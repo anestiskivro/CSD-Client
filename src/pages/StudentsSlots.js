@@ -15,19 +15,19 @@ function StudentsSlots() {
     const [TAs, setTAs] = useState([]);
     const [slots, setSlots] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3001/teacher/getStudents").then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
             if (response.status === 200) {
                 setStudents(response.data.students)
             }
         })
-        axios.get("http://localhost:3001/teacher/getExams", { params: { selectedCourse: selectedCourse } }).then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getExams", { params: { selectedCourse: selectedCourse } }).then((response) => {
             if (response.status === 200) {
                 setExams(response.data.exams);
             } else {
                 alert(response.data.message)
             }
         });
-        axios.get("http://localhost:3001/teacher/getTAs", { params: { selectedCourse: selectedCourse } }).then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: selectedCourse } }).then((response) => {
             if (response.status === 200) {
                 setTAs(response.data.TAs);
             } else {
@@ -39,7 +39,7 @@ function StudentsSlots() {
         const examName = event.target.value;
         const selectedExam = exams.find(exam => exam.name === examName);
         setSelectedExam(selectedExam);
-        axios.get("http://localhost:3001/teacher/getStudentsSlots", { params: { selectedCourse: selectedCourse, selectedExam: examName } }).then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudentsSlots", { params: { selectedCourse: selectedCourse, selectedExam: examName } }).then((response) => {
             if (response.status === 200) {
                 setSlots(response.data.slots);
             } else {

@@ -24,7 +24,7 @@ function AddComment() {
         formData.append("exam", examCourse);
         console.log(formData)
         axios.post(
-            'http://localhost:3001/student/addComment',
+            'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/addComment',
             formData,
             {
                 headers: {

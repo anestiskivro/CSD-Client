@@ -16,19 +16,19 @@ function TASlots() {
     const [selectedTA, setTA] = useState("");
     const [slots, setSlots] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3001/teacher").then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher").then((response) => {
             if (response.status === 200) {
                 setCourses(response.data.data)
             }
         })
-        axios.get("http://localhost:3001/teacher/getExams", { params: { selectedCourse: selectedCourse } }).then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getExams", { params: { selectedCourse: selectedCourse } }).then((response) => {
             if (response.status === 200) {
                 setExams(response.data.exams);
             } else {
                 alert(response.data.message)
             }
         });
-        axios.get("http://localhost:3001/teacher/getTAs", { params: { selectedCourse: selectedCourse } }).then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: selectedCourse } }).then((response) => {
             if (response.status === 200) {
                 setTAs(response.data.TAs);
             } else {
@@ -46,7 +46,7 @@ function TASlots() {
         setTA(selectedTA);
         const foundCourse = courses.find(course => course.code === selectedCourse);
         const cid = foundCourse.cid;
-        axios.get("http://localhost:3001/teacher/getSlots", { params: { teaching_assistant: selectedTA, exam: selectedExam, cid: cid } })
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getSlots", { params: { teaching_assistant: selectedTA, exam: selectedExam, cid: cid } })
             .then((response) => {
                 if (response.status === 200) {
                     setSlots(response.data.slots)

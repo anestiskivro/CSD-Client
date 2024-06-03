@@ -25,7 +25,7 @@ function AddEvaluation() {
         formData.append("studentemail", studentemail);
         console.log(formData)
         axios.post(
-            'http://localhost:3001/tassistant/addeval',
+            'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/addeval',
             formData,
             {
                 headers: {

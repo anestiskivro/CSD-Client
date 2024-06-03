@@ -7,7 +7,7 @@ const Info = ({ email }) => {
   const navigate = useNavigate();
   const handleSignOut = async () => {
     try {
-      await axios.post('http://localhost:3001/logout');
+      await axios.post('https://rendezvous-csd-106ea9dcba7a.herokuapp.com/logout');
       navigate('/');
     }
     catch (error) {

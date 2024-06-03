@@ -18,7 +18,7 @@ function AdminOp() {
             const formData = new FormData();
             formData.append('file', fileData);
             const response = await axios.post(
-                'http://localhost:3001/admin',
+                'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/admin',
                 formData,
                 {
                     headers: {
@@ -45,7 +45,7 @@ function AdminOp() {
             const formData = new FormData();
             formData.append('file', fileData);
             const response = await axios.post(
-                'http://localhost:3001/admin/insertcourses',
+                'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/admin/insertcourses',
                 formData,
                 {
                     headers: {

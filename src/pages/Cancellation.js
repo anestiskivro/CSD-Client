@@ -16,21 +16,21 @@ function Cancellation() {
     const [exams, setExams] = useState([]);
     useEffect(() => {
         if (email.includes("csdp")) {
-            axios.get("http://localhost:3001/tassistant/getSlots", { params: { email } })
+            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedSlots(response.data.slots);
                     }
                 });
         } else {
-            axios.get("http://localhost:3001/student/getappointments", { params: { email } })
+            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } })
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedAppointments(response.data.appointments);
                     }
                 });
         }
-        axios.get("http://localhost:3001/student/getExams")
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getExams")
             .then((response) => {
                 if (response.status === 200) {
                     setExams(response.data.exams);
@@ -43,7 +43,7 @@ function Cancellation() {
     useEffect(() => {
         if (selectedAppointments.length > 0) {
             const cids = selectedAppointments.map(val => val.cid).join(',');
-            axios.get("http://localhost:3001/student/getcourses", { params: { cids } })
+            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses", { params: { cids } })
                 .then((response) => {
                     setSelectedCourses(response.data.courses);
                 })
@@ -66,7 +66,7 @@ function Cancellation() {
     const handleCancel = async () => {
         const endpoint = email.includes("csdp") ? "tassistant/cancel" : "student/cancel";
         try {
-            const response = await axios.delete(`http://localhost:3001/${endpoint}`, { data: { checkboxes: selectedCheckboxes } });
+            const response = await axios.delete(`https://rendezvous-csd-106ea9dcba7a.herokuapp.com/${endpoint}`, { data: { checkboxes: selectedCheckboxes } });
             if (response.status === 200) {
                 alert("Successfully removed");
             }

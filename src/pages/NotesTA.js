@@ -16,10 +16,10 @@ function NotesTA() {
     const [selectedTA, setTA] = useState("");
     const [Evaluations, setEvaluations] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3001/teacher/getExams", { params: { selectedCourse: selectedCourse } }).then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getExams", { params: { selectedCourse: selectedCourse } }).then((response) => {
             if (response.status === 200) {
                 setExams(response.data.exams);
-                axios.get("http://localhost:3001/tassistant/getStudents").then((response) => {
+                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/getStudents").then((response) => {
                     if (response.status === 200) {
                         setStudents(response.data.students);
                     }
@@ -28,7 +28,7 @@ function NotesTA() {
                 alert(response.data.message)
             }
         });
-        axios.get("http://localhost:3001/teacher/getTAs", { params: { selectedCourse: selectedCourse } }).then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/getTAs", { params: { selectedCourse: selectedCourse } }).then((response) => {
             if (response.status === 200) {
                 setTAs(response.data.TAs);
             } else {
@@ -39,7 +39,7 @@ function NotesTA() {
     const handleAssistantChange = (event) => {
         const selectedTA = event.target.value;
         setTA(selectedTA);
-        axios.get("http://localhost:3001/teacher/getNotes", { params: { teaching_assistant: selectedTA } })
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getNotes", { params: { teaching_assistant: selectedTA } })
             .then((response) => {
                 if (response.status === 200) {
                     setEvaluations(response.data.evaluations);

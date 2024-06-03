@@ -15,14 +15,14 @@ function Review() {
 
     useEffect(() => {
         if (email.includes("csdp")) {
-            axios.get("http://localhost:3001/tassistant/getSlots", { params: { email } })
+            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedSlots(response.data.slots);
                     }
                 });
         } else {
-            axios.get("http://localhost:3001/student/getappointments", { params: { email } })
+            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } })
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedAppointments(response.data.appointments);
@@ -32,10 +32,10 @@ function Review() {
     }, [email]);
 
     useEffect(() => {
-        axios.get("http://localhost:3001/student/getcourses",)
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses",)
             .then((response) => {
                 setSelectedCourses(response.data.courses);
-                return axios.get("http://localhost:3001/student/getExams",);
+                return axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getExams",);
             })
             .then((response) => {
                 if (response.status === 200) {

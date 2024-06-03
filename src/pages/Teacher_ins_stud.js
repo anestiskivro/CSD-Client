@@ -26,7 +26,7 @@ function Teacher_ins_stud() {
       const formData = new FormData();
       formData.append('file', fileData);
       const response = await axios.post(
-        'http://localhost:3001/teacher/insertstud',
+        'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/insertstud',
         formData,
         {
           headers: {

@@ -28,7 +28,7 @@ function Set_Exams() {
     formData.append("Duration", Duration);
 
     const response = await axios.post(
-      'http://localhost:3001/teacher/setExams',
+      'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/setExams',
       formData,
       {
         headers: {

@@ -9,7 +9,7 @@ function Teacher_op({ email }) {
     const [courses, setCourses] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState('');
     useEffect(() => {
-        axios.get("http://localhost:3001/teacher").then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher").then((response) => {
             if (response.status === 200) {
                 setCourses(response.data.data)
             }

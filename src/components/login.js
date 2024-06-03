@@ -8,7 +8,7 @@ const Login = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
     useEffect(() => {
-        axios.get("http://localhost:3001/").then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/").then((response) => {
             if(response.data.loggedIn === true){
                 if( response.data.email.includes("csdp")){
                     navigate("/tassistant", { state: { email: response.data.email } });
@@ -25,7 +25,7 @@ const Login = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3001', { email }, {
+            const response = await axios.post('https://rendezvous-csd-106ea9dcba7a.herokuapp.com', { email }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

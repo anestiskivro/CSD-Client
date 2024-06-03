@@ -9,22 +9,22 @@ function Review_comments() {
     const [students, setStudents] = useState([]);
     const [exams, setExams] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:3001/tassistant/getComments").then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getComments").then((response) => {
             if (response.status === 200) {
                 setComments(response.data.comments);
-                axios.get("http://localhost:3001/tassistant/getExams").then((response) => {
+                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getExams").then((response) => {
                     if (response.status === 200) {
                         setExams(response.data.exams);
                     }
                 });
             }
         });
-        axios.get("http://localhost:3001/tassistant").then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant").then((response) => {
             if (response.status === 200) {
                 setCourses(response.data.data);
             }
         });
-        axios.get("http://localhost:3001/tassistant/getStudents").then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getStudents").then((response) => {
             if (response.status === 200) {
                 setStudents(response.data.students);
             }

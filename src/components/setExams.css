@@ -1,0 +1,59 @@
+.set-exams-container {
+    display: flex;
+}
+
+.set-exams-container .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.set-exams-header {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.set-exams-form {
+    width: 100%;
+    max-width: 500px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.set-exams-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.set-exams-form input[type="text"],
+.set-exams-form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.set-exams-form button {
+    background-color: #C50047;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.set-exams-form button:hover {
+    background-color: #a00037;
+}

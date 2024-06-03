@@ -1,0 +1,19 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: left;
+}
+
+.social-icon-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 11%;
+}
+
+.social-icon-container .SocialIcon {
+    margin-right: 4%;
+}

@@ -1,0 +1,33 @@
+.admin1 {
+    display: flex;
+}
+
+.right {
+    flex: 1;
+    background-color: #ffffff;
+	padding-top: 5vh;
+    height: 120vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1%;
+    width: 250px;
+    height: 300px;
+    overflow-y: scroll;
+}
+.btn-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.button {
+    padding: 0.5rem 1rem;
+    background-color: #C50047;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+

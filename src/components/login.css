@@ -1,0 +1,46 @@
+.right {
+    flex: 1;
+    background-color: #ffffff;
+    padding-top: 5vh;
+    margin-left: auto;
+}
+
+.form-container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+}
+
+.form-container form {
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.btn-group button {
+    background-color: #C50047;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 20px 25px;
+    font-weight: bold;
+    float: left;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right: 9%;
+    margin-left: 9%;
+}

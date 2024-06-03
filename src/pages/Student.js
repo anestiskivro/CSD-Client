@@ -1,0 +1,17 @@
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import Appointment from '../components/appointment';
+import Info from '../components/info';
+
+function Student() {
+    const location = useLocation();
+    const { email } = location.state || {};
+    return (
+        <div style={{ display: 'flex' }}>
+            <Info email={email}></Info>
+            <Appointment email={email} />
+        </div>
+    );
+}
+
+export default Student

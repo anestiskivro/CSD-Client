@@ -1,0 +1,31 @@
+.right {
+	flex: 1;
+    background-color: #ffffff;
+	padding-top: 5%;
+}
+
+.btn-group button {
+    background-color: #C50047;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 24px;
+    font-weight: bold;
+    float: left;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-right: 37%;
+    margin-left: 37%;
+}
+
+#file {
+    margin-left: 22%;
+    margin-right:22%;
+}
+
+#import {
+    margin-top: 6%;
+    margin-bottom: 6%;
+    margin-left: 7%;
+    margin-right: 20%;
+}

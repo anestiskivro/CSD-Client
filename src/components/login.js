@@ -21,7 +21,7 @@ const Login = () => {
                 }
             }
         })
-    },[])
+    },[navigate])
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {

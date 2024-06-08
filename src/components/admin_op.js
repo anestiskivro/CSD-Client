@@ -102,8 +102,8 @@ function AdminOp() {
                     <div className="modal-content">
                         <span className="close" onClick={handleCloseInfo}>&times;</span>
                         <h2>File Format Information</h2>
-                        <p><strong>Teachers File:</strong> The file should contain the following columns: Επώνυμο, Όνομα, Email.</p>
-                        <p><strong>Courses File:</strong> The file should contain the following columns: Τμήμα, Κωδικός, Τίτλος, Καθηγητής, ECTS, Τύπος.</p>
+                        <p><strong>Teachers File:</strong> The excel file should contain the following columns: Επώνυμο, Όνομα, Email.</p>
+                        <p><strong>Courses File:</strong> The excel file should contain the following columns: Τμήμα, Κωδικός, Τίτλος, Καθηγητής, ECTS, Τύπος.</p>
                     </div>
                 </div>
             )}

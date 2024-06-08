@@ -10,6 +10,7 @@ function Teacher_ins_stud() {
   const location = useLocation();
   const { email } = location.state || {};
   const [fileData, setFileData] = useState(null);
+  const [showInfo, setShowInfo] = useState(false);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -49,6 +50,13 @@ function Teacher_ins_stud() {
   const handleBack = () => {
     navigate('/teacher', { state: { email } });
   };
+  const handleShowInfo = () => {
+    setShowInfo(true);
+  };
+
+  const handleCloseInfo = () => {
+    setShowInfo(false);
+  };
 
   return (
     <div className="admin1">
@@ -68,6 +76,19 @@ function Teacher_ins_stud() {
             Back
           </button>
         </div>
+        <div id="info">
+          <button className="button" onClick={handleShowInfo}>
+            <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info</button>
+        </div>
+        {showInfo && (
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={handleCloseInfo}>&times;</span>
+              <h2>File Format Information</h2>
+              <p><strong>TA's File:</strong> The excel file should contain the following columns: ΑΜ,Επώνυμο,Όνομα,Ακαδημαϊκό Email.</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

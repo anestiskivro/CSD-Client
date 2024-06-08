@@ -95,7 +95,7 @@ function AdminOp() {
             </div>
             <div id="info">
                 <button className="button" onClick={handleShowInfo}>
-                    <i className="fa-regular fa-info-circle" style={{ paddingRight: '8px' }}></i>Info</button>
+                <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info</button>
             </div>
             {showInfo && (
                 <div className="modal">

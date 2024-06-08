@@ -4,11 +4,13 @@ import './admin_op.css';
 
 function AdminOp() {
     const [fileData, setFileData] = useState(null);
+    const [showInfo, setShowInfo] = useState(false);
 
     const handleFileUpload = (e) => {
         const file = e.target.files[0];
         setFileData(file);
     };
+
     const uploadToTeachers = async () => {
         if (!fileData) {
             alert('Please select a file');
@@ -36,6 +38,7 @@ function AdminOp() {
             alert('An error occurred. Please try again later.');
         }
     };
+
     const uploadToCourses = async () => {
         if (!fileData) {
             alert('Please select a file');
@@ -63,9 +66,15 @@ function AdminOp() {
             alert('An error occurred. Please try again later.');
         }
     };
-    //TODO: Ο υπεύθυνος του συστήματος θα πραγματοποιεί δύο ενέργειες. Μία θα είναι να εισάγει τα μαθήματα που 
-    //υπάρχουν για το συγκεκριμένο εξάμηνο. Η δεύτερη ενέργεια θα είναι να εισάγει τους καθηγητές όπου θα αντιστοιχούν με τα μαθήματα 
-    //που έχουν καταχωρηθεί.
+
+    const handleShowInfo = () => {
+        setShowInfo(true);
+    };
+
+    const handleCloseInfo = () => {
+        setShowInfo(false);
+    };
+
     return (
         <div className="right">
             <div id="file">
@@ -84,6 +93,20 @@ function AdminOp() {
                 <button className="button" onClick={uploadToCourses}>
                     <i className="fa-regular fa-file-lines" style={{ paddingRight: '8px' }}></i>Insert Courses</button>
             </div>
+            <div id="info">
+                <button className="button" onClick={handleShowInfo}>
+                    <i className="fa-regular fa-info-circle" style={{ paddingRight: '8px' }}></i>Info</button>
+            </div>
+            {showInfo && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={handleCloseInfo}>&times;</span>
+                        <h2>File Format Information</h2>
+                        <p><strong>Teachers File:</strong> The file should contain the following columns: Επώνυμο, Όνομα, Email.</p>
+                        <p><strong>Courses File:</strong> The file should contain the following columns: Τμήμα, Κωδικός, Τίτλος, Καθηγητής, ECTS, Τύπος.</p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

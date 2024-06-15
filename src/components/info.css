@@ -1,4 +1,3 @@
-/* General styles */
 .left {
   padding-top: 5vh;
   background-color: #C50047;
@@ -85,7 +84,6 @@ th {
   color: white;
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
   h1 {
     font-size: 32px;

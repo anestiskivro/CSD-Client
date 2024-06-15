@@ -1,4 +1,3 @@
-/* General styles */
 .footer {
     position: fixed;
     bottom: 0;
@@ -19,17 +18,14 @@
     margin-right: 4%;
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
     .footer {
         padding: 15px;
         text-align: center;
-        /* Center align text on tablets */
     }
 
     .social-icon-container {
         justify-content: left;
-        /* Center social icons on tablets */
         padding-left: 0;
     }
 
@@ -42,20 +38,16 @@
     .footer {
         padding: 10px;
         text-align: center;
-        /* Center align text on mobile */
     }
 
     .social-icon-container {
         justify-content: left;
-        /* Center social icons on mobile */
         padding-left: 0;
         flex-wrap: wrap;
-        /* Wrap icons to new lines if necessary */
     }
 
     .social-icon-container .SocialIcon {
         margin-right: 2%;
         margin-bottom: 10px;
-        /* Add space below icons for better wrapping */
     }
 }

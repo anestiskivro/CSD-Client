@@ -1,3 +1,4 @@
+/* General styles */
 .right {
     flex: 1;
     background-color: #ffffff;
@@ -43,4 +44,49 @@
     margin-bottom: 2%;
     margin-right: 9%;
     margin-left: 9%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .form-container {
+        width: 80%;
+        padding: 15px;
+    }
+
+    .btn-group button {
+        padding: 15px 20px;
+        margin-right: 5%;
+        margin-left: 5%;
+        float: none;
+        /* Center buttons on smaller screens */
+        display: block;
+        margin: 2% auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .form-container label {
+        font-size: 16px;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="password"] {
+        padding: 4px;
+    }
+
+    .btn-group button {
+        padding: 10px 15px;
+        margin-right: 2%;
+        margin-left: 2%;
+        font-size: 14px;
+        float: none;
+        /* Center buttons on smaller screens */
+        display: block;
+        margin: 2% auto;
+    }
 }

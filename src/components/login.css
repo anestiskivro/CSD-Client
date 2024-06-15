@@ -11,19 +11,6 @@ body {
     background-color: #f9f9f9;
 }
 
-/* Header Styles */
-
-.header {
-    background-color: #C50047;
-    padding: 10px;
-    text-align: center;
-    color: #fff;
-}
-
-.header img {
-    height: 40px;
-    margin: 10px;
-}
 
 /* Form Styles */
 

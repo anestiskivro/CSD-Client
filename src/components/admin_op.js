@@ -35,7 +35,7 @@ function AdminOp() {
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred. Please try again later.');
+            alert('The insertion of file teachers was not succesful');
         }
     };
 
@@ -63,7 +63,7 @@ function AdminOp() {
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred. Please try again later.');
+            alert('The insertion of file courses was not succesful');
         }
     };
 

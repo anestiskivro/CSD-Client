@@ -29,57 +29,55 @@ h3 {
   padding-right: 5%;
 }
 
-.button {
-  background-color: #C50047;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-weight: bold;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto;
-}
-
-#file {
-  margin-left: 22%;
-  margin-right: 22%;
-}
-
-#import {
-  margin-top: 6%;
-  margin-bottom: 6%;
-  margin-left: 7%;
-  margin-right: 20%;
-}
-
-#back {
-  margin-top: 4%;
-  margin-bottom: 4%;
-  margin-right: 13%;
-}
-
-.head_TA {
-  padding-left: 30%;
-  padding-right: 30%;
-}
-
-table {
+ /* Table Styles */
+  
+ table {
   border-collapse: collapse;
   width: 100%;
+  margin: 20px auto;
 }
 
 th,
 td {
   text-align: left;
   padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+  border: 1px solid #ddd;
 }
 
 th {
   background-color: #C50047;
-  color: white;
+  color: #fff;
+}
+
+/* Responsive Styles */
+
+@media only screen and (max-width: 600px) {
+ .form-container {
+    width: 100%;
+    margin: 10px;
+  }
+ .button {
+    padding: 10px 15px;
+  }
+  table {
+    font-size: 14px;
+  }
+  th, td {
+    padding: 5px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+ .form-container {
+    padding: 15px;
+  }
+ .button {
+    padding: 10px 10px;
+  }
+  table {
+    font-size: 12px;
+  }
+  th, td {
+    padding: 3px;
+  }
 }

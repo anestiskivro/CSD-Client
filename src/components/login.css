@@ -1,27 +1,16 @@
-/* Global Styles */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+.right {
+    flex: 1;
+    background-color: #ffffff;
+    padding-top: 5vh;
+    margin-left: auto;
 }
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-}
-
-
-/* Form Styles */
 
 .form-container {
-    width: 90%;
-    margin: 20px auto;
+    width: 300px;
+    margin: 0 auto;
     padding: 20px;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-container form {
@@ -37,12 +26,10 @@ body {
 .form-container input[type="text"],
 .form-container input[type="password"] {
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
 }
-
 
 .btn-group button {
     background-color: #C50047;
@@ -56,66 +43,4 @@ body {
     margin-bottom: 2%;
     margin-right: 9%;
     margin-left: 9%;
-}
-
-/* Table Styles */
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 20px auto;
-}
-
-th,
-td {
-    text-align: left;
-    padding: 8px;
-    border: 1px solid #ddd;
-}
-
-th {
-    background-color: #C50047;
-    color: #fff;
-}
-
-
-/* Responsive Styles */
-
-@media only screen and (max-width: 600px) {
-    .form-container {
-        width: 100%;
-        margin: 10px;
-    }
-
-    .button {
-        padding: 10px 15px;
-    }
-
-    table {
-        font-size: 14px;
-    }
-
-    th,
-    td {
-        padding: 5px;
-    }
-}
-
-@media only screen and (max-width: 400px) {
-    .form-container {
-        padding: 15px;
-    }
-
-    .button {
-        padding: 10px 10px;
-    }
-
-    table {
-        font-size: 12px;
-    }
-
-    th,
-    td {
-        padding: 3px;
-    }
 }

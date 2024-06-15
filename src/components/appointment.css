@@ -28,3 +28,30 @@
     margin: 10px 0;
     width: 200px;
 }
+
+@media (max-width: 768px) {
+
+    .btn-group1 button,
+    .btn-group2 button {
+        padding: 15px 20px;
+        margin-right: 5%;
+        margin-left: 5%;
+        float: none;
+        display: block;
+        margin: 2% auto;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .btn-group1 button,
+    .btn-group2 button {
+        padding: 10px 15px;
+        margin-right: 2%;
+        margin-left: 2%;
+        font-size: 14px;
+        float: none;
+        display: block;
+        margin: 2% auto;
+    }
+}

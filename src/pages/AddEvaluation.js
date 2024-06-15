@@ -36,7 +36,7 @@ function AddEvaluation() {
             if (response.status === 200) {
                 alert("Evaluation inserted successfully");
             } else {
-                alert("Something went wrong");
+                alert("Evaluation was not inserted successfully");
             }
         })
 

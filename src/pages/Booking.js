@@ -84,6 +84,8 @@ function Booking() {
         .then((response) => {
           if (response.status === 200) {
             setAvailableSlots(response.data.availableSlots);
+          }else {
+            alert("We could not get the available slots. Check your connection");
           }
         });
     }
@@ -98,6 +100,8 @@ function Booking() {
         .then((response) => {
           if (response.status === 200) {
             setAvailableSlots(response.data.availableSlots);
+          }else {
+            alert("We could not get the available slots. Check your connection");
           }
         });
     }
@@ -145,6 +149,8 @@ function Booking() {
     }).then((response) => {
       if (response.status === 200) {
         alert(response.data.message);
+      }else {
+        alert(response.data.message);
       }
     });
   };
@@ -158,6 +164,8 @@ function Booking() {
     console.log(hours)
     axios.post("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/book", { dates: dates, hours: hours, cid: cid, eid: eid, email: email, duration: examSelected.duration }).then((response) => {
       if (response.status === 200) {
+        alert(response.data.message);
+      }else {
         alert(response.data.message);
       }
     });

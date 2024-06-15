@@ -38,6 +38,8 @@ function Set_Exams() {
     );
     if (response.status === 200) {
       alert("Exam inserted successfully");
+    }else {
+      alert("The file was not uploaded.");
     }
   }
 

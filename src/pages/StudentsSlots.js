@@ -18,6 +18,8 @@ function StudentsSlots() {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
             if (response.status === 200) {
                 setStudents(response.data.students)
+            }else {
+                alert("We could not get the students. Check your connection");
             }
         })
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getExams", { params: { selectedCourse: selectedCourse } }).then((response) => {

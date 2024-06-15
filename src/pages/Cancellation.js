@@ -20,6 +20,8 @@ function Cancellation() {
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedSlots(response.data.slots);
+                    }else {
+                        alert(response.data.message);
                     }
                 });
         } else {
@@ -27,6 +29,8 @@ function Cancellation() {
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedAppointments(response.data.appointments);
+                    }else {
+                        alert(response.data.message);
                     }
                 });
         }
@@ -72,7 +76,7 @@ function Cancellation() {
             }
         } catch (error) {
             console.error("Error:", error);
-            alert("Something went wrong");
+            alert("The cancellation was not succesful. Check your connection");
         }
     };
 

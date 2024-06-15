@@ -12,6 +12,8 @@ function Teacher_op({ email }) {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher").then((response) => {
             if (response.status === 200) {
                 setCourses(response.data.data)
+            }else {
+                alert("There is something wrong with the connections. Courses were not retrieved");
             }
         })
     }, [])

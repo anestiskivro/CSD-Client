@@ -19,6 +19,8 @@ function Review() {
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedSlots(response.data.slots);
+                    }else {
+                        alert("We could not get the slots. Check your connection");
                     }
                 });
         } else {
@@ -26,6 +28,8 @@ function Review() {
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedAppointments(response.data.appointments);
+                    }else {
+                        alert("We could not get the appointments. Check your connection");
                     }
                 });
         }

@@ -43,7 +43,7 @@ function TeachingAssistant() {
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred. Please try again later.');
+      alert('The insertion of file teaching assistants was not succesful');
     }
   }
   const handleBack = () => {

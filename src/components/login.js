@@ -47,7 +47,7 @@ const Login = () => {
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred. Please try again later.');
+            alert('An error occurred. Please try again later. Check your connection to the Internet');
         }
     };
     return (

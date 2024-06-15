@@ -39,11 +39,11 @@ function Teacher_ins_stud() {
       if (response.status === 200) {
         console.log('Data imported successfully');
       } else {
-        alert('Data import failed.');
+        alert('Data import failed. ');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred. Please try again later.');
+      alert('An error occurred. Check your connection');
     }
   };
 

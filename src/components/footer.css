@@ -28,7 +28,7 @@
     }
 
     .social-icon-container {
-        justify-content: center;
+        justify-content: left;
         /* Center social icons on tablets */
         padding-left: 0;
     }
@@ -46,7 +46,7 @@
     }
 
     .social-icon-container {
-        justify-content: center;
+        justify-content: left;
         /* Center social icons on mobile */
         padding-left: 0;
         flex-wrap: wrap;

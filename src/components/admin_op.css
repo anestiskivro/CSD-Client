@@ -1,3 +1,9 @@
+.left {
+    padding-top: 5vh;
+    background-color: #C50047;
+    margin-right: auto;
+}
+
 .right {
     flex: 1;
     background-color: #ffffff;
@@ -23,7 +29,8 @@
     margin-right: 22%;
 }
 
-#import,#info  {
+#import,
+#info {
     margin-top: 6%;
     margin-bottom: 6%;
     margin-left: 7%;

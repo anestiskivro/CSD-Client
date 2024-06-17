@@ -87,6 +87,7 @@ function Teacher_ins_stud() {
           <div className="modal">
             <div className="modal-content">
               <span className="close" onClick={handleCloseInfo}>&times;</span>
+              <p><strong>Begin by downloading the file. Customize it according to your preferences, and then it will be ready for submission.</strong></p>
               <h2>File Format Information</h2>
               <p><strong>Student's File:</strong> The excel file should contain the following columns: ΑΜ,Επώνυμο,Όνομα,Ακαδημαϊκό Email.</p>
             </div>

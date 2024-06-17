@@ -70,7 +70,7 @@ function TeachingAssistant() {
           </button>
         </div>
         <a href="/βοηθοι_hy252.xlsx" download className="button">
-          <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Sample File
+          <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download TA's File
         </a>
         <div id="info">
           <button className="button" onClick={handleShowInfo}>

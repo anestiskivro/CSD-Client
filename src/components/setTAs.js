@@ -61,7 +61,7 @@ function TeachingAssistant() {
       <Info email={email}></Info>
       <div className="right">
         <h3>Insert the file here</h3>
-        <input type="file" name="file" accept=".csv" onChange={handleTAUpload} />
+        <input type="file" name="file" onChange={handleTAUpload} />
         <div className='btn-group'>
           <button className="button" onClick={handleInsertTA}>
             <i class="fa-solid fa-file-import" style={{ paddingRight: '8px' }}></i>Set Teaching Assistants</button>

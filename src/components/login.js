@@ -10,7 +10,7 @@ const Login = () => {
     useEffect(() => {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/").then((response) => {
             if(response.data.loggedIn === true){
-                if( response.data.email.includes("csdp")){
+                if(response.data.email.includes("csdp")){
                     navigate("/tassistant", { state: { email: response.data.email } });
                 }else if(response.data.email.includes("admin")) {
                     navigate("/admin", { state: { email: response.data.email } });

@@ -79,7 +79,7 @@ function AdminOp() {
         <div className="right">
             <div id="file">
                 <h2>Insert the teachers here</h2>
-                <input type="file" name="file" accept=".csv" onChange={handleFileUpload} />
+                <input type="file" name="file" onChange={handleFileUpload} />
             </div>
             <div id="import">
                 <button className="button" onClick={uploadToTeachers}>
@@ -87,7 +87,7 @@ function AdminOp() {
             </div>
             <div id="file">
                 <h2>Insert the courses here</h2>
-                <input type="file" name="file" accept=".csv" onChange={handleFileUpload} />
+                <input type="file" name="file"  onChange={handleFileUpload} />
             </div>
             <div id="import">
                 <button className="button" onClick={uploadToCourses}>

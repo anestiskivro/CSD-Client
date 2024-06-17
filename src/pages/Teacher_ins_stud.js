@@ -64,7 +64,7 @@ function Teacher_ins_stud() {
       <div className="right">
         <div id="file">
           <h2>Insert the file here</h2>
-          <input type="file" name="file" accept=".csv" onChange={handleFileUpload} />
+          <input type="file" name="file" onChange={handleFileUpload} />
         </div>
         <div className="btn-group">
           <button className="button" onClick={upload_to_Students}>

@@ -20,6 +20,7 @@ const Login = () => {
                     navigate("/teacher", { state: { email: response.data.email } });
                 }
             }
+
         })
     },[navigate])
     const handleFormSubmit = async (event) => {
@@ -32,15 +33,15 @@ const Login = () => {
             });
             if (response.status === 200) {
                 alert('Login successful');
-                const userEmail = response.data.email;
-                if (userEmail.includes("admin")) {
-                    navigate("/admin", { state: { email: userEmail } });
-                }else if (userEmail.includes("csdp")) {
-                    navigate("/tassistant", { state: { email: userEmail } });
-                }else if (userEmail.includes("csd")) {
-                    navigate("/student", { state: { email: userEmail } });
+                const userEmail = response.data;
+                if (userEmail.email.includes("admin")) {
+                    navigate("/admin", { state: { email: userEmail.email } });
+                }else if (userEmail.id === "TA") {
+                    navigate("/tassistant", { state: { email: userEmail.email } });
+                }else if (userEmail.id === "student") {
+                    navigate("/student", { state: { email: userEmail.email } });
                 }else {
-                    navigate("/teacher",{ state: { email: userEmail } });
+                    navigate("/teacher",{ state: { email: userEmail.email } });
                 }
             } else {
                 alert('Login failed. Please check your email.');

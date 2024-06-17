@@ -69,6 +69,9 @@ function TeachingAssistant() {
             <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>Back
           </button>
         </div>
+        <a href="/βοηθοι_hy252.xlsx" download className="button">
+          <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Sample File
+        </a>
         <div id="info">
           <button className="button" onClick={handleShowInfo}>
             <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info</button>

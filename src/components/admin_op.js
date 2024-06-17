@@ -81,21 +81,27 @@ function AdminOp() {
                 <h2>Insert the teachers here</h2>
                 <input type="file" name="file" onChange={handleFileUpload} />
             </div>
+            <a href="/Lista HY-252 2023 Καθηγητες.xlsx" download className="button">
+                <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Sample File
+            </a>
             <div id="import">
                 <button className="button" onClick={uploadToTeachers}>
                     <i className="fa-regular fa-file-lines" style={{ paddingRight: '8px' }}></i>Insert Teachers</button>
             </div>
             <div id="file">
                 <h2>Insert the courses here</h2>
-                <input type="file" name="file"  onChange={handleFileUpload} />
+                <input type="file" name="file" onChange={handleFileUpload} />
             </div>
             <div id="import">
                 <button className="button" onClick={uploadToCourses}>
                     <i className="fa-regular fa-file-lines" style={{ paddingRight: '8px' }}></i>Insert Courses</button>
             </div>
+            <a href="/Lista HY-252 2023 μαθήματα.xlsx" download className="button">
+                <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Sample File
+            </a>
             <div id="info">
                 <button className="button" onClick={handleShowInfo}>
-                <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info</button>
+                    <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info</button>
             </div>
             {showInfo && (
                 <div className="modal">

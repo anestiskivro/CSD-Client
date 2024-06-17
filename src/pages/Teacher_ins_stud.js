@@ -76,6 +76,9 @@ function Teacher_ins_stud() {
             Back
           </button>
         </div>
+        <a href="/Lista HY-252 2023 XEIMERINO-2023-10-27.xlsx" download className="button">
+          <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Sample File
+        </a>
         <div id="info">
           <button className="button" onClick={handleShowInfo}>
             <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info</button>

@@ -76,7 +76,7 @@ function Teacher_ins_stud() {
             Back
           </button>
         </div>
-        <a href="/Lista HY-252 2023 XEIMERINO-2023-10-27.xlsx" download className="button">
+        <a href={`${process.env.PUBLIC_URL}/students.xls`} download = "students.xls" className="button">
           <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Students File
         </a>
         <div id="info">

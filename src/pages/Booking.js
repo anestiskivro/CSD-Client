@@ -53,7 +53,7 @@ function Booking() {
     const duration = parseInt(foundExam.duration);
     examDurationInMinutes = duration;
     const availableHours = [];
-    for (let hour = 4; hour <= 20; hour++) {
+    for (let hour = 9; hour <= 20; hour++) {
       for (let minute = 0; minute < 60; minute += examDurationInMinutes) {
         let endHour = hour;
         let endMinute = minute + examDurationInMinutes;

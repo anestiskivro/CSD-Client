@@ -111,7 +111,7 @@ function AdminOp() {
                     <i className="fa-regular fa-file-lines" style={{ paddingRight: '8px' }}></i>Insert Courses
                 </button>
             </div>
-            <a href={`${process.env.PUBLIC_URL}/courses.xls`} download="courses.xls" className="button">
+            <a href={`${process.env.PUBLIC_URL}/courses.xlsx`} download="courses.xlsx" className="button">
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Courses File
             </a>
             <div id="import1">

@@ -100,13 +100,13 @@ function AdminOp() {
                 <button className="button" onClick={uploadToTeachers}>
                     <i className="fa-regular fa-file-lines" style={{ paddingRight: '8px' }}></i>Insert Teachers
                 </button>
+                <button className="button" onClick={openFileInNewTab}>
+                <i className="fa fa-external-link-alt" style={{ paddingRight: '8px' }}></i>Open Uploaded File in New Tab
+            </button>
             </div>
             <a href={`${process.env.PUBLIC_URL}/teachers.xls`} download="teachers.xls" className="button">
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Teachers File
             </a>
-            <button className="button" onClick={openFileInNewTab}>
-                <i className="fa fa-external-link-alt" style={{ paddingRight: '8px' }}></i>Open Uploaded File in New Tab
-            </button>
             <div id="file">
                 <h2>Insert the courses here</h2>
                 <input type="file" name="file" onChange={handleFileUpload} />
@@ -115,10 +115,10 @@ function AdminOp() {
                 <button className="button" onClick={uploadToCourses}>
                     <i className="fa-regular fa-file-lines" style={{ paddingRight: '8px' }}></i>Insert Courses
                 </button>
-            </div>
-            <button className="button" onClick={openFileInNewTab}>
+                <button className="button" onClick={openFileInNewTab}>
                 <i className="fa fa-external-link-alt" style={{ paddingRight: '8px' }}></i>Open Uploaded File in New Tab
             </button>
+            </div>
             <a href={`${process.env.PUBLIC_URL}/courses.xls`} download="courses.xls" className="button">
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Courses File
             </a>

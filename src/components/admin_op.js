@@ -116,9 +116,11 @@ function AdminOp() {
             <a href={`${process.env.PUBLIC_URL}/courses.xls`} download="courses.xls" className="button">
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Courses File
             </a>
+            <div id="import1">
             <button className="button" onClick={openFileInNewTab}>
                 <i className="fa fa-external-link-alt" style={{ paddingRight: '8px' }}></i>Open Uploaded File in New Tab
             </button>
+            </div>
             <div id="info">
                 <button className="button" onClick={handleShowInfo}>
                     <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info

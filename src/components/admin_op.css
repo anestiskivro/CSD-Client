@@ -67,7 +67,8 @@
 
 #file,
 #import,
-#info {
+#info,
+#import1 {
     margin: 20px 0;
     text-align: center;
 }

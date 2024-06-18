@@ -85,7 +85,7 @@ function AdminOp() {
                 <button className="button" onClick={uploadToTeachers}>
                     <i className="fa-regular fa-file-lines" style={{ paddingRight: '8px' }}></i>Insert Teachers</button>
             </div>
-            <a href="%PUBLIC_URL%/Lista HY-252 2023 Καθηγητες.xlsx" download className="button">
+            <a href="public/Lista HY-252 2023 Καθηγητες.xlsx" download className="button">
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Teachers File
             </a>
             <div id="file">
@@ -96,7 +96,7 @@ function AdminOp() {
                 <button className="button" onClick={uploadToCourses}>
                     <i className="fa-regular fa-file-lines" style={{ paddingRight: '8px' }}></i>Insert Courses</button>
             </div>
-            <a href="%PUBLIC_URL%/Lista HY-252 2023 μαθήματα.xlsx" download className="button">
+            <a href="public/Lista HY-252 2023 μαθήματα.xlsx" download className="button">
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Courses File
             </a>
             <div id="info">

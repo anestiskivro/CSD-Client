@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import Teachers from '../public/Lista HY-252 2023 Καθηγητες.xlsx';
+import Courses from '../public/Lista HY-252 2023 μαθήματα.xlsx';
 import './admin_op.css';
-import Teachers from './public/Lista HY-252 2023 Καθηγητες.xlsx';
-import Courses from './public/Lista HY-252 2023 μαθήματα.xlsx';
 
 function AdminOp() {
     const [fileData, setFileData] = useState(null);

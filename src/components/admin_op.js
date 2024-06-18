@@ -1,7 +1,5 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import Courses from '../public/courses.xls';
-import Teachers from '../public/teachers.xls';
 import './admin_op.css';
 
 function AdminOp() {
@@ -87,7 +85,7 @@ function AdminOp() {
                 <button className="button" onClick={uploadToTeachers}>
                     <i className="fa-regular fa-file-lines" style={{ paddingRight: '8px' }}></i>Insert Teachers</button>
             </div>
-            <a href={Teachers} download = "teachers.xlsx" className="button">
+            <a href={`${process.env.PUBLIC_URL}/courses.xls`} download = "teachers.xlsx" className="button">
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Teachers File
             </a>
             <div id="file">
@@ -98,7 +96,7 @@ function AdminOp() {
                 <button className="button" onClick={uploadToCourses}>
                     <i className="fa-regular fa-file-lines" style={{ paddingRight: '8px' }}></i>Insert Courses</button>
             </div>
-            <a href={Courses} download = "courses.xlsx" className="button">
+            <a href={`${process.env.PUBLIC_URL}/teachers.xls`} download = "courses.xlsx" className="button">
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Courses File
             </a>
             <div id="info">

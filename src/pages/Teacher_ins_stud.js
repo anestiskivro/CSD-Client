@@ -57,6 +57,18 @@ function Teacher_ins_stud() {
   const handleCloseInfo = () => {
     setShowInfo(false);
   };
+  const seeFile = () => {
+    if (!fileData) {
+      alert('Please select a file');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataUrl = e.target.result;
+      window.open(dataUrl, '_blank');
+    };
+    reader.readAsDataURL(fileData);
+  };
 
   return (
     <div className="admin1">
@@ -76,9 +88,14 @@ function Teacher_ins_stud() {
             Back
           </button>
         </div>
-        <a href={`${process.env.PUBLIC_URL}/students.xls`} download = "students.xls" className="button">
+        <a href={`${process.env.PUBLIC_URL}/students.xls`} download="students.xls" className="button">
           <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Students File
         </a>
+        <div id="import1">
+          <button className="button" onClick={seeFile}>
+            <i className="fa fa-external-link-alt" style={{ paddingRight: '8px' }}></i>See your file right here
+          </button>
+        </div>
         <div id="info">
           <button className="button" onClick={handleShowInfo}>
             <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info</button>

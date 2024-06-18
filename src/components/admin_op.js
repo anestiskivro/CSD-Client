@@ -75,13 +75,11 @@ function AdminOp() {
         setShowInfo(false);
     };
 
-    // Function to open uploaded file in a new tab
-    const openFileInNewTab = () => {
+    const seeFile = () => {
         if (!fileData) {
             alert('Please select a file');
             return;
         }
-
         const reader = new FileReader();
         reader.onload = (e) => {
             const dataUrl = e.target.result;
@@ -117,8 +115,8 @@ function AdminOp() {
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Courses File
             </a>
             <div id="import1">
-            <button className="button" onClick={openFileInNewTab}>
-                <i className="fa fa-external-link-alt" style={{ paddingRight: '8px' }}></i>Open Uploaded File in New Tab
+            <button className="button" onClick={seeFile}>
+                <i className="fa fa-external-link-alt" style={{ paddingRight: '8px' }}></i>See your file right here
             </button>
             </div>
             <div id="info">

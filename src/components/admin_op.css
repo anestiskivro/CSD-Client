@@ -22,6 +22,7 @@
     font-weight: bold;
     margin: 10px;
     display: flex;
+    text-align: center;
     align-items: center;
 }
 

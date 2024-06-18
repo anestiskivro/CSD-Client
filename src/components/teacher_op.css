@@ -8,7 +8,7 @@
     align-items: center;
 }
 
-.btn-group {
+/* .btn-group {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,7 +24,7 @@
     padding: 10px 20px;
     font-weight: bold;
     width: 200px;
-}
+} */
 .modal {
     display: block;
     position: fixed;

@@ -8,23 +8,6 @@
     align-items: center;
 }
 
-/* .btn-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.btn-group button {
-    background-color: #C50047;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-weight: bold;
-    width: 200px;
-} */
 .modal {
     display: block;
     position: fixed;

@@ -55,7 +55,7 @@ function Teacher_op({ email }) {
                 {(selectedCourse) && (
                     <div>
                         <h3>Course: {selectedCourse}</h3>
-                        <div className="btn-group">
+                        <div className="btn-group1">
                             <button className='button' onClick={() => handleSetTAs()}>
                             <i className="fa-regular fa-file-lines" style={{ paddingRight: '8px' }}></i>
                                 Insert Teaching Assistants</button>

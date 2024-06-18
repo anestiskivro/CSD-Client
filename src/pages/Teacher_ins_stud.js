@@ -37,7 +37,7 @@ function Teacher_ins_stud() {
       );
 
       if (response.status === 200) {
-        console.log('Data imported successfully');
+        alert('Data imported successfully');
       } else {
         alert('Data import failed. ');
       }

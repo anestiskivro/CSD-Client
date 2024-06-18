@@ -93,22 +93,6 @@ function AdminOp() {
     return (
         <div className="right">
             <div id="file">
-            <div id="info">
-                <button className="button" onClick={handleShowInfo}>
-                    <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info
-                </button>
-            </div>
-            {showInfo && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={handleCloseInfo}>&times;</span>
-                        <p><strong>Begin by downloading the file. Customize it according to your preferences, and then it will be ready for submission.</strong></p>
-                        <h2>File Format Information</h2>
-                        <p><strong>Teachers File:</strong> The Excel file should contain the following columns: Επώνυμο, Όνομα, Email.</p>
-                        <p><strong>Courses File:</strong> The Excel file should contain the following columns: Τμήμα, Κωδικός, Τίτλος, Καθηγητής, ECTS, Τύπος.</p>
-                    </div>
-                </div>
-            )}
                 <h2>Insert the teachers here</h2>
                 <input type="file" name="file" onChange={handleFileUpload} />
             </div>
@@ -125,6 +109,22 @@ function AdminOp() {
             <a href={`${process.env.PUBLIC_URL}/teachers.xls`} download="teachers.xls" className="button">
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Teachers File
             </a>
+            <div id="info">
+                <button className="button" onClick={handleShowInfo}>
+                    <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info
+                </button>
+            </div>
+            {showInfo && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={handleCloseInfo}>&times;</span>
+                        <p><strong>Begin by downloading the file. Customize it according to your preferences, and then it will be ready for submission.</strong></p>
+                        <h2>File Format Information</h2>
+                        <p><strong>Teachers File:</strong> The Excel file should contain the following columns: Επώνυμο, Όνομα, Email.</p>
+                        <p><strong>Courses File:</strong> The Excel file should contain the following columns: Τμήμα, Κωδικός, Τίτλος, Καθηγητής, ECTS, Τύπος.</p>
+                    </div>
+                </div>
+            )}
             <div id="file">
                 <h2>Insert the courses here</h2>
                 <input type="file" name="file" onChange={handleFileUpload} />
@@ -142,6 +142,7 @@ function AdminOp() {
             <a href={`${process.env.PUBLIC_URL}/courses.xls`} download="courses.xls" className="button">
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Courses File
             </a>
+
         </div>
     );
 }

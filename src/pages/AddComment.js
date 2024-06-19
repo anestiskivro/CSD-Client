@@ -35,7 +35,7 @@ function AddComment() {
                 alert("Comment inserted successfully");
             }
         } catch (error) {
-            alert(response.data.message);
+            alert("There was an error submitting the form. Please try again.");
         }
     };
 

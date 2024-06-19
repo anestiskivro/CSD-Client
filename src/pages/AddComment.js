@@ -33,12 +33,9 @@ function AddComment() {
             );
             if (response.status === 200) {
                 alert("Comment inserted successfully");
-            } else if (response.status === 404) {
-                alert(response.data.message);
             }
         } catch (error) {
-            console.error("There was an error submitting the form:", error);
-            alert("An error occurred while submitting your comment. Please try again.");
+            alert(response.data.message);
         }
     };
 

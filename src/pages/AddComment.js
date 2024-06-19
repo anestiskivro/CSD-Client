@@ -32,6 +32,7 @@ function AddComment() {
                 }
             }
         ).then((response) => {
+            console.log(response);
             if (response.status === 200) {
                 alert("Comment inserted successfully");
             } else {

@@ -35,7 +35,7 @@ function AddComment() {
             if (response.status === 200) {
                 alert("Comment inserted successfully");
             } else {
-                alert("Comment was not inserted successfully");
+                alert(response.data.message);
             }
         })
 

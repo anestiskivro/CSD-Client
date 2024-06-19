@@ -19,7 +19,7 @@ function NotesTA() {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getExams", { params: { selectedCourse: selectedCourse } }).then((response) => {
             if (response.status === 200) {
                 setExams(response.data.exams);
-                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/getStudents").then((response) => {
+                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
                     if (response.status === 200) {
                         setStudents(response.data.students);
                     }else{
@@ -30,7 +30,7 @@ function NotesTA() {
                 alert(response.data.message)
             }
         });
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/getTAs", { params: { selectedCourse: selectedCourse } }).then((response) => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: selectedCourse } }).then((response) => {
             if (response.status === 200) {
                 setTAs(response.data.TAs);
             } else {

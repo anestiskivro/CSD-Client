@@ -17,30 +17,31 @@ function AddEvaluation() {
 
     const handleonSubmit = async (event) => {
         event.preventDefault();
-        let formData = new FormData();
-        formData.append("email", email);
-        formData.append("evaluation", Evaluation);
-        formData.append("code", coursecode);
-        formData.append("exam", examCourse);
-        formData.append("studentemail", studentemail);
-        console.log(formData)
-        axios.post(
-            'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/addeval',
-            formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+        try {
+            let formData = new FormData();
+            formData.append("email", email);
+            formData.append("evaluation", Evaluation);
+            formData.append("code", coursecode);
+            formData.append("exam", examCourse);
+            formData.append("studentemail", studentemail);
+
+            const response = await axios.post(
+                'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/addeval',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
                 }
-            }
-        ).then((response) => {
+            );
+
             if (response.status === 200) {
                 alert("Evaluation inserted successfully");
-            } else {
-                alert("Evaluation was not inserted successfully");
             }
-        })
-
-    }
+        } catch (error) {
+            alert("An error occurred while submitting your evaluation in the form. Please try again.");
+        }
+    };
 
     const handleBack = () => {
         navigate('/tassistant', { state: { email } });

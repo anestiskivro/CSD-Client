@@ -16,31 +16,31 @@ function AddComment() {
 
     const handleonSubmit = async (event) => {
         event.preventDefault();
-        let formData = new FormData();
-        console.log(email)
-        formData.append("email", email);
-        formData.append("comment", Comment);
-        formData.append("code", coursecode);
-        formData.append("exam", examCourse);
-        console.log(formData)
-        axios.post(
-            'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/addComment',
-            formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+        try {
+            let formData = new FormData();
+            formData.append("email", email);
+            formData.append("comment", Comment);
+            formData.append("code", coursecode);
+            formData.append("exam", examCourse);
+            const response = await axios.post(
+                'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/addComment',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
                 }
-            }
-        ).then((response) => {
-            console.log(response);
+            );
             if (response.status === 200) {
                 alert("Comment inserted successfully");
-            } else {
+            } else if (response.status === 404) {
                 alert(response.data.message);
             }
-        })
-
-    }
+        } catch (error) {
+            console.error("There was an error submitting the form:", error);
+            alert("An error occurred while submitting your comment. Please try again.");
+        }
+    };
 
     const handleBack = () => {
         navigate('/student', { state: { email } });

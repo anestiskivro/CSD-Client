@@ -9,6 +9,7 @@ function Cancellation() {
     const navigate = useNavigate();
     const location = useLocation();
     const { email } = location.state || {};
+    const { id } = location.state || {};
     const [selectedSlots, setSelectedSlots] = useState([]);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
     const [selectedAppointments, setSelectedAppointments] = useState([]);
@@ -89,7 +90,7 @@ function Cancellation() {
         <div className="admin1">
             <Info email={email} />
             <div className="right">
-                {email.includes("csdp") ? (
+                {id.includes("TA") ? (
                     <div className="table-container">
                         {selectedSlots && selectedSlots.length > 0 ? (
                             <>

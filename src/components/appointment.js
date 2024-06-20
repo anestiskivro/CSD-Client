@@ -9,10 +9,10 @@ function Appointment({ id, email }) {
     navigate('book', { state: { id,email } });
   }
   const handleCancel = async () => {
-    navigate('cancel', { state: { email } });
+    navigate('cancel', { state: { id,email } });
   }
   const handleReview = async () => {
-    navigate('review', { state: { email } });
+    navigate('review', { state: { id,email } });
   }
   const handleComment = async () => {
     navigate('addComment', { state: { email } });

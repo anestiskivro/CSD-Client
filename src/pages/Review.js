@@ -8,6 +8,7 @@ function Review() {
     const navigate = useNavigate();
     const location = useLocation();
     const { email } = location.state || {};
+    const { id } = location.state || {};
     const [selectedSlots, setSelectedSlots] = useState([]);
     const [selectedAppointments, setSelectedAppointments] = useState([]);
     const [selectedCourses, setSelectedCourses] = useState([]);
@@ -62,7 +63,7 @@ function Review() {
         <div className="admin1">
             <Info email={email} />
             <div className="right">
-                {email.includes("csdp") ? (
+                {id.includes("TA") ? (
                     <div className="table-container">
                         {selectedSlots && selectedSlots.length > 0 ? (
                             <>

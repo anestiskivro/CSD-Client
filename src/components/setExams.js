@@ -77,7 +77,7 @@ function Set_Exams() {
             />
           </label>
           <label>
-            Duration:
+            Duration in minutes:
             <input
               type="text"
               name="duration"

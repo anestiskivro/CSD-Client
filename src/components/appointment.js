@@ -3,10 +3,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './appointment.css';
 
-function Appointment({ email }) {
+function Appointment({ id, email }) {
   const navigate = useNavigate();
   const handleBook = async () => {
-    navigate('book', { state: { email } });
+    navigate('book', { state: { id,email } });
   }
   const handleCancel = async () => {
     navigate('cancel', { state: { email } });
@@ -25,7 +25,7 @@ function Appointment({ email }) {
   }
   return (
     <div className="right">
-      {email.includes("csdp") ? (
+      {id.includes("TA") ? (
         <>
           <div className="btn-group1">
             <button className='button' onClick={handleBook}>

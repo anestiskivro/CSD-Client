@@ -84,7 +84,7 @@ function Booking() {
         .then((response) => {
           if (response.status === 200) {
             setAvailableSlots(response.data.availableSlots);
-          }else {
+          } else {
             alert("We could not get the available slots. Check your connection");
           }
         });
@@ -100,7 +100,7 @@ function Booking() {
         .then((response) => {
           if (response.status === 200) {
             setAvailableSlots(response.data.availableSlots);
-          }else {
+          } else {
             alert("We could not get the available slots. Check your connection");
           }
         });
@@ -149,7 +149,7 @@ function Booking() {
     }).then((response) => {
       if (response.status === 200) {
         alert(response.data.message);
-      }else {
+      } else {
         alert(response.data.message);
       }
     });
@@ -165,17 +165,17 @@ function Booking() {
     axios.post("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/book", { dates: dates, hours: hours, cid: cid, eid: eid, email: email, duration: examSelected.duration }).then((response) => {
       if (response.status === 200) {
         alert(response.data.message);
-      }else {
+      } else {
         alert(response.data.message);
       }
     });
   };
 
   const handleBack = () => {
-    if (email.includes("csdp")) {
-      navigate('/tassistant', { state: { email } });
+    if (id.includes("TA")) {
+      navigate('/tassistant', { state: { id, email } });
     } else {
-      navigate('/student', { state: { email } });
+      navigate('/student', { state: { id, email } });
     }
   };
 
@@ -183,7 +183,7 @@ function Booking() {
     <div className="admin1">
       <Info email={email}></Info>
       <div className="right">
-        {email.includes("csdp") ? (
+        {id.includes("TA") ? (
           <>
             <h3>Select a Course: {selectedCourse}</h3>
             <select name="course" onChange={handleOptions}>

@@ -9,20 +9,20 @@ const Login = () => {
     axios.defaults.withCredentials = true;
     useEffect(() => {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/").then((response) => {
-            if(response.data.loggedIn === true){
-                if(response.data.email.includes("csdp")){
+            if (response.data.loggedIn === true) {
+                if (response.data.email.includes("csdp")) {
                     navigate("/tassistant", { state: { email: response.data.email } });
-                }else if(response.data.email.includes("admin")) {
+                } else if (response.data.email.includes("admin")) {
                     navigate("/admin", { state: { email: response.data.email } });
-                }else if(response.data.email.includes("csd")){
+                } else if (response.data.email.includes("csd")) {
                     navigate("/student", { state: { email: response.data.email } });
-                }else {
+                } else {
                     navigate("/teacher", { state: { email: response.data.email } });
                 }
             }
 
         })
-    },[navigate])
+    }, [navigate])
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -35,13 +35,13 @@ const Login = () => {
                 alert('Login successful');
                 const userEmail = response.data;
                 if (userEmail.email.includes("admin")) {
-                    navigate("/admin", { state: { email: userEmail.email } });
-                }else if (userEmail.id === "TA") {
-                    navigate("/tassistant", { state: { email: userEmail.email } });
-                }else if (userEmail.id === "student") {
-                    navigate("/student", { state: { email: userEmail.email } });
-                }else {
-                    navigate("/teacher",{ state: { email: userEmail.email } });
+                    navigate("/admin", { state: { id: userEmail.id, email: userEmail.email } });
+                } else if (userEmail.id === "TA") {
+                    navigate("/tassistant", { state: { id: userEmail.id, email: userEmail.email } });
+                } else if (userEmail.id === "student") {
+                    navigate("/student", { state: { id: userEmail.id, email: userEmail.email } });
+                } else {
+                    navigate("/teacher", { state: { id: userEmail.id, email: userEmail.email } });
                 }
             } else {
                 alert('Login failed. Please check your email.');

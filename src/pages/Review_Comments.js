@@ -15,7 +15,7 @@ function Review_comments() {
                 axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getExams").then((response) => {
                     if (response.status === 200) {
                         setExams(response.data.exams);
-                    }else {
+                    } else {
                         alert("We could not get the exams. Check your connection");
                     }
                 });
@@ -24,14 +24,14 @@ function Review_comments() {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant").then((response) => {
             if (response.status === 200) {
                 setCourses(response.data.data);
-            }else {
+            } else {
                 alert("We could not get the courses. Check your connection");
             }
         });
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getStudents").then((response) => {
             if (response.status === 200) {
                 setStudents(response.data.students);
-            }else {
+            } else {
                 alert("We could not get the students. Check your connection");
             }
         });
@@ -40,8 +40,10 @@ function Review_comments() {
     const navigate = useNavigate();
     const location = useLocation();
     const { email } = location.state || {};
+    const { id } = location.state || {};
+
     const handleBack = () => {
-        const path = email.includes("csdp") ? '/tassistant' : '/teacher';
+        const path = id.includes("TA") ? '/tassistant' : '/teacher';
         navigate(path, { state: { email } });
     };
     return (

@@ -18,7 +18,7 @@ function Appointment({ id, email }) {
     navigate('addComment', { state: { email } });
   }
   const handleReviewComments = async () => {
-    navigate('reviewcomments', { state: { email } });
+    navigate('reviewcomments', { state: { id,email } });
   }
   const handleEvaluation = async () => {
     navigate('addeval', { state: { email } });

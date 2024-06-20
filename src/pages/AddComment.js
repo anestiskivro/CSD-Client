@@ -10,6 +10,7 @@ function AddComment() {
     const navigate = useNavigate();
     const location = useLocation();
     const { email } = location.state || {};
+    const { id } = location.state || {};
     const [Comment, setComment] = useState("");
     const [coursecode, setCourseCode] = useState("");
     const [examCourse, setExamCourse] = useState("");
@@ -40,7 +41,7 @@ function AddComment() {
     };
 
     const handleBack = () => {
-        navigate('/student', { state: { email } });
+        navigate('/student', { state: { id, email } });
     };
 
     return (

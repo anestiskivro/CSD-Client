@@ -6,10 +6,11 @@ import Info from '../components/info';
 function Student() {
     const location = useLocation();
     const { email } = location.state || {};
+    const { id } = location.state || {};
     return (
         <div style={{ display: 'flex' }}>
             <Info email={email}></Info>
-            <Appointment email={email} />
+            <Appointment id={id} email={email} />
         </div>
     );
 }

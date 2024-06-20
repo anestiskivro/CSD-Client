@@ -15,13 +15,13 @@ function Appointment({ id, email }) {
     navigate('review', { state: { id,email } });
   }
   const handleComment = async () => {
-    navigate('addComment', { state: { email } });
+    navigate('addComment', { state: { id,email } });
   }
   const handleReviewComments = async () => {
     navigate('reviewcomments', { state: { id,email } });
   }
   const handleEvaluation = async () => {
-    navigate('addeval', { state: { email } });
+    navigate('addeval', { state: { id,email} });
   }
   return (
     <div className="right">

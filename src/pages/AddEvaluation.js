@@ -10,6 +10,7 @@ function AddEvaluation() {
     const navigate = useNavigate();
     const location = useLocation();
     const { email } = location.state || {};
+    const { id } = location.state || {};
     const [Evaluation, setEvaluation] = useState("");
     const [coursecode, setCourseCode] = useState("");
     const [examCourse, setExamCourse] = useState("");
@@ -44,7 +45,7 @@ function AddEvaluation() {
     };
 
     const handleBack = () => {
-        navigate('/tassistant', { state: { email } });
+        navigate('/tassistant', { state: { id,email } });
     };
 
     return (

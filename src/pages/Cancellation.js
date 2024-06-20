@@ -21,7 +21,7 @@ function Cancellation() {
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedSlots(response.data.slots);
-                    }else {
+                    } else {
                         alert(response.data.message);
                     }
                 });
@@ -30,7 +30,7 @@ function Cancellation() {
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedAppointments(response.data.appointments);
-                    }else {
+                    } else {
                         alert(response.data.message);
                     }
                 });
@@ -82,7 +82,7 @@ function Cancellation() {
     };
 
     const handleBack = () => {
-        const path = email.includes("csdp") ? '/tassistant' : '/student';
+        const path = id.includes("TA") ? '/tassistant' : '/student';
         navigate(path, { state: { email } });
     };
 

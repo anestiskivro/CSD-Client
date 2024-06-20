@@ -55,7 +55,7 @@ function Review() {
     }, []);
 
     const handleBack = () => {
-        const path = email.includes("csdp") ? '/tassistant' : '/student';
+        const path = id.includes("TA") ? '/tassistant' : '/student';
         navigate(path, { state: { email } });
     };
 

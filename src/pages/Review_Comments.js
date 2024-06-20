@@ -44,7 +44,7 @@ function Review_comments() {
 
     const handleBack = () => {
         const path = id.includes("TA") ? '/tassistant' : '/teacher';
-        navigate(path, { state: { email } });
+        navigate(path, { state: { id,email } });
     };
     return (
         <div className="admin1">

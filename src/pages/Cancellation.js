@@ -83,7 +83,7 @@ function Cancellation() {
 
     const handleBack = () => {
         const path = id.includes("TA") ? '/tassistant' : '/student';
-        navigate(path, { state: { email } });
+        navigate(path, { state: { id,email } });
     };
 
     return (

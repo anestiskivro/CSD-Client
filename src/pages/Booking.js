@@ -11,6 +11,7 @@ function Booking() {
   const navigate = useNavigate();
   const location = useLocation();
   const { email } = location.state || {};
+  const { id } = location.state || {};
   const [selectedHours, setSelectedHours] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [courses, setCourses] = useState([]);

@@ -70,7 +70,7 @@ function Review() {
         const path = id.includes("TA") ? '/tassistant' : '/student';
         navigate(path, { state: { id, email } });
     };
-
+// TODO mailto:email of student
     return (
         <div className="admin1">
             <Info email={email} />

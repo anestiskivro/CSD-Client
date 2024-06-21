@@ -13,14 +13,22 @@ function Review() {
     const [selectedAppointments, setSelectedAppointments] = useState([]);
     const [selectedCourses, setSelectedCourses] = useState([]);
     const [exams, setExams] = useState([]);
+    const [students, setStudents] = useState([]);
     const [TAs, setTAs] = useState([]);
     useEffect(() => {
-        if (id.includes("TA") ) {
+        if (id.includes("TA")) {
             axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedSlots(response.data.slots);
-                    }else {
+                        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
+                            if (response.status === 200) {
+                                setStudents(response.data.students)
+                            } else {
+                                alert("We could not get the students. Check your connection");
+                            }
+                        });
+                    } else {
                         alert("We could not get the slots. Check your connection");
                     }
                 });
@@ -29,7 +37,7 @@ function Review() {
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedAppointments(response.data.appointments);
-                    }else {
+                    } else {
                         alert("We could not get the appointments. Check your connection");
                     }
                 });
@@ -40,11 +48,9 @@ function Review() {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses",)
             .then((response) => {
                 setSelectedCourses(response.data.courses);
-                console.log(response.data.courses)
                 axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: response.data.courses } }).then((response) => {
                     if (response.status === 200) {
                         setTAs(response.data.TAs);
-                        console.log(response.data.TAs);
                     } else {
                         alert(response.data.message)
                     }
@@ -65,7 +71,7 @@ function Review() {
 
     const handleBack = () => {
         const path = id.includes("TA") ? '/tassistant' : '/student';
-        navigate(path, { state: { id,email } });
+        navigate(path, { state: { id, email } });
     };
 
     return (
@@ -81,6 +87,7 @@ function Review() {
                                         <tr>
                                             <th>Exam</th>
                                             <th>Date</th>
+                                            <th>AM</th>
                                             <th>FromTime</th>
                                             <th>EndTime</th>
                                             <th>Status</th>
@@ -89,14 +96,17 @@ function Review() {
                                     <tbody>
                                         {selectedSlots.map((val, i) => {
                                             const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
+                                            const slotAppointment = selectedAppointments.find(appointment => appointment.slotid === val.slotid);
+                                            const student = students.find(student => student.id === slotAppointment.studentId)
                                             return (
-                                            <tr key={i}>
-                                                <td>{matched_exam ? matched_exam.name : 'N/A'}</td>
-                                                <td>{val.date}</td>
-                                                <td>{val.fromTime}</td>
-                                                <td>{val.EndTime}</td>
-                                                <td>{val.Status}</td>
-                                            </tr>
+                                                <tr key={i}>
+                                                    <td>{matched_exam ? matched_exam.name : 'N/A'}</td>
+                                                    <td>{student ? matched_exam.student_number : 'N/A'}</td>
+                                                    <td>{val.date}</td>
+                                                    <td>{val.fromTime}</td>
+                                                    <td>{val.EndTime}</td>
+                                                    <td>{val.Status}</td>
+                                                </tr>
                                             );
                                         })}
                                     </tbody>

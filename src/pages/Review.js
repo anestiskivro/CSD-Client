@@ -43,6 +43,7 @@ function Review() {
                 axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: response.data.courses } }).then((response) => {
                     if (response.status === 200) {
                         setTAs(response.data.TAs);
+                        console.log(response.data.TAs);
                     } else {
                         alert(response.data.message)
                     }

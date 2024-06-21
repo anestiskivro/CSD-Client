@@ -15,7 +15,7 @@ function Review() {
     const [exams, setExams] = useState([]);
 
     useEffect(() => {
-        if (email.includes("csdp")) {
+        if (id.includes("TA") ) {
             axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
                 .then((response) => {
                     if (response.status === 200) {

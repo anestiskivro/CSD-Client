@@ -99,13 +99,13 @@ function Review() {
                                 <tbody>
                                     {selectedSlots.map((val, i) => {
                                         const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
-                                        const slotAppointment = selectedAppointments.find(appointment => appointment.slotid === val.slotid);
+                                        const slotAppointment = selectedAppointments.find(appointment => appointment.slotId === val.slotid);
                                         const student = slotAppointment ? students.find(student => student.id === slotAppointment.studentId) : null;
                                         return (
                                             <tr key={i}>
                                                 <td>{matched_exam ? matched_exam.name : 'N/A'}</td>
-                                                <td>{student ? student.student_number : 'N/A'}</td>
                                                 <td>{val.date}</td>
+                                                <td>{student ? student.student_number : 'N/A'}</td>
                                                 <td>{val.fromTime}</td>
                                                 <td>{val.EndTime}</td>
                                                 <td>{val.Status}</td>

@@ -11,6 +11,7 @@ function AddEvaluation() {
     const location = useLocation();
     const { email } = location.state || {};
     const { id } = location.state || {};
+    const [students, setStudents] = useState([]);
     const [Evaluation, setEvaluation] = useState("");
     const [courses, setCourses] = useState([]);
     const [exams, setExams] = useState([]);
@@ -33,6 +34,13 @@ function AddEvaluation() {
                 if (response.status === 200) {
                     setExams(response.data.exams);
                     setExamSelected(null);
+                    axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
+                        if (response.status === 200) {
+                            setStudents(response.data.students);
+                        }else{
+                            alert("We could not get the students. Check your connection");
+                        }
+                    });
                 }
             });
         }
@@ -41,6 +49,10 @@ function AddEvaluation() {
         const selectedExamName = event.target.value;
         const foundExam = exams.find(exam => exam.name === selectedExamName);
         setExamSelected(foundExam);
+    };
+    const handleStudentChange = (event) => {
+        const selectedemail = event.target.value;
+        setStudentemail(selectedemail);
     };
     const handleonSubmit = async (event) => {
         event.preventDefault();
@@ -97,12 +109,10 @@ function AddEvaluation() {
                             </label>
                             <label>
                                 Student email:
-                                <input
-                                    type="text"
-                                    name="studentemail"
-                                    value={studentemail}
-                                    onChange={(e) => setStudentemail(e.target.value)}
-                                />
+                                <select name="students" onChange={handleStudentChange}>
+                            <option value="" selected disabled hidden>Select a Student...</option>
+                            {students.length > 0 && students.map((opts, i) => <option key={i}>{opts.email}</option>)}
+                        </select>
                             </label>
                             <label>
                                 Evaluation:

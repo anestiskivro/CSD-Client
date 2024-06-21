@@ -15,6 +15,7 @@ function Review() {
     const [exams, setExams] = useState([]);
     const [students, setStudents] = useState([]);
     const [TAs, setTAs] = useState([]);
+
     useEffect(() => {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
             .then((response) => {
@@ -22,8 +23,7 @@ function Review() {
                     setSelectedSlots(response.data.slots);
                     axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
                         if (response.status === 200) {
-                            setStudents(response.data.students)
-                            console.log(response.data.students)
+                            setStudents(response.data.students);
                         } else {
                             alert("We could not get the students. Check your connection");
                         }
@@ -32,6 +32,7 @@ function Review() {
                     alert("We could not get the slots. Check your connection");
                 }
             });
+
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } })
             .then((response) => {
                 if (response.status === 200) {
@@ -43,18 +44,23 @@ function Review() {
     }, [email, id]);
 
     useEffect(() => {
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses",)
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses")
             .then((response) => {
                 setSelectedCourses(response.data.courses);
-                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: response.data.courses } }).then((response) => {
-                    if (response.status === 200) {
-                        setTAs(response.data.TAs);
-                    } else {
-                        alert(response.data.message)
-                    }
-                });
-                return axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getExams",);
+                return axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: response.data.courses } });
             })
+            .then((response) => {
+                if (response.status === 200) {
+                    setTAs(response.data.TAs);
+                } else {
+                    alert(response.data.message);
+                }
+            })
+            .catch((error) => {
+                console.error("There was an error fetching the courses or TAs!", error);
+            });
+
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getExams")
             .then((response) => {
                 if (response.status === 200) {
                     setExams(response.data.exams);
@@ -63,7 +69,7 @@ function Review() {
                 }
             })
             .catch((error) => {
-                console.error("There was an error fetching the courses or exams!", error);
+                console.error("There was an error fetching the exams!", error);
             });
     }, []);
 
@@ -71,7 +77,7 @@ function Review() {
         const path = id.includes("TA") ? '/tassistant' : '/student';
         navigate(path, { state: { id, email } });
     };
-// TODO mailto:email of student
+
     return (
         <div className="admin1">
             <Info email={email} />
@@ -79,37 +85,35 @@ function Review() {
                 {id.includes("TA") ? (
                     <div className="table-container">
                         {selectedSlots && selectedSlots.length > 0 ? (
-                            <>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Exam</th>
-                                            <th>Date</th>
-                                            <th>AM</th>
-                                            <th>FromTime</th>
-                                            <th>EndTime</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {selectedSlots.map((val, i) => {
-                                            const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
-                                            const slotAppointment = selectedAppointments.find(appointment => appointment.slotid === val.slotid);
-                                            const student = students.find(student => student.id === slotAppointment.studentId)
-                                            return (
-                                                <tr key={i}>
-                                                    <td>{matched_exam ? matched_exam.name : 'N/A'}</td>
-                                                    <td>{student ? matched_exam.student_number : 'N/A'}</td>
-                                                    <td>{val.date}</td>
-                                                    <td>{val.fromTime}</td>
-                                                    <td>{val.EndTime}</td>
-                                                    <td>{val.Status}</td>
-                                                </tr>
-                                            );
-                                        })}
-                                    </tbody>
-                                </table>
-                            </>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Exam</th>
+                                        <th>Date</th>
+                                        <th>AM</th>
+                                        <th>FromTime</th>
+                                        <th>EndTime</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {selectedSlots.map((val, i) => {
+                                        const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
+                                        const slotAppointment = selectedAppointments.find(appointment => appointment.slotid === val.slotid);
+                                        const student = slotAppointment ? students.find(student => student.id === slotAppointment.studentId) : null;
+                                        return (
+                                            <tr key={i}>
+                                                <td>{matched_exam ? matched_exam.name : 'N/A'}</td>
+                                                <td>{student ? student.student_number : 'N/A'}</td>
+                                                <td>{val.date}</td>
+                                                <td>{val.fromTime}</td>
+                                                <td>{val.EndTime}</td>
+                                                <td>{val.Status}</td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
                         ) : (
                             <div>No slots available</div>
                         )}
@@ -117,37 +121,35 @@ function Review() {
                 ) : (
                     <div className="table-container">
                         {selectedAppointments && selectedAppointments.length > 0 ? (
-                            <>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Course</th>
-                                            <th>Exam</th>
-                                            <th>TA</th>
-                                            <th>Date</th>
-                                            <th>FromTime</th>
-                                            <th>EndTime</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {selectedAppointments.map((val, i) => {
-                                            const matchedCourse = selectedCourses.find(course => course.cid === val.cid);
-                                            const matchedExam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
-                                            const matched_TA = TAs.find(ta => ta.taid === val.taid);
-                                            return (
-                                                <tr key={i}>
-                                                    <td>{matchedCourse ? matchedCourse.code : 'N/A'}</td>
-                                                    <td>{matchedExam ? matchedExam.name : 'N/A'}</td>
-                                                    <td>{matched_TA ? matched_TA.lastname : 'N/A'}</td>
-                                                    <td>{val.date}</td>
-                                                    <td>{val.FromTime}</td>
-                                                    <td>{val.EndTime}</td>
-                                                </tr>
-                                            );
-                                        })}
-                                    </tbody>
-                                </table>
-                            </>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Course</th>
+                                        <th>Exam</th>
+                                        <th>TA</th>
+                                        <th>Date</th>
+                                        <th>FromTime</th>
+                                        <th>EndTime</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {selectedAppointments.map((val, i) => {
+                                        const matchedCourse = selectedCourses.find(course => course.cid === val.cid);
+                                        const matchedExam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
+                                        const matched_TA = TAs.find(ta => ta.taid === val.taid);
+                                        return (
+                                            <tr key={i}>
+                                                <td>{matchedCourse ? matchedCourse.code : 'N/A'}</td>
+                                                <td>{matchedExam ? matchedExam.name : 'N/A'}</td>
+                                                <td>{matched_TA ? matched_TA.lastname : 'N/A'}</td>
+                                                <td>{val.date}</td>
+                                                <td>{val.FromTime}</td>
+                                                <td>{val.EndTime}</td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
                         ) : (
                             <div>No appointments available</div>
                         )}
@@ -156,7 +158,8 @@ function Review() {
                 <div className='btn-group3'>
                     <button className="button" onClick={handleBack}>
                         <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
-                        Back</button>
+                        Back
+                    </button>
                 </div>
             </div>
         </div>

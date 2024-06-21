@@ -87,11 +87,9 @@ function Review() {
                                     <tbody>
                                         {selectedSlots.map((val, i) => {
                                             const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
-                                            const matched_TA = TAs.find(ta => ta.cid === val.taid);
                                             return (
                                             <tr key={i}>
                                                 <td>{matched_exam ? matched_exam.name : 'N/A'}</td>
-                                                <td>{matched_TA ? matched_TA.lastname : 'N/A'}</td>
                                                 <td>{val.date}</td>
                                                 <td>{val.fromTime}</td>
                                                 <td>{val.EndTime}</td>
@@ -115,6 +113,7 @@ function Review() {
                                         <tr>
                                             <th>Course</th>
                                             <th>Exam</th>
+                                            <th>TA</th>
                                             <th>Date</th>
                                             <th>FromTime</th>
                                             <th>EndTime</th>
@@ -124,10 +123,12 @@ function Review() {
                                         {selectedAppointments.map((val, i) => {
                                             const matchedCourse = selectedCourses.find(course => course.cid === val.cid);
                                             const matchedExam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
+                                            const matched_TA = TAs.find(ta => ta.cid === val.taid);
                                             return (
                                                 <tr key={i}>
                                                     <td>{matchedCourse ? matchedCourse.code : 'N/A'}</td>
                                                     <td>{matchedExam ? matchedExam.name : 'N/A'}</td>
+                                                    <td>{matched_TA ? matched_TA.lastname : 'N/A'}</td>
                                                     <td>{val.date}</td>
                                                     <td>{val.FromTime}</td>
                                                     <td>{val.EndTime}</td>

@@ -110,7 +110,7 @@ function Cancellation() {
                                             const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
                                             return (
                                                 <tr key={i}>
-                                                    <td>{matched_exam ? matched_exam.name : 'N/A'}</td>
+                                                    <td>{matched_exam ? matched_exam.name : ''}</td>
                                                     <td>{val.date}</td>
                                                     <td>{val.fromTime}</td>
                                                     <td>{val.EndTime}</td>

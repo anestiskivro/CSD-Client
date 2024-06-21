@@ -13,7 +13,7 @@ function Review() {
     const [selectedAppointments, setSelectedAppointments] = useState([]);
     const [selectedCourses, setSelectedCourses] = useState([]);
     const [exams, setExams] = useState([]);
-
+    const [TAs, setTAs] = useState([]);
     useEffect(() => {
         if (id.includes("TA") ) {
             axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })

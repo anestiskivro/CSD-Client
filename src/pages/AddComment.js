@@ -12,17 +12,44 @@ function AddComment() {
     const { email } = location.state || {};
     const { id } = location.state || {};
     const [Comment, setComment] = useState("");
-    const [coursecode, setCourseCode] = useState("");
-    const [examCourse, setExamCourse] = useState("");
+    const [courses, setCourses] = useState([]);
+    const [exams, setExams] = useState([]);
+    const [selectedCourse, setSelectedCourse] = useState('');
+    const [examSelected, setExamSelected] = useState(null);
+    useEffect(() => {
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant").then((response) => {
+            if (response.status === 200) {
+                setCourses(response.data.data);
+            }
+        });
+    }, []);
 
+    const handleOptions = (event) => {
+        if (event.target.value !== "Select a course...") {
+            setSelectedCourse(event.target.value);
+            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/book", {
+                params: { selectedCourse: event.target.value }
+            }).then((response) => {
+                if (response.status === 200) {
+                    setExams(response.data.exams);
+                    setExamSelected(null);
+                }
+            });
+        }
+    };
+    const handleExamChange = (event) => {
+        const selectedExamName = event.target.value;
+        const foundExam = exams.find(exam => exam.name === selectedExamName);
+        setExamSelected(foundExam);
+    };
     const handleonSubmit = async (event) => {
         event.preventDefault();
         try {
             let formData = new FormData();
             formData.append("email", email);
             formData.append("comment", Comment);
-            formData.append("code", coursecode);
-            formData.append("exam", examCourse);
+            formData.append("code", selectedCourse);
+            formData.append("exam", examSelected);
             const response = await axios.post(
                 'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/addComment',
                 formData,
@@ -54,21 +81,17 @@ function AddComment() {
                         <form className="add-comment-form" onSubmit={handleonSubmit}>
                             <label>
                                 Course code:
-                                <input
-                                    type="text"
-                                    name="coursecode"
-                                    value={coursecode}
-                                    onChange={(e) => setCourseCode(e.target.value)}
-                                />
+                                <select name="course" onChange={handleOptions}>
+                                    <option value="" selected disabled hidden>Select a course...</option>
+                                    {courses.length > 0 && courses.map((opts, i) => <option key={i}>{opts.code}</option>)}
+                                </select>
                             </label>
                             <label>
                                 Exam course:
-                                <input
-                                    type="text"
-                                    name="examCourse"
-                                    value={examCourse}
-                                    onChange={(e) => setExamCourse(e.target.value)}
-                                />
+                                <select name="exams" onChange={handleExamChange}>
+                                    <option value="" selected disabled hidden>Select an exam...</option>
+                                    {exams.length > 0 && exams.map((opts, i) => <option key={i}>{opts.name}</option>)}
+                                </select>
                             </label>
                             <label>
                                 Comment:

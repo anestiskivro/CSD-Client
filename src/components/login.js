@@ -32,7 +32,8 @@ const Login = () => {
             const response = await axios.post('https://rendezvous-csd-106ea9dcba7a.herokuapp.com', { email }, {
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                withCredentials: true
             });
             if (response.status === 200) {
                 alert('Login successful');

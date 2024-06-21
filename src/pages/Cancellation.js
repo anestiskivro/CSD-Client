@@ -60,7 +60,7 @@ function Cancellation() {
 
     const handleCheckboxChange = (index) => (event) => {
         const isChecked = event.target.checked;
-        const selectedData = email.includes("csdp") ? selectedSlots[index] : selectedAppointments[index];
+        const selectedData = id.includes("TA") ? selectedSlots[index] : selectedAppointments[index];
         if (isChecked) {
             setSelectedCheckboxes(prevState => [...prevState, selectedData]);
         } else {
@@ -69,11 +69,12 @@ function Cancellation() {
     };
 
     const handleCancel = async () => {
-        const endpoint = email.includes("csdp") ? "tassistant/cancel" : "student/cancel";
+        const endpoint = id.includes("TA") ? "tassistant/cancel" : "student/cancel";
         try {
             const response = await axios.delete(`https://rendezvous-csd-106ea9dcba7a.herokuapp.com/${endpoint}`, { data: { checkboxes: selectedCheckboxes } });
             if (response.status === 200) {
                 alert("Successfully removed");
+                window.location.reload();
             }
         } catch (error) {
             console.error("Error:", error);

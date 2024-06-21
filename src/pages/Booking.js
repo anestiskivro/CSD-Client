@@ -166,6 +166,7 @@ function Booking() {
     axios.post("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/book", { dates: dates, hours: hours, cid: cid, eid: eid, email: email, duration: examSelected.duration }).then((response) => {
       if (response.status === 200) {
         alert(response.data.message);
+        
       } else {
         alert(response.data.message);
       }

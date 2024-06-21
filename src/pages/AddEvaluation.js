@@ -61,7 +61,7 @@ function AddEvaluation() {
             formData.append("email", email);
             formData.append("evaluation", Evaluation);
             formData.append("code", selectedCourse);
-            formData.append("exam", examSelected);
+            formData.append("exam", examSelected.name);
             formData.append("studentemail", studentemail);
             const response = await axios.post(
                 'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/addeval',

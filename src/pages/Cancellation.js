@@ -186,6 +186,7 @@ function Cancellation() {
                                                     <td>{val.EndTime}</td>
                                                     <td>{selectedCourses.find(course => course.cid === val.cid)?.code}</td>
                                                     <td>{matchedExam ? matchedExam.name : ''}</td>
+                                                    <td>{val.Status}</td>
                                                     <td><input type="checkbox" onChange={handleCheckboxChange(i)} /></td>
                                                 </tr>
                                             );

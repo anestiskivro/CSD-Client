@@ -40,7 +40,7 @@ function Review() {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses",)
             .then((response) => {
                 setSelectedCourses(response.data.courses);
-                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: selectedCourses } }).then((response) => {
+                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: response.data.courses } }).then((response) => {
                     if (response.status === 200) {
                         setTAs(response.data.TAs);
                     } else {

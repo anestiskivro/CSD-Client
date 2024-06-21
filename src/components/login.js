@@ -10,17 +10,16 @@ const Login = () => {
     useEffect(() => {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/").then((response) => {
             if (response.data.loggedIn === true) {
-                if (response.data.email.includes("csdp")) {
+                if (response.data.id.includes("TA")) {
                     navigate("/tassistant", { state: { email: response.data.email } });
-                } else if (response.data.email.includes("admin")) {
-                    navigate("/admin", { state: { email: response.data.email } });
-                } else if (response.data.email.includes("csd")) {
+                } else if (response.data.id.includes("teacher")) {
+                    navigate("/teacher", { state: { email: response.data.email } });
+                } else if (response.data.id.includes("student")) {
                     navigate("/student", { state: { email: response.data.email } });
                 } else {
-                    navigate("/teacher", { state: { email: response.data.email } });
+                    navigate("/admin", { state: { email: response.data.email } });
                 }
             }
-
         })
     }, [navigate])
     const handleFormSubmit = async (event) => {

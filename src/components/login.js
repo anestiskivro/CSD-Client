@@ -11,13 +11,13 @@ const Login = () => {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/").then((response) => {
             if (response.data.loggedIn === true) {
                 if (response.data.id.includes("TA")) {
-                    navigate("/tassistant", { state: { email: response.data.email } });
+                    navigate("/tassistant", { state: { id: response.data.id, email: response.data.email } });
                 } else if (response.data.id.includes("teacher")) {
-                    navigate("/teacher", { state: { email: response.data.email } });
+                    navigate("/teacher", { state: { id: response.data.id, email: response.data.email } });
                 } else if (response.data.id.includes("student")) {
-                    navigate("/student", { state: { email: response.data.email } });
+                    navigate("/student", { state: { id: response.data.id, email: response.data.email } });
                 } else {
-                    navigate("/admin", { state: { email: response.data.email } });
+                    navigate("/admin", { state: { id: response.data.id, email: response.data.email } });
                 }
             }
         })

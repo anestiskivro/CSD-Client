@@ -49,7 +49,7 @@ function AddComment() {
             formData.append("email", email);
             formData.append("comment", Comment);
             formData.append("code", selectedCourse);
-            formData.append("exam", examSelected);
+            formData.append("exam", examSelected.name);
             const response = await axios.post(
                 'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/addComment',
                 formData,

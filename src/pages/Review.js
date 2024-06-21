@@ -123,7 +123,7 @@ function Review() {
                                         {selectedAppointments.map((val, i) => {
                                             const matchedCourse = selectedCourses.find(course => course.cid === val.cid);
                                             const matchedExam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
-                                            const matched_TA = TAs.find(ta => ta.cid === val.taid);
+                                            const matched_TA = TAs.find(ta => ta.taid === val.taid);
                                             return (
                                                 <tr key={i}>
                                                     <td>{matchedCourse ? matchedCourse.code : 'N/A'}</td>

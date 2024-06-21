@@ -1,6 +1,6 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
-import { default as React, useState } from 'react';
+import { default as React, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import "../components/addComment.css";
 import Info from '../components/info';

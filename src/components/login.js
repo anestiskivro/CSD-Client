@@ -7,21 +7,27 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
+
     useEffect(() => {
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/").then((response) => {
-            if (response.data.loggedIn === true) {
-                if (response.data.id.includes("TA")) {
-                    navigate("/tassistant", { state: { id: response.data.id, email: response.data.email } });
-                } else if (response.data.id.includes("teacher")) {
-                    navigate("/teacher", { state: { id: response.data.id, email: response.data.email } });
-                } else if (response.data.id.includes("student")) {
-                    navigate("/student", { state: { id: response.data.id, email: response.data.email } });
-                } else {
-                    navigate("/admin", { state: { id: response.data.id, email: response.data.email } });
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/")
+            .then((response) => {
+                if (response.data.loggedIn === true) {
+                    if (response.data.id.includes("TA")) {
+                        navigate("/tassistant", { state: { id: response.data.id, email: response.data.email } });
+                    } else if (response.data.id.includes("teacher")) {
+                        navigate("/teacher", { state: { id: response.data.id, email: response.data.email } });
+                    } else if (response.data.id.includes("student")) {
+                        navigate("/student", { state: { id: response.data.id, email: response.data.email } });
+                    } else {
+                        navigate("/admin", { state: { id: response.data.id, email: response.data.email } });
+                    }
                 }
-            }
-        })
-    }, [navigate])
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    }, [navigate]);
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -50,6 +56,7 @@ const Login = () => {
             alert('An error occurred. Please try again later. Check your connection to the Internet');
         }
     };
+
     return (
         <div className="right">
             <div className="header">
@@ -67,5 +74,6 @@ const Login = () => {
         </div>
     );
 }
+
 
 export default Login;

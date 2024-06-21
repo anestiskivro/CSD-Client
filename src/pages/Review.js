@@ -34,7 +34,7 @@ function Review() {
                     }
                 });
         }
-    }, [email]);
+    }, [email, id]);
 
     useEffect(() => {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses",)

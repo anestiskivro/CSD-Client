@@ -43,7 +43,7 @@ function Cancellation() {
                     alert(response.data.message);
                 }
             })
-    }, [email]);
+    }, [email, id]);
 
     useEffect(() => {
         if (selectedAppointments.length > 0) {

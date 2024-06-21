@@ -16,32 +16,29 @@ function Review() {
     const [students, setStudents] = useState([]);
     const [TAs, setTAs] = useState([]);
     useEffect(() => {
-        if (id.includes("TA")) {
-            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
-                .then((response) => {
-                    if (response.status === 200) {
-                        setSelectedSlots(response.data.slots);
-                        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
-                            if (response.status === 200) {
-                                setStudents(response.data.students)
-                            } else {
-                                alert("We could not get the students. Check your connection");
-                            }
-                        });
-                    } else {
-                        alert("We could not get the slots. Check your connection");
-                    }
-                });
-        } else {
-            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } })
-                .then((response) => {
-                    if (response.status === 200) {
-                        setSelectedAppointments(response.data.appointments);
-                    } else {
-                        alert("We could not get the appointments. Check your connection");
-                    }
-                });
-        }
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
+            .then((response) => {
+                if (response.status === 200) {
+                    setSelectedSlots(response.data.slots);
+                    axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
+                        if (response.status === 200) {
+                            setStudents(response.data.students)
+                        } else {
+                            alert("We could not get the students. Check your connection");
+                        }
+                    });
+                } else {
+                    alert("We could not get the slots. Check your connection");
+                }
+            });
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } })
+            .then((response) => {
+                if (response.status === 200) {
+                    setSelectedAppointments(response.data.appointments);
+                } else {
+                    alert("We could not get the appointments. Check your connection");
+                }
+            });
     }, [email, id]);
 
     useEffect(() => {

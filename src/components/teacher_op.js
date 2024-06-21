@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './teacher_op.css';
 
-function Teacher_op({ email }) {
+function Teacher_op({ id, email }) {
     const navigate = useNavigate();
     const [courses, setCourses] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState('');
@@ -32,7 +32,7 @@ function Teacher_op({ email }) {
         navigate('setExams', { state: { email, selectedCourse } });
     }
     const handleReviewComments = async () => {
-        navigate('reviewcomments', { state: { email } });
+        navigate('reviewcomments', { state: {id, email } });
     }
     const handleNotesTA = async () => {
         navigate('getNotes', { state: { email, selectedCourse } })

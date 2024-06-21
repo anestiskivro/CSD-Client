@@ -11,36 +11,47 @@ function Review() {
     const { id } = location.state || {};
     const [selectedSlots, setSelectedSlots] = useState([]);
     const [selectedAppointments, setSelectedAppointments] = useState([]);
+    const [appointments, setAppointments] = useState([]);
     const [selectedCourses, setSelectedCourses] = useState([]);
     const [exams, setExams] = useState([]);
     const [students, setStudents] = useState([]);
     const [TAs, setTAs] = useState([]);
 
     useEffect(() => {
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
-            .then((response) => {
-                if (response.status === 200) {
-                    setSelectedSlots(response.data.slots);
-                    axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
-                        if (response.status === 200) {
-                            setStudents(response.data.students);
-                        } else {
-                            alert("We could not get the students. Check your connection");
-                        }
-                    });
-                } else {
-                    alert("We could not get the slots. Check your connection");
-                }
-            });
-
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } })
-            .then((response) => {
-                if (response.status === 200) {
-                    setSelectedAppointments(response.data.appointments);
-                } else {
-                    alert("We could not get the appointments. Check your connection");
-                }
-            });
+        if (id.includes("TA")) {
+            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
+                .then((response) => {
+                    if (response.status === 200) {
+                        setSelectedSlots(response.data.slots);
+                        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
+                            if (response.status === 200) {
+                                setStudents(response.data.students);
+                                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getappointments")
+                                    .then((response) => {
+                                        if (response.status === 200) {
+                                            setAppointments(response.data.appointments);
+                                        } else {
+                                            alert("We could not get the appointments. Check your connection");
+                                        }
+                                    });
+                            } else {
+                                alert("We could not get the students. Check your connection");
+                            }
+                        });
+                    } else {
+                        alert("We could not get the slots. Check your connection");
+                    }
+                });
+        } else {
+            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } })
+                .then((response) => {
+                    if (response.status === 200) {
+                        setSelectedAppointments(response.data.appointments);
+                    } else {
+                        alert("We could not get the appointments. Check your connection");
+                    }
+                });
+        }
     }, [email, id]);
 
     useEffect(() => {
@@ -99,7 +110,7 @@ function Review() {
                                 <tbody>
                                     {selectedSlots.map((val, i) => {
                                         const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
-                                        const slotAppointment = selectedAppointments.find(appointment => appointment.slotId === val.slotid);
+                                        const slotAppointment = appointments.find(appointment => appointment.slotId === val.slotid);
                                         const student = slotAppointment ? students.find(student => student.id === slotAppointment.studentId) : null;
                                         return (
                                             <tr key={i}>

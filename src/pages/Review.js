@@ -87,10 +87,11 @@ function Review() {
                                     <tbody>
                                         {selectedSlots.map((val, i) => {
                                             const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
-                                            // const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
+                                            const matched_TA = TAs.find(ta => ta.cid === val.taid);
                                             return (
                                             <tr key={i}>
                                                 <td>{matched_exam ? matched_exam.name : 'N/A'}</td>
+                                                <td>{matched_TA ? matched_TA.lastname : 'N/A'}</td>
                                                 <td>{val.date}</td>
                                                 <td>{val.fromTime}</td>
                                                 <td>{val.EndTime}</td>

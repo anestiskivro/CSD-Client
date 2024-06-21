@@ -21,13 +21,19 @@ const Login = () => {
                     } else {
                         navigate("/admin", { state: { id: response.data.id, email: response.data.email } });
                     }
+                } else {
+                    console.log('Not logged in');
                 }
             })
             .catch(error => {
                 console.error('There was an error!', error);
+                if (error.response && error.response.status === 401) {
+                    alert('Unauthorized. Please log in.');
+                } else {
+                    alert('An unexpected error occurred.');
+                }
             });
     }, [navigate]);
-
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {

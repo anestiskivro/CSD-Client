@@ -40,6 +40,13 @@ function Review() {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses",)
             .then((response) => {
                 setSelectedCourses(response.data.courses);
+                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: selectedCourses } }).then((response) => {
+                    if (response.status === 200) {
+                        setTAs(response.data.TAs);
+                    } else {
+                        alert(response.data.message)
+                    }
+                });
                 return axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getExams",);
             })
             .then((response) => {
@@ -80,6 +87,7 @@ function Review() {
                                     <tbody>
                                         {selectedSlots.map((val, i) => {
                                             const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
+                                            // const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
                                             return (
                                             <tr key={i}>
                                                 <td>{matched_exam ? matched_exam.name : 'N/A'}</td>

@@ -105,6 +105,7 @@ function Review() {
                                         <th>FromTime</th>
                                         <th>EndTime</th>
                                         <th>Status</th>
+                                        <th>Message</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -120,6 +121,11 @@ function Review() {
                                                 <td>{val.fromTime}</td>
                                                 <td>{val.EndTime}</td>
                                                 <td>{val.Status}</td>
+                                                <td>
+                                                {student ? (
+                                                    <a href={`mailto:${student.email}`}>Send Message</a>
+                                                ) : ''}
+                                            </td>
                                             </tr>
                                         );
                                     })}

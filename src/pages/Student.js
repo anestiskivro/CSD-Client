@@ -8,9 +8,13 @@ function Student() {
     const { email } = location.state || {};
     const { id } = location.state || {};
     return (
-        <div style={{ display: 'flex' }}>
-            <Info email={email}></Info>
-            <Appointment id={id} email={email} />
+        <div className="container" style={{ display: 'flex' }}>
+            <div className="info">
+                <Info email={email} />
+            </div>
+            <div className="appointment">
+                <Appointment id={id} email={email} />
+            </div>
         </div>
     );
 }

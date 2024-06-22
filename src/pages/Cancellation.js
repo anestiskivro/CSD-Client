@@ -100,7 +100,6 @@ function Cancellation() {
             const response = await axios.delete(`https://rendezvous-csd-106ea9dcba7a.herokuapp.com/${endpoint}`, { data: { checkboxes: selectedCheckboxes } });
             if (response.status === 200) {
                 alert("Successfully removed");
-                // window.location.reload();
             }
         } catch (error) {
             console.error("Error:", error);

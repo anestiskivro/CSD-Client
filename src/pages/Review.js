@@ -122,7 +122,7 @@ function Review() {
                                                 <td>{val.EndTime}</td>
                                                 <td>{val.Status}</td>
                                                 <td>
-                                                {student ? (
+                                                {student  ? (
                                                     <a href={`mailto:${student.email}`}>Send Message</a>
                                                 ) : ''}
                                             </td>

@@ -46,6 +46,15 @@
 }
 
 @media (max-width: 768px) {
+
+    .right {
+        width: 100%;
+        margin: 0;
+        padding-top: 2vh;
+    }
+}
+
+@media (max-width: 768px) {
     .form-container {
         width: 80%;
         padding: 15px;

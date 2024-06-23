@@ -85,6 +85,15 @@ th {
 }
 
 @media (max-width: 768px) {
+
+  .left {
+    width: 100%;
+    margin: 0;
+    padding-top: 2vh;
+  }
+}
+
+@media (max-width: 768px) {
   h1 {
     font-size: 32px;
   }

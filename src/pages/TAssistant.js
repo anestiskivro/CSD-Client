@@ -1,4 +1,5 @@
 import React from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useLocation } from 'react-router-dom';
 import Appointment from '../components/appointment';
 import Info from '../components/info';

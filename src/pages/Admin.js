@@ -1,4 +1,5 @@
 import { default as React } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useLocation } from 'react-router-dom';
 import AdminOp from '../components/admin_op';
 import Info from '../components/info';

@@ -8,6 +8,7 @@
 
 .mobile {
     flex-direction: column;
+    height: 120vh;
 }
 .right {
     flex: 1;

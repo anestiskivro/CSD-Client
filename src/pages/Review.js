@@ -45,11 +45,9 @@ function Review() {
                 const examsResponse = await axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getExams");
                 setExams(examsResponse.data.exams);
 
-                setIsLoading(false);
             } catch (error) {
                 console.error("Error fetching data:", error);
                 alert("Error fetching data. Please check your connection.");
-                setIsLoading(false);
             }
         };
 

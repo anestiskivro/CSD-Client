@@ -22,7 +22,7 @@ const Info = ({ email }) => {
     <div className="left">
       <div className="header">
         <img src="/imagesUOC.png" alt="Logo" className="logo" />
-        {!isMobile && (!email) && (
+        {!(email && isMobile) && (
           <>
             <h1>Welcome</h1>
             <h2>Rendezvous System for CSD Courses</h2>

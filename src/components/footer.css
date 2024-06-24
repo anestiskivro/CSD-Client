@@ -21,33 +21,37 @@
 @media (max-width: 768px) {
     .footer {
         padding: 15px;
-        text-align: center;
+        text-align: left;
     }
 
     .social-icon-container {
-        justify-content: left;
+        justify-content: flex-start;
+        flex-direction: column;
         padding-left: 0;
+        align-items: flex-start;
     }
 
     .social-icon-container .SocialIcon {
-        margin-right: 3%;
+        margin-right: 0;
+        margin-bottom: 10px;
     }
 }
 
 @media (max-width: 480px) {
     .footer {
         padding: 10px;
-        text-align: center;
+        text-align: left;
     }
 
     .social-icon-container {
-        justify-content: left;
+        justify-content: flex-start;
+        flex-direction: column;
         padding-left: 0;
-        flex-wrap: wrap;
+        align-items: flex-start;
     }
 
     .social-icon-container .SocialIcon {
-        margin-right: 2%;
+        margin-right: 0;
         margin-bottom: 10px;
     }
 }

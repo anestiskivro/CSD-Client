@@ -1,11 +1,14 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Info from '../components/info';
 import "../components/teacher_op.css";
 
+
 function Teacher_ins_stud() {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const navigate = useNavigate();
   const location = useLocation();
   const { email } = location.state || {};
@@ -71,6 +74,7 @@ function Teacher_ins_stud() {
   };
 
   return (
+    <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
     <div className="admin1">
       <Info email={email}></Info>
       <div className="right">
@@ -111,6 +115,7 @@ function Teacher_ins_stud() {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };

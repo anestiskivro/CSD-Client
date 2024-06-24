@@ -8,13 +8,12 @@
 
 .mobile {
     flex-direction: column;
-    height: 120vh;
 }
 .right {
     flex: 1;
     background-color: #ffffff;
 	padding-top: 5vh;
-    height: 120vh;
+    height: 150vh;
 }
 
 .container {

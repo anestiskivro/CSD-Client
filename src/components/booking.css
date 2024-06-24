@@ -9,11 +9,12 @@
 .mobile {
     flex-direction: column;
 }
+
 .right {
     flex: 1;
     background-color: #ffffff;
-	padding-top: 5vh;
-    height: 160vh;
+    padding-top: 5vh;
+    height: 120vh;
 }
 
 .container {
@@ -24,6 +25,7 @@
     height: 300px;
     overflow-y: scroll;
 }
+
 .btn-group {
     display: flex;
     gap: 1rem;
@@ -38,3 +40,24 @@
     border-radius: 5px;
 }
 
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        width: auto;
+    }
+
+    .right {
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+        width: auto;
+    }
+
+    .right {
+        height: auto;
+    }
+}

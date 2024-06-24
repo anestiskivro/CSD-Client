@@ -185,7 +185,6 @@ function Booking() {
 
   return (
     <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-    <div className="book">
       <Info email={email}></Info>
       <div className="right">
         {id.includes("TA") ? (
@@ -302,7 +301,6 @@ function Booking() {
           </>
         )}
       </div>
-    </div>
     </div>
   );
 }

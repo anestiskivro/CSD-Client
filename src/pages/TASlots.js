@@ -62,7 +62,6 @@ function TASlots() {
     };
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-            <div className="review">
                 <Info email={email} />
                 <div className="right">
                     {selectedCourse && (
@@ -132,7 +131,6 @@ function TASlots() {
                     )}
                 </div>
             </div>
-        </div>
     );
 };
 export default TASlots;

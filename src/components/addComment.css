@@ -1,6 +1,13 @@
-
-.add-comment-container {
+.home-container {
     display: flex;
+}
+
+.desktop {
+    flex-direction: row;
+}
+
+.mobile {
+    flex-direction: column;
 }
 
 .add-comment-header {

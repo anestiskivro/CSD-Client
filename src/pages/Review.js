@@ -93,7 +93,6 @@ function Review() {
 
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-        <div className="review">
             <Info email={email} />
             <div className="right">
                 {id.includes("TA") ? (
@@ -182,7 +181,6 @@ function Review() {
                     </button>
                 </div>
             </div>
-        </div>
         </div>
     );
 }

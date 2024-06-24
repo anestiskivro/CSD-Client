@@ -50,7 +50,6 @@ function Review_comments() {
     };
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-            <div className="review">
                 <Info email={email}></Info>
                 <div className='right'>
                     <div className="table-container">
@@ -94,7 +93,6 @@ function Review_comments() {
                     </div>
                 </div>
             </div >
-        </div >
     )
 }
 

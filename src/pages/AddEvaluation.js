@@ -39,7 +39,7 @@ function AddEvaluation() {
                     axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
                         if (response.status === 200) {
                             setStudents(response.data.students);
-                        }else{
+                        } else {
                             alert("We could not get the students. Check your connection");
                         }
                     });
@@ -89,7 +89,6 @@ function AddEvaluation() {
 
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-        <div className="add-comment-container">
             <Info email={email}></Info>
             <div className="right">
                 <div className='header'>
@@ -113,9 +112,9 @@ function AddEvaluation() {
                             <label>
                                 Student email:
                                 <select name="students" onChange={handleStudentChange}>
-                            <option value="" selected disabled hidden>Select a Student...</option>
-                            {students.length > 0 && students.map((opts, i) => <option key={i}>{opts.email}</option>)}
-                        </select>
+                                    <option value="" selected disabled hidden>Select a Student...</option>
+                                    {students.length > 0 && students.map((opts, i) => <option key={i}>{opts.email}</option>)}
+                                </select>
                             </label>
                             <label>
                                 Evaluation:
@@ -139,8 +138,7 @@ function AddEvaluation() {
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
+        </div >
     )
 }
 

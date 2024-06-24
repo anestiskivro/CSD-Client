@@ -75,7 +75,6 @@ function Teacher_ins_stud() {
 
   return (
     <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-    <div className="admin1">
       <Info email={email}></Info>
       <div className="right">
         <div id="file">
@@ -115,7 +114,6 @@ function Teacher_ins_stud() {
           </div>
         )}
       </div>
-    </div>
     </div>
   );
 };

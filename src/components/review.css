@@ -1,7 +1,14 @@
-.review {
+.home-container {
     display: flex;
 }
 
+.desktop {
+    flex-direction: row;
+}
+
+.mobile {
+    flex-direction: column;
+}
 .right {
     flex: 1;
     background-color: #ffffff;

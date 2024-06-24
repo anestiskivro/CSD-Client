@@ -75,7 +75,6 @@ function AddComment() {
 
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-        <div className="add-comment-container">
             <Info email={email}></Info>
             <div className="right">
                 <div className='header'>
@@ -117,7 +116,6 @@ function AddComment() {
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     )
 }

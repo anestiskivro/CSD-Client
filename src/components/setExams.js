@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Info from '../components/info';
+import './info.css';
 import "./setExams.css";
-
 
 function Set_Exams() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -48,7 +48,6 @@ function Set_Exams() {
 
   return (
     <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-    <div className="set-exams-container">
       <Info email={email} />
       <div className="right">
         <h2 className="set-exams-header">Insert the Exam</h2>
@@ -95,7 +94,6 @@ function Set_Exams() {
           <button className="button" onClick={handleBack}>
             <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>Back</button>
       </div>
-    </div>
     </div>
   )
 }

@@ -56,7 +56,6 @@ function StudentsSlots() {
     };
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-            <div className="review">
                 <Info email={email} />
                 <div className="right">
                     {selectedCourse && (
@@ -117,7 +116,6 @@ function StudentsSlots() {
                     )}
                 </div>
             </div>
-        </div>
     );
 }
 export default StudentsSlots

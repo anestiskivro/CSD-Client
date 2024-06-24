@@ -57,7 +57,6 @@ function NotesTA() {
     };
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-        <div className="review">
             <Info email={email}></Info>
             <div className="right">
                 {(selectedCourse) && (
@@ -107,7 +106,6 @@ function NotesTA() {
                         Back</button>
                 </div>
             </div>
-        </div>
         </div>
     )
 }

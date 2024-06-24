@@ -1,6 +1,15 @@
-.set-exams-container {
+.home-container {
     display: flex;
 }
+
+.desktop {
+    flex-direction: row;
+}
+
+.mobile {
+    flex-direction: column;
+}
+
 
 .set-exams-container .right {
     flex: 1;

@@ -116,7 +116,6 @@ function Cancellation() {
 
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-        <div className="review">
             <Info email={email} />
             <div className="right">
                 {id.includes("TA") ? (
@@ -209,7 +208,6 @@ function Cancellation() {
                         <i className="fa-solid fa-trash" style={{ paddingRight: '8px' }}></i>Remove</button>
                 </div>
             </div >
-        </div>
         </div>
     );
 }

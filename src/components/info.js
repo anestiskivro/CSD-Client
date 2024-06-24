@@ -41,7 +41,9 @@ const Info = ({ email }) => {
           <h3>This is an application for the Examination of Students</h3>
         )}
       </div>
-      <Footer />
+      {!isMobile && (
+        <Footer />
+      )}
     </div>
   );
 };

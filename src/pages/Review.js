@@ -20,38 +20,40 @@ function Review() {
     const [TAs, setTAs] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                if (id.includes("TA")) {
-                    const slotsResponse = await axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } });
-                    setSelectedSlots(slotsResponse.data.slots);
-
-                    const studentsResponse = await axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents");
-                    setStudents(studentsResponse.data.students);
-
-                    const appointmentsResponse = await axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getappointments");
-                    setAppointments(appointmentsResponse.data.appointments);
-                } else {
-                    const appointmentsResponse = await axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } });
-                    setSelectedAppointments(appointmentsResponse.data.appointments);
-                }
-
-                const coursesResponse = await axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses");
-                setSelectedCourses(coursesResponse.data.courses);
-
-                const TAsResponse = await axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: coursesResponse.data.courses } });
-                setTAs(TAsResponse.data.TAs);
-
-                const examsResponse = await axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getExams");
-                setExams(examsResponse.data.exams);
-
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                alert("Error fetching data. Please check your connection.");
-            }
-        };
-
-        fetchData();
+        if (id.includes("TA")) {
+            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
+                .then((response) => {
+                    if (response.status === 200) {
+                        setSelectedSlots(response.data.slots);
+                        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
+                            if (response.status === 200) {
+                                setStudents(response.data.students);
+                                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getappointments")
+                                    .then((response) => {
+                                        if (response.status === 200) {
+                                            setAppointments(response.data.appointments);
+                                        } else {
+                                            alert("We could not get the appointments. Check your connection");
+                                        }
+                                    });
+                            } else {
+                                alert("We could not get the students. Check your connection");
+                            }
+                        });
+                    } else {
+                        alert("We could not get the slots. Check your connection");
+                    }
+                });
+        } else {
+            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } })
+                .then((response) => {
+                    if (response.status === 200) {
+                        setSelectedAppointments(response.data.appointments);
+                    } else {
+                        alert("We could not get the appointments. Check your connection");
+                    }
+                });
+        }
     }, [email, id]);
 
     useEffect(() => {

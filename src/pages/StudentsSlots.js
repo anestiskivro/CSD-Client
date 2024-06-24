@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useMediaQuery } from 'react-responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Info from '../components/info';
 import "../components/review.css";
 
 function StudentsSlots() {
+    const isMobile = useMediaQuery({ maxWidth: 768 });
     const navigate = useNavigate();
     const location = useLocation();
     const { email, selectedCourse } = location.state || {};
@@ -18,7 +20,7 @@ function StudentsSlots() {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
             if (response.status === 200) {
                 setStudents(response.data.students)
-            }else {
+            } else {
                 alert("We could not get the students. Check your connection");
             }
         })
@@ -53,66 +55,67 @@ function StudentsSlots() {
         navigate("/teacher", { state: { email } });
     };
     return (
-        <div className="admin1">
-            <Info email={email} />
-            <div className="right">
-                {selectedCourse && (
-                    <>
-                        <h4>Select Exam:</h4>
-                        <select name="Exam" onChange={handleOptions}>
-                            <option value="" selected disabled hidden>Select an Exam...</option>
-                            {exams.length > 0 && exams.map((opts, i) => (
-                                <option key={i}>{opts.name}</option>
-                            ))}
-                        </select>
-                    </>
-                )}
-                {selectedCourse && selectedExam && (
-                    <>
-                        <div className="table-container">
-                            {slots && slots.length > 0 ? (
-                                <>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Course</th>
-                                                <th>Exam</th>
-                                                <th>AM</th>
-                                                <th>TA</th>
-                                                <th>Date</th>
-                                                <th>FromTime</th>
-                                                <th>EndTime</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {slots.map((val, i) => (
-                                                <tr key={i}>
-                                                    <td>{selectedCourse}</td>
-                                                    <td>{exams.find(exam => exam.eid === val.eid)?.name}</td>
-                                                    <td>{students.find(student => student.id === val.studentId)?.student_number}</td>
-                                                    <td>{TAs.find(TA => TA.taid === val.taid)?.lastname}</td>
-                                                    <td>{val.date}</td>
-                                                    <td>{val.FromTime}</td>
-                                                    <td>{val.EndTime}</td>
-                                                    <td>{val.Status}</td>
+        <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
+            <div className="review">
+                <Info email={email} />
+                <div className="right">
+                    {selectedCourse && (
+                        <>
+                            <h4>Select Exam:</h4>
+                            <select name="Exam" onChange={handleOptions}>
+                                <option value="" selected disabled hidden>Select an Exam...</option>
+                                {exams.length > 0 && exams.map((opts, i) => (
+                                    <option key={i}>{opts.name}</option>
+                                ))}
+                            </select>
+                        </>
+                    )}
+                    {selectedCourse && selectedExam && (
+                        <>
+                            <div className="table-container">
+                                {slots && slots.length > 0 ? (
+                                    <>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Course</th>
+                                                    <th>Exam</th>
+                                                    <th>AM</th>
+                                                    <th>TA</th>
+                                                    <th>Date</th>
+                                                    <th>FromTime</th>
+                                                    <th>EndTime</th>
+                                                    <th>Status</th>
                                                 </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </>
-                            ) : (
-                                <div>No slots available</div>
-                            )}
-                        </div>
-                        <div className="btn-group3">
-                            <button className="button" onClick={handleBack}>
-                                <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
-                                Back</button>
-                        </div>
-                    </>
-                )}
-
+                                            </thead>
+                                            <tbody>
+                                                {slots.map((val, i) => (
+                                                    <tr key={i}>
+                                                        <td>{selectedCourse}</td>
+                                                        <td>{exams.find(exam => exam.eid === val.eid)?.name}</td>
+                                                        <td>{students.find(student => student.id === val.studentId)?.student_number}</td>
+                                                        <td>{TAs.find(TA => TA.taid === val.taid)?.lastname}</td>
+                                                        <td>{val.date}</td>
+                                                        <td>{val.FromTime}</td>
+                                                        <td>{val.EndTime}</td>
+                                                        <td>{val.Status}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </>
+                                ) : (
+                                    <div>No slots available</div>
+                                )}
+                            </div>
+                            <div className="btn-group3">
+                                <button className="button" onClick={handleBack}>
+                                    <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
+                                    Back</button>
+                            </div>
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     );

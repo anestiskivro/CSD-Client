@@ -1,12 +1,14 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
 import { default as React, useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
 import "../components/addComment.css";
 import Info from '../components/info';
 
 
 function AddEvaluation() {
+    const isMobile = useMediaQuery({ maxWidth: 768 });
     const navigate = useNavigate();
     const location = useLocation();
     const { email } = location.state || {};
@@ -86,6 +88,7 @@ function AddEvaluation() {
     };
 
     return (
+        <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
         <div className="add-comment-container">
             <Info email={email}></Info>
             <div className="right">
@@ -136,6 +139,7 @@ function AddEvaluation() {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

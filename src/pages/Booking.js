@@ -3,11 +3,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useMediaQuery } from 'react-responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
 import "../components/booking.css";
 import Info from '../components/info';
 
 function Booking() {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const navigate = useNavigate();
   const location = useLocation();
   const { email } = location.state || {};
@@ -182,7 +184,8 @@ function Booking() {
   };
 
   return (
-    <div className="admin1">
+    <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
+    <div className="book">
       <Info email={email}></Info>
       <div className="right">
         {id.includes("TA") ? (
@@ -299,6 +302,7 @@ function Booking() {
           </>
         )}
       </div>
+    </div>
     </div>
   );
 }

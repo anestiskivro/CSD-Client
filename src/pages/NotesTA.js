@@ -1,12 +1,14 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Info from '../components/info';
 import "../components/review.css";
 
 function NotesTA() {
     const navigate = useNavigate();
+    const isMobile = useMediaQuery({ maxWidth: 768 });
     const location = useLocation();
     const { email } = location.state || {};
     const { selectedCourse } = location.state || {};
@@ -54,7 +56,8 @@ function NotesTA() {
         navigate("/teacher", { state: { email } });
     };
     return (
-        <div className="admin1">
+        <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
+        <div className="review">
             <Info email={email}></Info>
             <div className="right">
                 {(selectedCourse) && (
@@ -104,6 +107,7 @@ function NotesTA() {
                         Back</button>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

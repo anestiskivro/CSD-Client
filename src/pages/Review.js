@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Info from '../components/info';
 import '../components/review.css';
 
 function Review() {
+    const isMobile = useMediaQuery({ maxWidth: 768 });
     const navigate = useNavigate();
     const location = useLocation();
     const { email } = location.state || {};
@@ -90,7 +92,8 @@ function Review() {
     };
 
     return (
-        <div className="admin1">
+        <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
+        <div className="review">
             <Info email={email} />
             <div className="right">
                 {id.includes("TA") ? (
@@ -179,6 +182,7 @@ function Review() {
                     </button>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

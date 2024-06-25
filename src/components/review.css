@@ -53,7 +53,7 @@
 
 @media (max-width: 768px) {
     .table-container {
-        max-width: 100%;
+        max-width: 50%;
         padding-top: 2vh;
     }
 
@@ -68,7 +68,7 @@
     }
 
     .table-container {
-        max-height: 50vh;
+        max-height: 25vh;
     }
 }
 

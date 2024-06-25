@@ -93,7 +93,7 @@ function Review() {
 
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-            {!isMobile && <Info email={email} />}
+            <Info email={email} />
             <div className="right">
                 {id.includes("TA") ? (
                     <div className="table-container">

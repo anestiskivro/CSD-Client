@@ -51,6 +51,28 @@
     font-size: 14px;
 }
 
+@media (max-width: 768px) {
+    .table-container {
+        max-width: 100%;
+        padding-top: 2vh;
+    }
+
+    .table-container th,
+    .table-container td {
+        padding: 3px;
+        font-size: 12px;
+    }
+
+    .table-container th {
+        font-size: 12px;
+    }
+
+    .table-container {
+        max-height: 50vh;
+    }
+}
+
+
 .table-container .comment-cell {
     max-width: 100px;
     word-wrap: break-word;

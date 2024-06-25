@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Info from '../components/info';
-import '../components/review.css';
+// import '../components/review.css';
 
 function Review() {
     const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -92,22 +92,22 @@ function Review() {
     };
 
     return (
-        <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
+        <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`} style={{ padding: '10px', margin: 'auto' }}>
             <Info email={email} />
-            <div className="right">
+            <div className="right" style={{ padding: '10px', margin: 'auto' }}>
                 {id.includes("TA") ? (
-                    <div className="table-container">
+                    <div className="table-container" style={{ overflow: 'auto', maxHeight: '60vh', maxWidth: '95%' }}>
                         {selectedSlots && selectedSlots.length > 0 ? (
-                            <table>
+                            <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
                                 <thead>
                                     <tr>
-                                        <th>Exam</th>
-                                        <th>Date</th>
-                                        <th>AM</th>
-                                        <th>FromTime</th>
-                                        <th>EndTime</th>
-                                        <th>Status</th>
-                                        <th>Message</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>Exam</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>Date</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>AM</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>FromTime</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>EndTime</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>Status</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>Message</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -117,13 +117,13 @@ function Review() {
                                         const student = slotAppointment ? students.find(student => student.id === slotAppointment.studentId) : null;
                                         return (
                                             <tr key={i}>
-                                                <td>{matched_exam ? matched_exam.name : ''}</td>
-                                                <td>{val.date}</td>
-                                                <td>{student ? student.student_number : ''}</td>
-                                                <td>{val.fromTime}</td>
-                                                <td>{val.EndTime}</td>
-                                                <td>{val.Status}</td>
-                                                <td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{matched_exam ? matched_exam.name : ''}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{val.date}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{student ? student.student_number : ''}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{val.fromTime}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{val.EndTime}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{val.Status}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>
                                                     {student ? (
                                                         <a href={`mailto:${student.email}`}>Send Message</a>
                                                     ) : ''}
@@ -138,17 +138,17 @@ function Review() {
                         )}
                     </div>
                 ) : (
-                    <div className="table-container">
+                    <div className="table-container" style={{ overflow: 'auto', maxHeight: '60vh', maxWidth: '95%' }}>
                         {selectedAppointments && selectedAppointments.length > 0 ? (
-                            <table>
+                            <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
                                 <thead>
                                     <tr>
-                                        <th>Course</th>
-                                        <th>Exam</th>
-                                        <th>TA</th>
-                                        <th>Date</th>
-                                        <th>FromTime</th>
-                                        <th>EndTime</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>Course</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>Exam</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>TA</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>Date</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>FromTime</th>
+                                        <th style={{ backgroundColor: '#c50047', color: 'white', padding: '5px', fontSize: '14px' }}>EndTime</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -158,12 +158,12 @@ function Review() {
                                         const matched_TA = TAs.find(ta => ta.taid === val.taid);
                                         return (
                                             <tr key={i}>
-                                                <td>{matchedCourse ? matchedCourse.code : 'N/A'}</td>
-                                                <td>{matchedExam ? matchedExam.name : 'N/A'}</td>
-                                                <td>{matched_TA ? matched_TA.lastname : 'N/A'}</td>
-                                                <td>{val.date}</td>
-                                                <td>{val.FromTime}</td>
-                                                <td>{val.EndTime}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{matchedCourse ? matchedCourse.code : 'N/A'}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{matchedExam ? matchedExam.name : 'N/A'}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{matched_TA ? matched_TA.lastname : 'N/A'}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{val.date}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{val.FromTime}</td>
+                                                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{val.EndTime}</td>
                                             </tr>
                                         );
                                     })}
@@ -174,7 +174,7 @@ function Review() {
                         )}
                     </div>
                 )}
-                <div className='btn-group3'>
+                <div className='btn-group3' style={{ padding: '10px', margin: 'auto' }}>
                     <button className="button" onClick={handleBack}>
                         <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
                         Back

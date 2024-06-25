@@ -30,6 +30,7 @@ function TASlots() {
                 alert(response.data.message)
             }
         });
+        console.log(selectedCourse)
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: selectedCourse } }).then((response) => {
             if (response.status === 200) {
                 console.log(response.data.TAs);

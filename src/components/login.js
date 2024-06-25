@@ -45,7 +45,7 @@ const Login = () => {
     } else {
         navigate('/');
     }
-}, []);
+}, [navigate]);
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {

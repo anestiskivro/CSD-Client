@@ -118,7 +118,7 @@ function Cancellation() {
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
             <Info email={email} />
             <div className="right">
-                {id.includes("TA") ? (
+                {id.includes("TA") || isMobile  ? (
                     <div className="table-container">
                         {selectedSlots && selectedSlots.length > 0 ? (
                             <>

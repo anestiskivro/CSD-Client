@@ -25,6 +25,7 @@ const Login = () => {
             });
             if (response.status === 200) {
                 alert('Login successful');
+                console.log('Response:', response.data);
                 const userEmail = response.data;
                 const token = response.data.token;
                 localStorage.setItem('token', token);

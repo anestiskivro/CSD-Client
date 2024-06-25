@@ -45,54 +45,54 @@ function Review_comments() {
     const { id } = location.state || {};
 
     const handleBack = () => {
-        const path = id.includes("TA") ? '/tassistant' : '/teacher';
+        const path = id && id.includes("TA") ? '/tassistant' : '/teacher';
         navigate(path, { state: { id, email } });
     };
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-                <Info email={email}></Info>
-                <div className='right'>
-                    <div className="table-container">
-                        {comments && comments.length > 0 ? (
-                            <>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Course</th>
-                                            <th>Exam</th>
-                                            <th>AM</th>
-                                            <th>Date</th>
-                                            <th>FromTime</th>
-                                            <th>EndTime</th>
-                                            <th>Comment</th>
+            <Info email={email}></Info>
+            <div className='right'>
+                <div className="table-container">
+                    {comments && comments.length > 0 ? (
+                        <>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Course</th>
+                                        <th>Exam</th>
+                                        <th>AM</th>
+                                        <th>Date</th>
+                                        <th>FromTime</th>
+                                        <th>EndTime</th>
+                                        <th>Comment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {comments.map((val, i) => (
+                                        <tr key={i}>
+                                            <td>{courses.find(course => course.cid === val.cid)?.code}</td>
+                                            <td>{exams.find(exam => exam.eid === val.eid)?.name}</td>
+                                            <td>{students.find(student => student.id === val.studentId)?.student_number}</td>
+                                            <td>{val.date}</td>
+                                            <td>{val.FromTime}</td>
+                                            <td>{val.EndTime}</td>
+                                            <td className="comment-cell">{val.Comment}</td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        {comments.map((val, i) => (
-                                            <tr key={i}>
-                                                <td>{courses.find(course => course.cid === val.cid)?.code}</td>
-                                                <td>{exams.find(exam => exam.eid === val.eid)?.name}</td>
-                                                <td>{students.find(student => student.id === val.studentId)?.student_number}</td>
-                                                <td>{val.date}</td>
-                                                <td>{val.FromTime}</td>
-                                                <td>{val.EndTime}</td>
-                                                <td className="comment-cell">{val.Comment}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </>
-                        ) : (
-                            <div>No comments available</div>
-                        )}
-                    </div>
-                    <div className='btn-group3'>
-                        <button className="button" onClick={handleBack}>
-                            <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
-                            Back</button>
-                    </div>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </>
+                    ) : (
+                        <div>No comments available</div>
+                    )}
                 </div>
-            </div >
+                <div className='btn-group3'>
+                    <button className="button" onClick={handleBack}>
+                        <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
+                        Back</button>
+                </div>
+            </div>
+        </div >
     )
 }
 

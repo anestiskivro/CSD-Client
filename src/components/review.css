@@ -34,7 +34,6 @@
 .table-container table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
 }
 
 .table-container th,
@@ -56,32 +55,6 @@
     max-width: 100px;
     word-wrap: break-word;
     white-space: normal;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .table-container {
-        max-width: 100%;
-        padding-top: 2vh;
-    }
-
-    .table-container th,
-    .table-container td {
-        padding: 3px;
-        font-size: 12px;
-    }
-
-    .table-container th {
-        font-size: 12px;
-    }
-
-    .table-container {
-        max-height: 50vh;
-    }
-
-    .table-container table {
-        table-layout: auto;
-    }
 }
 
 .btn-group3 {

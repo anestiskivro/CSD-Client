@@ -116,9 +116,9 @@ function Cancellation() {
 
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-            <Info email={email} />
+            {!isMobile && <Info email={email} />}
             <div className="right">
-                {id.includes("TA") || isMobile  ? (
+                {(id.includes("TA")) ? (
                     <div className="table-container">
                         {selectedSlots && selectedSlots.length > 0 ? (
                             <>
@@ -147,7 +147,7 @@ function Cancellation() {
                                                     <td>{val.fromTime}</td>
                                                     <td>{val.EndTime}</td>
                                                     <td>{val.Status}</td>
-                                                    <td><input type="checkbox" onChange={handleCheckboxChange(i)} /></td>
+                                                    <td><input type="checkbox" onChange={() => handleCheckboxChange(i)} /></td>
                                                 </tr>
                                             );
                                         })}
@@ -188,7 +188,7 @@ function Cancellation() {
                                                     <td>{selectedCourses.find(course => course.cid === val.cid)?.code}</td>
                                                     <td>{matchedExam ? matchedExam.name : ''}</td>
                                                     <td>{val.Status}</td>
-                                                    <td><input type="checkbox" onChange={handleCheckboxChange(i)} /></td>
+                                                    <td><input type="checkbox" onChange={() => handleCheckboxChange(i)} /></td>
                                                 </tr>
                                             );
                                         })}
@@ -200,14 +200,17 @@ function Cancellation() {
                         )}
                     </div>
                 )}
-                <div className="btn-group3" >
-                    <button className='button' onClick={handleBack}>
+                <div className="btn-group3">
+                    <button className="button" onClick={handleBack}>
                         <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
-                        Back</button>
-                    <button className='button' onClick={handleCancel}>
-                        <i className="fa-solid fa-trash" style={{ paddingRight: '8px' }}></i>Remove</button>
+                        Back
+                    </button>
+                    <button className="button" onClick={handleCancel}>
+                        <i className="fa-solid fa-trash" style={{ paddingRight: '8px' }}></i>
+                        Remove
+                    </button>
                 </div>
-            </div >
+            </div>
         </div>
     );
 }

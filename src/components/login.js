@@ -7,14 +7,45 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
-
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        console.log(token);
-        if (token) {
+    const token = localStorage.getItem('token');
+    if (token) {
+        axios.get('/', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            const data = response.data;
+            if (data.loggedIn) {
+                switch (data.id) {
+                    case 'admin':
+                        navigate('/admin');
+                        break;
+                    case 'teacher':
+                        navigate('/teacher');
+                        break;
+                    case 'TA':
+                        navigate('/ta');
+                        break;
+                    case 'student':
+                        navigate('/student');
+                        break;
+                    default:
+                        navigate('/');
+                }
+            } else {
+                navigate('/');
+            }
+        })
+        .catch(error => {
+            console.error('Error authenticating user:', error);
             navigate('/');
-        }
-    }, [navigate]);
+        });
+    } else {
+        navigate('/');
+    }
+}, []);
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {

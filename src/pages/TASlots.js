@@ -32,6 +32,7 @@ function TASlots() {
         });
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: selectedCourse } }).then((response) => {
             if (response.status === 200) {
+                console.log(response.data.TAs);
                 setTAs(response.data.TAs);
             } else {
                 alert(response.data.message)
@@ -51,6 +52,7 @@ function TASlots() {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getSlots", { params: { teaching_assistant: selectedTA, exam: selectedExam, cid: cid } })
             .then((response) => {
                 if (response.status === 200) {
+                    console.log(response.data.slots)
                     setSlots(response.data.slots)
                 }
             });

@@ -9,22 +9,10 @@ const Login = () => {
     axios.defaults.withCredentials = true;
 
     useEffect(() => {
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/")
-            .then((response) => {
-                if (response.data.loggedIn === true) {
-                    if (response.data.id.includes("TA")) {
-                        navigate("/tassistant", { state: { id: response.data.id, email: response.data.email } });
-                    } else if (response.data.id.includes("teacher")) {
-                        navigate("/teacher", { state: { id: response.data.id, email: response.data.email } });
-                    } else if (response.data.id.includes("student")) {
-                        navigate("/student", { state: { id: response.data.id, email: response.data.email } });
-                    } else {
-                        navigate("/admin", { state: { id: response.data.id, email: response.data.email } });
-                    }
-                } else {
-                    console.log('Not logged in');
-                }
-            })
+        const token = localStorage.getItem('token');
+        if (token) {
+            navigate('/');
+        }
     }, [navigate]);
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -38,6 +26,8 @@ const Login = () => {
             if (response.status === 200) {
                 alert('Login successful');
                 const userEmail = response.data;
+                const token = response.data.token;
+                localStorage.setItem('token', token);
                 if (userEmail.email.includes("admin")) {
                     navigate("/admin", { state: { id: userEmail.id, email: userEmail.email } });
                 } else if (userEmail.id === "TA") {

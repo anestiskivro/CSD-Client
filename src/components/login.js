@@ -27,17 +27,17 @@ const Login = () => {
             if (response.status === 200) {
                 alert('Login successful');
                 console.log('Response:', response.data);
-                const userEmail = response.data;
+                const user = response.data.user;
                 const token = response.data.token;
                 localStorage.setItem('token', token);
-                if (userEmail.email.includes("admin")) {
-                    navigate("/admin", { state: { id: userEmail.id, email: userEmail.email } });
-                } else if (userEmail.id === "TA") {
-                    navigate("/tassistant", { state: { id: userEmail.id, email: userEmail.email } });
-                } else if (userEmail.id === "student") {
-                    navigate("/student", { state: { id: userEmail.id, email: userEmail.email } });
+                if (user.email.includes("admin")) {
+                    navigate("/admin", { state: { id: user.id, email: user.email } });
+                } else if (user.id === "TA") {
+                    navigate("/tassistant", { state: { id: user.id, email: user.email } });
+                } else if (user.id === "student") {
+                    navigate("/student", { state: { id: user.id, email: user.email } });
                 } else {
-                    navigate("/teacher", { state: { id: userEmail.id, email: userEmail.email } });
+                    navigate("/teacher", { state: { id: user.id, email: user.email } });
                 }
             } else {
                 alert('Login failed. Please check your email.');

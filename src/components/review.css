@@ -51,9 +51,16 @@
     font-size: 14px;
 }
 
+.table-container .comment-cell {
+    max-width: 100px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .table-container {
-        max-width: 50%;
+        max-width: 80%;
         padding-top: 2vh;
     }
 
@@ -68,17 +75,9 @@
     }
 
     .table-container {
-        max-height: 25vh;
+        max-height: 20vh; /* Adjusted to provide a bit more height */
     }
 }
-
-
-.table-container .comment-cell {
-    max-width: 100px;
-    word-wrap: break-word;
-    white-space: normal;
-}
-
 .btn-group3 {
     display: flex;
     flex-direction: column;

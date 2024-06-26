@@ -89,9 +89,9 @@ const Login = () => {
                     <p>This is an application for the Examination of Students</p>
                 </div>
                 <div className="social-icons">
-                    <a href="#"><i className="fab fa-facebook"></i></a>
-                    <a href="#"><i className="fab fa-instagram"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
+                    <a href="https://www.facebook.com/UniversityOfCrete/?locale=el_GR"><i className="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/uocrete/"><i className="fab fa-instagram"></i></a>
+                    <a href="https://x.com/UOC_gr?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><i className="fab fa-twitter"></i></a>
                 </div>
             </div>
             <div className="right">

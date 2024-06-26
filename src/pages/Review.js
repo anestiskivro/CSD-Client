@@ -6,7 +6,7 @@ import Info from '../components/info';
 import '../components/review.css';
 
 function Review() {
-    const isMobile = useMediaQuery({ maxWidth: 768 });
+    const isMobile = useMediaQuery({ maxWidth: 428 });
     const navigate = useNavigate();
     const location = useLocation();
     const { email } = location.state || {};

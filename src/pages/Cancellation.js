@@ -8,7 +8,7 @@ import "../components/review.css";
 
 function Cancellation() {
     const navigate = useNavigate();
-    const isMobile = useMediaQuery({ maxWidth: 768 });
+    const isMobile = useMediaQuery({ maxWidth: 428 });
     const location = useLocation();
     const { email } = location.state || {};
     const { id } = location.state || {};

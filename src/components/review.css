@@ -78,7 +78,7 @@
     }
 
     .table-container {
-        max-height: 60vh; /* Adjust height for mobile */
+        max-height: 100vh; /* Adjust height for mobile */
     }
 
     .btn-group3 {

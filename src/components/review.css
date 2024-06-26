@@ -80,16 +80,34 @@
         flex-direction: column;
     }
 
-    .table-container {
-        max-height: none;
-        overflow-x: auto;
-        padding-top: 2vh;
+    .table-container table {
+        width: 100%;
+        border-collapse: collapse;
     }
 
     .table-container th,
     .table-container td {
-        padding: 8px;
-        font-size: 12px;
+        border: 1px solid #ccc;
+        padding: 5px;
+        text-align: center;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .table-container th {
+        background-color: #c50047;
+        color: white;
+        font-size: 14px;
+    }
+
+    .table-container .comment-cell {
+        max-width: 100px;
+        word-wrap: break-word;
+        white-space: normal;
+    }
+
+    .table-container {
+        overflow-x: scroll;
     }
 
     .btn-group3 {

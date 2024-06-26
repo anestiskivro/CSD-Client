@@ -76,18 +76,26 @@
     .right {
         padding-top: 2vh;
         height: auto;
+        /* Adjust height for mobile */
         width: 100%;
+        overflow: auto;
+        /* Enable scrolling if content overflows */
     }
 
     .table-container {
         max-height: 300px;
+        /* Set a specific max-height for the table container */
         overflow-x: auto;
+        /* Enable horizontal scrolling if needed */
         padding: 10px;
+        width: 100%;
+        /* Ensure table container takes full width */
     }
 
     .table-container table {
         width: 100%;
-        min-width: 428px;
+        min-width: 100%;
+        /* Adjust minimum width to 100% for responsiveness */
     }
 
     .btn-group3 {

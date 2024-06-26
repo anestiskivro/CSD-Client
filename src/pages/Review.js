@@ -1,12 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Info from '../components/info';
 import '../components/review.css';
 
 function Review() {
-    const isMobile = useMediaQuery({ maxWidth: 428 });
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const navigate = useNavigate();
     const location = useLocation();
     const { email } = location.state || {};
@@ -18,6 +17,17 @@ function Review() {
     const [exams, setExams] = useState([]);
     const [students, setStudents] = useState([]);
     const [TAs, setTAs] = useState([]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     useEffect(() => {
         if (id.includes("TA")) {
@@ -92,7 +102,7 @@ function Review() {
     };
 
     return (
-        <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
+        <div className={`home-container ${windowWidth <= 428 ? 'mobile' : 'desktop'}`}>
             <Info email={email} />
             <div className="right">
                 {id.includes("TA") ? (

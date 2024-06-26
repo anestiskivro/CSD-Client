@@ -8,45 +8,44 @@ const Login = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            axios.get('/', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
+    const token = localStorage.getItem('token');
+    if (token) {
+        axios.get('/', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            const data = response.data;
+            if (data.loggedIn) {
+                switch (data.id) {
+                    case 'admin':
+                        navigate('/admin');
+                        break;
+                    case 'teacher':
+                        navigate('/teacher');
+                        break;
+                    case 'TA':
+                        navigate('/ta');
+                        break;
+                    case 'student':
+                        navigate('/student');
+                        break;
+                    default:
+                        navigate('/');
                 }
-            })
-            .then(response => {
-                const data = response.data;
-                if (data.loggedIn) {
-                    switch (data.id) {
-                        case 'admin':
-                            navigate('/admin');
-                            break;
-                        case 'teacher':
-                            navigate('/teacher');
-                            break;
-                        case 'TA':
-                            navigate('/ta');
-                            break;
-                        case 'student':
-                            navigate('/student');
-                            break;
-                        default:
-                            navigate('/');
-                    }
-                } else {
-                    navigate('/');
-                }
-            })
-            .catch(error => {
-                console.error('Error authenticating user:', error);
+            } else {
                 navigate('/');
-            });
-        } else {
+            }
+        })
+        .catch(error => {
+            console.error('Error authenticating user:', error);
             navigate('/');
-        }
-    }, [navigate]);
-
+        });
+    } else {
+        navigate('/');
+    }
+}, [navigate]);
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -80,21 +79,9 @@ const Login = () => {
     };
 
     return (
-        <div className="container">
-            <div className="left">
-                <div className="header">
-                    <img src="/imagesUOC.png" alt="Logo" className="logo" />
-                    <h1>Welcome</h1>
-                    <h2>Rendezvous System for CSD Courses</h2>
-                    <p>This is an application for the Examination of Students</p>
-                </div>
-                <div className="social-icons">
-                    <a href="https://www.facebook.com/UniversityOfCrete/?locale=el_GR"><i className="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/uocrete/"><i className="fab fa-instagram"></i></a>
-                    <a href="https://x.com/UOC_gr?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><i className="fab fa-twitter"></i></a>
-                </div>
-            </div>
-            <div className="right">
+        <div className="right">
+            <div className="header">
+                <h1 id="login">Login</h1>
                 <div className="form-container">
                     <form onSubmit={handleFormSubmit}>
                         <label htmlFor="email"><strong>Email:</strong></label><br />
@@ -108,5 +95,6 @@ const Login = () => {
         </div>
     );
 }
+
 
 export default Login;

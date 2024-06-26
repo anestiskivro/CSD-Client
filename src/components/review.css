@@ -74,3 +74,29 @@
     margin: 10px 0;
     width: 200px;
 }
+
+@media (max-width: 428px) {
+    .home-container {
+        flex-direction: column;
+    }
+
+    .table-container {
+        max-height: none;
+        overflow-x: auto;
+        padding-top: 2vh;
+    }
+
+    .table-container th,
+    .table-container td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .btn-group3 {
+        margin-top: 20px;
+    }
+
+    .btn-group3 button {
+        width: 100%;
+    }
+}

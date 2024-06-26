@@ -25,7 +25,8 @@
     width: 100%;
     padding-top: 5vh;
     max-width: 95%;
-    overflow-x: auto; /* Added for horizontal scrolling */
+    overflow-x: auto;
+    /* Added for horizontal scrolling */
     margin: 0 auto;
 }
 
@@ -70,22 +71,68 @@
 @media (max-width: 428px) {
     .home-container {
         flex-direction: column;
+        padding: 10px;
+        /* Adding some padding for better spacing on mobile */
     }
 
     .right {
         padding-top: 2vh;
-        height: auto; /* Adjust height for mobile */
+        height: auto;
+        /* Let the height adjust based on content */
+        width: 100%;
+        /* Ensure the right container takes full width on mobile */
+        padding: 10px;
+        /* Add padding for better spacing */
     }
 
     .table-container {
-        max-height: 100vh; /* Adjust height for mobile */
+        max-height: 50vh;
+        /* Reduce max-height for mobile to fit better */
+        overflow-x: auto;
+        /* Enable horizontal scrolling */
+        margin: 0;
+        /* Remove margin to use full width */
+        padding: 10px;
+        /* Add some padding for better spacing */
+    }
+
+    .table-container table {
+        width: 100%;
+        /* Ensure the table takes full width */
+        min-width: 600px;
+        /* Set a minimum width to ensure horizontal scrolling works */
+    }
+
+    .table-container th,
+    .table-container td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        /* Increase padding for better touch targets */
+        text-align: center;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .table-container th {
+        background-color: #c50047;
+        color: white;
+        font-size: 14px;
     }
 
     .btn-group3 {
         margin-top: 20px;
+        width: 100%;
+        /* Ensure the button group takes full width */
+        display: flex;
+        justify-content: center;
     }
 
     .btn-group3 button {
-        width: 100%;
+        width: 90%;
+        /* Use a percentage for better responsiveness */
+        max-width: 300px;
+        /* Set a maximum width to avoid excessively wide buttons */
+        margin: 10px auto;
+        /* Center the button with margin auto */
     }
 }

@@ -19,7 +19,6 @@ function Review() {
     const [students, setStudents] = useState([]);
     const [TAs, setTAs] = useState([]);
 
-    // Effect to set window width on resize
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
@@ -126,8 +125,8 @@ function Review() {
                 date: val.date,
                 am: student ? student.student_number : '',
                 fromTime: val.fromTime,
-                endTime: val.EndTime,
-                status: val.Status,
+                endTime: val.endTime,
+                status: val.status,
                 message: student ? <a href={`mailto:${student.email}`}>Send Message</a> : ''
             };
         }),

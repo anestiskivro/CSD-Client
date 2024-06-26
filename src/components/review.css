@@ -80,7 +80,7 @@
     }
 
     .table-container {
-        max-height: 100vh;
+        max-height: calc(100vh - 120px);
         overflow-x: auto;
         padding: 10px;
     }
@@ -88,7 +88,6 @@
     .table-container table {
         width: 100%;
         min-width: 428px;
-        height: 300px;
     }
 
     .btn-group3 {

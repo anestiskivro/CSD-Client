@@ -87,7 +87,8 @@
 
     .table-container table {
         width: 100%;
-        min-width: 400px;
+        min-width: 428px;
+        height: 300px;
     }
 
     .btn-group3 {

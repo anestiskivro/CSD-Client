@@ -80,25 +80,14 @@
     }
 
     .table-container {
-        max-width: 100%;
+        max-height: 100vh;
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
         padding: 10px;
     }
 
     .table-container table {
         width: 100%;
-        min-width: unset;
-        table-layout: fixed;
-    }
-
-    .table-container th,
-    .table-container td {
-        font-size: 12px;
-        padding: 3px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        min-width: 600px;
     }
 
     .btn-group3 {
@@ -107,25 +96,5 @@
 
     .btn-group3 button {
         width: 100%;
-    }
-
-    .mobile-table {
-        width: 100%;
-    }
-
-    .mobile-row {
-        border: 1px solid #ccc;
-        margin-bottom: 10px;
-        padding: 10px;
-    }
-
-    .mobile-cell {
-        margin-bottom: 5px;
-    }
-
-    .mobile-cell strong {
-        display: inline-block;
-        width: 100px;
-        font-weight: bold;
     }
 }

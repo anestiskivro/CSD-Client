@@ -169,54 +169,34 @@ function Review() {
 
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
-    const renderMobileTable = () => {
-        return (
-            <div className="mobile-table">
-                {rows.map((row, rowIndex) => (
-                    <div key={rowIndex} className="mobile-row">
-                        {row.cells.map((cell, cellIndex) => (
-                            <div key={cellIndex} className="mobile-cell">
-                                <strong>{headerGroups[0].headers[cellIndex].Header}:</strong> {cell.render('Cell')}
-                            </div>
-                        ))}
-                    </div>
-                ))}
-            </div>
-        );
-    };
-
     return (
         <div className={`home-container ${windowWidth <= 428 ? 'mobile' : 'desktop'}`}>
             <Info email={email} />
             <div className="right">
                 <div className="table-container">
-                    {windowWidth <= 428 ? (
-                        renderMobileTable()
-                    ) : (
-                        <table {...getTableProps()}>
-                            <thead>
-                                {headerGroups.map(headerGroup => (
-                                    <tr {...headerGroup.getHeaderGroupProps()}>
-                                        {headerGroup.headers.map(column => (
-                                            <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                    <table {...getTableProps()}>
+                        <thead>
+                            {headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                                    ))}
+                                </tr>
+                            ))}
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {rows.map(row => {
+                                prepareRow(row);
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map(cell => (
+                                            <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                                         ))}
                                     </tr>
-                                ))}
-                            </thead>
-                            <tbody {...getTableBodyProps()}>
-                                {rows.map(row => {
-                                    prepareRow(row);
-                                    return (
-                                        <tr {...row.getRowProps()}>
-                                            {row.cells.map(cell => (
-                                                <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                            ))}
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                    )}
+                                );
+                            })}
+                        </tbody>
+                    </table>
                 </div>
                 <div className='btn-group3'>
                     <button className="button" onClick={handleBack}>

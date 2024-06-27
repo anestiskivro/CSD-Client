@@ -220,8 +220,8 @@ function Booking() {
                       <input
                         type="checkbox"
                         id={`hour-${time.start.hour}-${time.start.minute}`}
-                        checked={selectedSlot && selectedSlot.start === time.start && selectedSlot.end === time.end}
-                        onChange={() => handleHourChangeStud(time.start, time.end)}
+                        checked={selectedHours[new Date(selectedDate).toDateString()]?.some(hour => hour.start.hour === time.start.hour && hour.start.minute === time.start.minute) || false}
+                        onChange={() => handleHourChange(time)}
                       />
                       <label htmlFor={`hour-${time.start.hour}-${time.start.minute}`}>
                         {`${time.start.hour}:${time.start.minute.toString().padStart(2, '0')} - ${time.end.hour}:${time.end.minute.toString().padStart(2, '0')}`}
@@ -267,16 +267,16 @@ function Booking() {
               <>
                 <div className='container'>
                   <h4>Select Available Slots:</h4>
-                  {availableSlots && availableSlots.map((slot, index) => (
+                  {availableHours.map((time, index) => (
                     <div key={index}>
                       <input
-                        type="radio"
-                        id={`time-${slot.fromTime}-${slot.EndTime}`}
-                        checked={selectedSlot?.start === slot.fromTime && selectedSlot?.end === slot.EndTime}
-                        onChange={() => handleHourChangeStud(slot.fromTime, slot.EndTime)}
+                        type="checkbox"
+                        id={`hour-${time.start.hour}-${time.start.minute}`}
+                        checked={selectedSlot && selectedSlot.start === time.start && selectedSlot.end === time.end}
+                        onChange={() => handleHourChangeStud(time.start, time.end)}
                       />
-                      <label htmlFor={`hour-${slot.fromTime}-${slot.EndTime}`}>
-                        {`${slot.fromTime} - ${slot.EndTime} at ${slot.date}`}
+                      <label htmlFor={`hour-${time.start.hour}-${time.start.minute}`}>
+                        {`${time.start.hour}:${time.start.minute.toString().padStart(2, '0')} - ${time.end.hour}:${time.end.minute.toString().padStart(2, '0')}`}
                       </label>
                     </div>
                   ))}

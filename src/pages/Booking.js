@@ -53,23 +53,26 @@ function Booking() {
     const selectedExamName = event.target.value;
     const foundExam = exams.find(exam => exam.name === selectedExamName);
     setExamSelected(foundExam);
-    const duration = parseInt(foundExam.duration);
-    examDurationInMinutes = duration;
-    const availableHours = [];
-    for (let hour = 9; hour <= 20; hour++) {
-      for (let minute = 0; minute < 60; minute += examDurationInMinutes) {
-        let endHour = hour;
-        let endMinute = minute + examDurationInMinutes;
-        if (endMinute >= 60) {
-          endMinute -= 60;
-          endHour += 1;
-        }
-        if (endHour <= 21) {
-          availableHours.push({ start: { hour, minute }, end: { hour: endHour, minute: endMinute } });
+    if (id.includes("TA")) {
+
+      const duration = parseInt(foundExam.duration);
+      examDurationInMinutes = duration;
+      const availableHours = [];
+      for (let hour = 9; hour <= 20; hour++) {
+        for (let minute = 0; minute < 60; minute += examDurationInMinutes) {
+          let endHour = hour;
+          let endMinute = minute + examDurationInMinutes;
+          if (endMinute >= 60) {
+            endMinute -= 60;
+            endHour += 1;
+          }
+          if (endHour <= 21) {
+            availableHours.push({ start: { hour, minute }, end: { hour: endHour, minute: endMinute } });
+          }
         }
       }
+      setAvailableHours(availableHours);
     }
-    setAvailableHours(availableHours);
     axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/findTA", {
       params: { selectedExam: foundExam }
     }).then((response) => {
@@ -95,17 +98,6 @@ function Booking() {
   const handleDateChange = (date) => {
     const selectedDateObject = new Date(date);
     setSelectedDate(selectedDateObject);
-    const selectDate = selectedDateObject.toDateString();
-    if (!email.includes("csdp")) {
-      axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getSlots", { params: { date: selectDate, teaching_assistant: selectedTA } })
-        .then((response) => {
-          if (response.status === 200) {
-            setAvailableSlots(response.data.availableSlots);
-          } else {
-            alert("We could not get the available slots. Check your connection");
-          }
-        });
-    }
   };
 
   const handleHourChange = (hour) => {

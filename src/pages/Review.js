@@ -1,12 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Info from '../components/info';
 import '../components/review.css';
 
 function Review() {
-    const isMobile = useMediaQuery({ maxWidth: 428 });
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const navigate = useNavigate();
     const location = useLocation();

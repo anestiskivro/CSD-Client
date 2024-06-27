@@ -265,14 +265,6 @@ function Booking() {
             )}
             {(selectedCourse && examSelected && selectedTA) && (
               <>
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={handleDateChange}
-                  dateFormat="yyyy/MM/dd"
-                  minDate={new Date(examSelected.FromDate)}
-                  maxDate={new Date(examSelected.ToDate)}
-                  placeholderText="Select a date..."
-                />
                 <div className='container'>
                   <h4>Select Available Slots:</h4>
                   {availableSlots && availableSlots.map((slot, index) => (

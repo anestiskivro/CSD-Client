@@ -120,7 +120,7 @@ function Review() {
                                                 <td>{matched_exam ? matched_exam.name : ''}</td>
                                                 <td>{val.date}</td>
                                                 <td>{student ? student.student_number : ''}</td>
-                                                <td>{val.FromTime}</td>
+                                                <td>{val.fromTime}</td>
                                                 <td>{val.EndTime}</td>
                                                 <td>{val.Status}</td>
                                                 <td>
@@ -162,8 +162,8 @@ function Review() {
                                                 <td>{matchedExam ? matchedExam.name : 'N/A'}</td>
                                                 <td>{matched_TA ? matched_TA.lastname : 'N/A'}</td>
                                                 <td>{val.date}</td>
-                                                <td>{val.fromTime}</td>
-                                                <td>{val.endTime}</td>
+                                                <td>{val.FromTime}</td>
+                                                <td>{val.EndTime}</td>
                                             </tr>
                                         );
                                     })}

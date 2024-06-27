@@ -267,7 +267,7 @@ function Booking() {
               <>
                 <div className='container'>
                   <h4>Select Available Slots:</h4>
-                  {availableHours.map((time, index) => (
+                  {availableSlots.map((time, index) => (
                     <div key={index}>
                       <input
                         type="checkbox"

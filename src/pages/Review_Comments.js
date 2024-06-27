@@ -96,18 +96,24 @@ function Review_comments() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {comments.map((val, i) => (
-                                    <tr key={i}>
-                                        <td>{courses.find(course => course.cid === val.cid)?.code}</td>
-                                        <td>{exams.find(exam => exam.eid === val.eid)?.name}</td>
-                                        <td>{TAs.find(ta => ta.taid === val.taid).lastname}</td>
-                                        <td>{students.find(student => student.id === val.studentId)?.student_number}</td>
-                                        <td>{val.date}</td>
-                                        <td>{val.FromTime}</td>
-                                        <td>{val.EndTime}</td>
-                                        <td className="comment-cell">{val.Comment}</td>
-                                    </tr>
-                                ))}
+                                {comments.map((val, i) => {
+                                    const course = courses.find(course => course.cid === val.cid);
+                                    const exam = exams.find(exam => exam.eid === val.eid);
+                                    const ta = TAs.find(ta => ta.taid === val.taid);
+                                    const student = students.find(student => student.id === val.studentId);
+                                    return (
+                                        <tr key={i}>
+                                            <td>{course ? course.code : 'N/A'}</td>
+                                            <td>{exam ? exam.name : 'N/A'}</td>
+                                            <td>{ta ? ta.lastname : 'N/A'}</td>
+                                            <td>{student ? student.student_number : 'N/A'}</td>
+                                            <td>{val.date}</td>
+                                            <td>{val.FromTime}</td>
+                                            <td>{val.EndTime}</td>
+                                            <td className="comment-cell">{val.Comment}</td>
+                                        </tr>
+                                    );
+                                })}
                             </tbody>
                         </table>
                     ) : (

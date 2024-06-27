@@ -29,15 +29,15 @@ function Appointment({ id, email }) {
         <>
           <div className="btn-group1">
             <button className='button' onClick={handleBook}>
-              <i className="fa-solid fa-book" style={{ paddingRight: '8px' }}></i>Book
+              <i className="fa-solid fa-book" style={{ paddingRight: '8px' }}></i>Manage Booking
             </button>
             <button className='button' onClick={handleCancel}>
-              <i className="fa-solid fa-xmark" style={{ paddingRight: '8px' }}></i>Cancel
+              <i className="fa-solid fa-xmark" style={{ paddingRight: '8px' }}></i>Delete Slots
             </button>
           </div>
           <div className="btn-group2">
             <button className='button' onClick={handleReview}>
-              <i className="fa-solid fa-table" style={{ paddingRight: '8px' }}></i>Review</button>
+              <i className="fa-solid fa-table" style={{ paddingRight: '8px' }}></i>Review Slots</button>
             <button className='button' onClick={handleReviewComments}>
               <i className="fa-solid fa-table" style={{ paddingRight: '8px' }}></i>Review Comments from Students</button>
             <button className='button' onClick={handleEvaluation}>
@@ -48,15 +48,15 @@ function Appointment({ id, email }) {
         <>
           <div className="btn-group1">
             <button className='button' onClick={handleBook}>
-              <i className="fa-solid fa-book" style={{ paddingRight: '8px' }}></i>Book
+              <i className="fa-solid fa-book" style={{ paddingRight: '8px' }}></i>Book Appointment
             </button>
             <button className='button' onClick={handleCancel}>
-              <i className="fa-solid fa-xmark" style={{ paddingRight: '8px' }}></i>Cancel
+              <i className="fa-solid fa-xmark" style={{ paddingRight: '8px' }}></i>Cancel Appointment
             </button>
           </div>
           <div className="btn-group2">
             <button className='button' onClick={handleReview}>
-              <i className="fa-solid fa-table" style={{ paddingRight: '8px' }}></i>Review
+              <i className="fa-solid fa-table" style={{ paddingRight: '8px' }}></i>Review Appointment
             </button>
             <button className='button' onClick={handleComment}>
               <i className="fa-solid fa-plus" style={{ paddingRight: '8px' }}></i>Add Comment

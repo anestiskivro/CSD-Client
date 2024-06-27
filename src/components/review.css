@@ -48,6 +48,7 @@
     background-color: #c50047;
     color: white;
     font-size: 12px;
+    font-weight: bold;
 }
 
 .btn-group3 {
@@ -90,6 +91,12 @@
     .table-container table {
         width: 100%;
         min-width: 100%;
+    }
+    .table-container th {
+        background-color: #c50047;
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
     }
 
     .btn-group3 button {

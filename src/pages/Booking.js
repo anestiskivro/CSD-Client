@@ -269,15 +269,19 @@ function Booking() {
                   <h4>Select Available Slots:</h4>
                   {availableSlots.map((time, index) => (
                     <div key={index}>
-                      <input
-                        type="checkbox"
-                        id={`hour-${time.start.hour}-${time.start.minute}`}
-                        checked={selectedSlot && selectedSlot.start === time.start && selectedSlot.end === time.end}
-                        onChange={() => handleHourChangeStud(time.start, time.end)}
-                      />
-                      <label htmlFor={`hour-${time.start.hour}-${time.start.minute}`}>
-                        {`${time.start.hour}:${time.start.minute.toString().padStart(2, '0')} - ${time.end.hour}:${time.end.minute.toString().padStart(2, '0')}`}
-                      </label>
+                      {time.start && time.end && (
+                        <>
+                          <input
+                            type="checkbox"
+                            id={`hour-${time.start.hour}-${time.start.minute}`}
+                            checked={selectedSlot && selectedSlot.start === time.start && selectedSlot.end === time.end}
+                            onChange={() => handleHourChangeStud(time.start, time.end)}
+                          />
+                          <label htmlFor={`hour-${time.start.hour}-${time.start.minute}`}>
+                            {`${time.start.hour}:${time.start.minute.toString().padStart(2, '0')} - ${time.end.hour}:${time.end.minute.toString().padStart(2, '0')}`}
+                          </label>
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>

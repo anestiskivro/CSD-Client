@@ -99,10 +99,15 @@ function Cancellation() {
     const handleCancel = async () => {
         const endpoint = id.includes("TA") ? "tassistant/cancel" : "student/cancel";
         try {
-            const response = await axios.delete(`https://rendezvous-csd-106ea9dcba7a.herokuapp.com/${endpoint}`, { data: { checkboxes: selectedCheckboxes } });
-            if (response.status === 200) {
-                alert("Successfully removed");
+            if (selectedCheckboxes) {
+                const response = await axios.delete(`https://rendezvous-csd-106ea9dcba7a.herokuapp.com/${endpoint}`, { data: { checkboxes: selectedCheckboxes } });
+                if (response.status === 200) {
+                    alert("Successfully removed");
+                }
+            } else {
+                alert("Please select a checkbox");
             }
+
         } catch (error) {
             console.error("Error:", error);
             alert("The cancellation was not succesful. Check your connection");

@@ -1,10 +1,12 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
 import './teacher_op.css';
 
 function Teacher_op({ id, email }) {
+    const isMobile = useMediaQuery({ maxWidth: 428 });
     const navigate = useNavigate();
     const [courses, setCourses] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState('');
@@ -44,6 +46,7 @@ function Teacher_op({ id, email }) {
         navigate('Studslots', { state: { email, selectedCourse } })
     }
     return (
+        <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
         <div className="right">
             <div className="header">
                 <h3>Select a Course: {selectedCourse}</h3>
@@ -84,6 +87,7 @@ function Teacher_op({ id, email }) {
                     </div>
                 )}
             </div>
+        </div>
         </div>
     )
 }

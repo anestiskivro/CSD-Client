@@ -85,14 +85,16 @@ function Booking() {
   const handleAssistantChange = (event) => {
     const selectedTA = event.target.value;
     setTA(selectedTA);
-    axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getSlots", { params: { teaching_assistant: selectedTA } })
-      .then((response) => {
-        if (response.status === 200) {
-          setAvailableSlots(response.data.availableSlots);
-        } else {
-          alert("We could not get the available slots. Check your connection");
-        }
-      });
+    if (!email.includes("csdp")) {
+      axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getSlots", { params: { teaching_assistant: selectedTA } })
+        .then((response) => {
+          if (response.status === 200) {
+            setAvailableSlots(response.data.availableSlots);
+          } else {
+            alert("We could not get the available slots. Check your connection");
+          }
+        });
+    }
   };
 
   const handleDateChange = (date) => {
@@ -133,6 +135,7 @@ function Booking() {
       }
     });
   };
+
 
   const handleSubmitBook = () => {
     const foundCourse = courses.find(course => course.code === selectedCourse);
@@ -212,8 +215,8 @@ function Booking() {
                       <input
                         type="checkbox"
                         id={`hour-${time.start.hour}-${time.start.minute}`}
-                        checked={selectedSlot && selectedSlot.start === time.start && selectedSlot.end === time.end}
-                        onChange={() => handleHourChangeStud(time.start, time.end)}
+                        checked={selectedHours[new Date(selectedDate).toDateString()]?.some(hour => hour.start.hour === time.start.hour && hour.start.minute === time.start.minute) || false}
+                        onChange={() => handleHourChange(time)}
                       />
                       <label htmlFor={`hour-${time.start.hour}-${time.start.minute}`}>
                         {`${time.start.hour}:${time.start.minute.toString().padStart(2, '0')} - ${time.end.hour}:${time.end.minute.toString().padStart(2, '0')}`}
@@ -259,21 +262,17 @@ function Booking() {
               <>
                 <div className='container'>
                   <h4>Select Available Slots:</h4>
-                  {availableSlots.map((time, index) => (
+                  {availableSlots && availableSlots.map((slot, index) => (
                     <div key={index}>
-                      {time.fromTime && time.EndTime && (
-                        <>
-                          <input
-                            type="checkbox"
-                            id={`hour-${time.start.hour}-${time.start.minute}`}
-                            checked={selectedSlot && selectedSlot.start === time.start && selectedSlot.end === time.end}
-                            onChange={() => handleHourChangeStud(time.start, time.end)}
-                          />
-                          <label htmlFor={`hour-${time.start.hour}-${time.start.minute}`}>
-                            {`${time.start.hour}:${time.start.minute.toString().padStart(2, '0')} - ${time.end.hour}:${time.end.minute.toString().padStart(2, '0')}`}
-                          </label>
-                        </>
-                      )}
+                      <input
+                        type="radio"
+                        id={`time-${slot.fromTime}-${slot.EndTime}`}
+                        checked={selectedSlot?.start === slot.fromTime && selectedSlot?.end === slot.EndTime}
+                        onChange={() => handleHourChangeStud(slot.fromTime, slot.EndTime)}
+                      />
+                      <label htmlFor={`hour-${slot.fromTime}-${slot.EndTime}`}>
+                        {`${slot.fromTime} - ${slot.EndTime} at ${slot.date}`}
+                      </label>
                     </div>
                   ))}
                 </div>

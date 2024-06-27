@@ -7,7 +7,7 @@ import "../components/teacher_op.css";
 import Info from './info';
 
 function TeachingAssistant() {
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isMobile = useMediaQuery({ maxWidth: 428 });
   const navigate = useNavigate();
   const location = useLocation();
   const { email, selectedCourse } = location.state || {};

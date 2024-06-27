@@ -207,13 +207,13 @@ function Booking() {
                 />
                 <div className='container'>
                   <h4>Select Available Hours:</h4>
-                  {availableHours && availableHours.map((time, index) => (
+                  {availableHours.map((time, index) => (
                     <div key={index}>
                       <input
                         type="checkbox"
                         id={`hour-${time.start.hour}-${time.start.minute}`}
-                        checked={selectedHours[new Date(selectedDate).toDateString()]?.some(hour => hour.start.hour === time.start.hour && hour.start.minute === time.start.minute) || false}
-                        onChange={() => handleHourChange(time)}
+                        checked={selectedSlot && selectedSlot.start === time.start && selectedSlot.end === time.end}
+                        onChange={() => handleHourChangeStud(time.start, time.end)}
                       />
                       <label htmlFor={`hour-${time.start.hour}-${time.start.minute}`}>
                         {`${time.start.hour}:${time.start.minute.toString().padStart(2, '0')} - ${time.end.hour}:${time.end.minute.toString().padStart(2, '0')}`}
@@ -255,7 +255,7 @@ function Booking() {
                 </select>
               </>
             )}
-            {selectedCourse && examSelected && selectedTA && (
+            {(selectedCourse && examSelected && selectedTA) && (
               <>
                 <div className='container'>
                   <h4>Select Available Slots:</h4>
@@ -263,7 +263,6 @@ function Booking() {
                     <div key={index}>
                       {time.fromTime && time.EndTime && (
                         <>
-                          <p>Date: {new Date(time.date).toDateString()}</p>
                           <input
                             type="checkbox"
                             id={`hour-${time.start.hour}-${time.start.minute}`}
@@ -278,18 +277,18 @@ function Booking() {
                     </div>
                   ))}
                 </div>
+                <div className='btn-group'>
+                  <button className='button' onClick={handleSubmitBook}>
+                    <i className="fa-solid fa-paper-plane" style={{ paddingRight: '8px' }}></i>Submit</button>
+                  <button className='button' onClick={handleBack}>
+                    <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
+                    Back</button>
+                </div>
               </>
             )}
-            <div className='btn-group'>
-              <button className='button' onClick={handleSubmitBook}>
-                <i className="fa-solid fa-paper-plane" style={{ paddingRight: '8px' }}></i>Submit</button>
-              <button className='button' onClick={handleBack}>
-                <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
-                Back</button>
-            </div>
           </>
         )}
-    </div>
+      </div>
     </div>
   );
 }

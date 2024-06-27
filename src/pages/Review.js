@@ -120,9 +120,9 @@ function Review() {
                                                 <td>{matched_exam ? matched_exam.name : ''}</td>
                                                 <td>{val.date}</td>
                                                 <td>{student ? student.student_number : ''}</td>
-                                                <td>{val.fromTime}</td>
-                                                <td>{val.endTime}</td>
-                                                <td>{val.status}</td>
+                                                <td>{val.FromTime}</td>
+                                                <td>{val.EndTime}</td>
+                                                <td>{val.Status}</td>
                                                 <td>
                                                     {student ? (
                                                         <a href={`mailto:${student.email}`}>Send Message</a>

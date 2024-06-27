@@ -1,3 +1,4 @@
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
@@ -19,7 +20,7 @@ function Booking() {
   const [exams, setExams] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState('');
   const [examSelected, setExamSelected] = useState(null);
-  const [TAs, setTAs] = useState([]);
+  const [TAs, setTAS] = useState([]);
   const [selectedTA, setTA] = useState(null);
   const [availableSlots, setAvailableSlots] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -27,15 +28,11 @@ function Booking() {
   let examDurationInMinutes = 0;
 
   useEffect(() => {
-    axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant")
-      .then((response) => {
-        if (response.status === 200) {
-          setCourses(response.data.data);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching courses:', error);
-      });
+    axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant").then((response) => {
+      if (response.status === 200) {
+        setCourses(response.data.data);
+      }
+    });
   }, []);
 
   const handleOptions = (event) => {
@@ -48,8 +45,6 @@ function Booking() {
           setExams(response.data.exams);
           setExamSelected(null);
         }
-      }).catch((error) => {
-        console.error('Error fetching exams:', error);
       });
     }
   };
@@ -59,6 +54,7 @@ function Booking() {
     const foundExam = exams.find(exam => exam.name === selectedExamName);
     setExamSelected(foundExam);
     if (id.includes("TA")) {
+
       const duration = parseInt(foundExam.duration);
       examDurationInMinutes = duration;
       const availableHours = [];
@@ -81,10 +77,8 @@ function Booking() {
       params: { selectedExam: foundExam }
     }).then((response) => {
       if (response.status === 200) {
-        setTAs(response.data.teaching_assistants);
+        setTAS(response.data.teaching_assistants);
       }
-    }).catch((error) => {
-      console.error('Error fetching TAs:', error);
     });
   };
 
@@ -98,16 +92,15 @@ function Booking() {
         } else {
           alert("We could not get the available slots. Check your connection");
         }
-      }).catch((error) => {
-        console.error('Error fetching slots:', error);
       });
   };
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    const selectedDateObject = new Date(date);
+    setSelectedDate(selectedDateObject);
   };
 
-  const handleHourChange = (time) => {
+  const handleHourChange = (hour) => {
     const currentDate = selectedDate.toDateString();
 
     setSelectedHours(prevSelectedHours => {
@@ -116,16 +109,15 @@ function Booking() {
       if (!updatedSelectedHours[currentDate]) {
         updatedSelectedHours[currentDate] = [];
       }
-
-      const isSelected = updatedSelectedHours[currentDate].some(selectedHour =>
-        selectedHour.start.hour === time.start.hour && selectedHour.start.minute === time.start.minute
+      const hourIndex = updatedSelectedHours[currentDate].findIndex(selectedHour =>
+        selectedHour.start.hour === hour.start.hour && selectedHour.start.minute === hour.start.minute
       );
 
-      if (!isSelected) {
-        updatedSelectedHours[currentDate].push(time);
+      if (hourIndex === -1) {
+        updatedSelectedHours[currentDate] = [...updatedSelectedHours[currentDate], hour];
       } else {
         updatedSelectedHours[currentDate] = updatedSelectedHours[currentDate].filter(selectedHour =>
-          !(selectedHour.start.hour === time.start.hour && selectedHour.start.minute === time.start.minute)
+          !(selectedHour.start.hour === hour.start.hour && selectedHour.start.minute === hour.start.minute)
         );
       }
       return updatedSelectedHours;
@@ -155,8 +147,6 @@ function Booking() {
       } else {
         alert(response.data.message);
       }
-    }).catch((error) => {
-      console.error('Error booking:', error);
     });
   };
 
@@ -165,15 +155,15 @@ function Booking() {
     const cid = foundCourse.cid;
     const eid = examSelected.eid;
     const dates = Object.keys(selectedHours);
-    const hours = Object.values(selectedHours).flat();
+    const hours = Object.values(selectedHours);
+    console.log(hours)
     axios.post("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/book", { dates: dates, hours: hours, cid: cid, eid: eid, email: email, duration: examSelected.duration }).then((response) => {
       if (response.status === 200) {
         alert(response.data.message);
+
       } else {
         alert(response.data.message);
       }
-    }).catch((error) => {
-      console.error('Error submitting:', error);
     });
   };
 
@@ -193,23 +183,23 @@ function Booking() {
           <>
             <h3>Select a Course: {selectedCourse}</h3>
             <select name="course" onChange={handleOptions}>
-              <option value="" disabled hidden>Select a course...</option>
-              {courses.map((opts, i) => <option key={i}>{opts.code}</option>)}
+              <option value="" selected disabled hidden>Select a course...</option>
+              {courses.length > 0 && courses.map((opts, i) => <option key={i}>{opts.code}</option>)}
             </select>
-            {selectedCourse && (
+            {(selectedCourse) && (
               <>
                 <h4>Select Exam:</h4>
                 <select name="exams" onChange={handleExamChange}>
-                  <option value="" disabled hidden>Select an exam...</option>
-                  {exams.map((opts, i) => <option key={i}>{opts.name}</option>)}
+                  <option value="" selected disabled hidden>Select an exam...</option>
+                  {exams.length > 0 && exams.map((opts, i) => <option key={i}>{opts.name}</option>)}
                 </select>
               </>
             )}
-            {selectedCourse && examSelected && (
+            {(selectedCourse && examSelected) && (
               <>
                 <DatePicker
                   selected={selectedDate}
-                  onChange={date => handleDateChange(date)}
+                  onChange={handleDateChange}
                   dateFormat="yyyy/MM/dd"
                   minDate={new Date(examSelected.FromDate)}
                   maxDate={new Date(examSelected.ToDate)}
@@ -217,7 +207,7 @@ function Booking() {
                 />
                 <div className='container'>
                   <h4>Select Available Hours:</h4>
-                  {availableHours.map((time, index) => (
+                  {availableHours && availableHours.map((time, index) => (
                     <div key={index}>
                       <input
                         type="checkbox"
@@ -231,7 +221,7 @@ function Booking() {
                     </div>
                   ))}
                 </div>
-                <div   className='btn-group'>
+                <div className='btn-group'>
                   <button className='button' onClick={handleSubmit}>
                     <i className="fa-solid fa-paper-plane" style={{ paddingRight: '8px' }}></i>Submit</button>
                   <button className='button' onClick={handleBack}>
@@ -244,62 +234,62 @@ function Booking() {
           <>
             <h3>Select a Course: {selectedCourse}</h3>
             <select name="course" onChange={handleOptions}>
-              <option value="" disabled hidden>Select a course...</option>
-              {courses.map((opts, i) => <option key={i}>{opts.code}</option>)}
+              <option value="" selected disabled hidden>Select a course...</option>
+              {courses.length > 0 && courses.map((opts, i) => <option key={i}>{opts.code}</option>)}
             </select>
-            {selectedCourse && (
+            {(selectedCourse) && (
               <>
                 <h4>Select Exam:</h4>
                 <select name="exams" onChange={handleExamChange}>
-                  <option value="" disabled hidden>Select an exam...</option>
-                  {exams.map((opts, i) => <option key={i}>{opts.name}</option>)}
+                  <option value="" selected disabled hidden>Select an exam...</option>
+                  {exams.length > 0 && exams.map((opts, i) => <option key={i}>{opts.name}</option>)}
                 </select>
               </>
             )}
-            {selectedCourse && examSelected && (
+            {(selectedCourse && examSelected) && (
               <>
                 <h5>Select Teaching Assistant:</h5>
                 <select name="tassistant" onChange={handleAssistantChange}>
-                  <option value="" disabled hidden>Select an Assistant...</option>
-                  {TAs.map((opts, i) => <option key={i}>{opts.lastname}</option>)}
+                  <option value="" selected disabled hidden>Select an Assistant...</option>
+                  {TAs && TAs.map((opts, i) => <option key={i}>{opts.lastname}</option>)}
                 </select>
               </>
             )}
             {selectedCourse && examSelected && selectedTA && (
-              <div className='container'>
-                <h4>Select Available Slots:</h4>
-                {availableSlots.map((time, index) => {
-                  const [startHour, startMinute] = time.fromTime.split(':').map(Number);
-                  const [endHour, endMinute] = time.EndTime.split(':').map(Number);
-
-                  const startTime = { hour: startHour, minute: startMinute };
-                  const endTime = { hour: endHour, minute: endMinute };
-
-                  return (
+              <>
+                <div className='container'>
+                  <h4>Select Available Slots:</h4>
+                  {availableSlots.map((time, index) => (
                     <div key={index}>
-                      <input
-                        type="checkbox"
-                        id={`hour-${startTime.hour}-${startTime.minute}`}
-                        checked={selectedSlot && selectedSlot.start.hour === startTime.hour && selectedSlot.start.minute === startTime.minute && selectedSlot.end.hour === endTime.hour && selectedSlot.end.minute === endTime.minute}
-                        onChange={() => handleHourChangeStud(startTime, endTime)}
-                      />
-                      <label htmlFor={`hour-${startTime.hour}-${startTime.minute}`}>
-                        {`${startTime.hour}:${startTime.minute.toString().padStart(2, '0')} - ${endTime.hour}:${endTime.minute.toString().padStart(2, '0')}`}
-                      </label>
+                      {time.fromTime && time.EndTime && (
+                        <>
+                          <p>Date: {new Date(time.date).toDateString()}</p>
+                          <input
+                            type="checkbox"
+                            id={`hour-${time.start.hour}-${time.start.minute}`}
+                            checked={selectedSlot && selectedSlot.start === time.start && selectedSlot.end === time.end}
+                            onChange={() => handleHourChangeStud(time.start, time.end)}
+                          />
+                          <label htmlFor={`hour-${time.start.hour}-${time.start.minute}`}>
+                            {`${time.start.hour}:${time.start.minute.toString().padStart(2, '0')} - ${time.end.hour}:${time.end.minute.toString().padStart(2, '0')}`}
+                          </label>
+                        </>
+                      )}
                     </div>
-                  );
-                })}
-              </div>
+                  ))}
+                </div>
+              </>
             )}
             <div className='btn-group'>
               <button className='button' onClick={handleSubmitBook}>
                 <i className="fa-solid fa-paper-plane" style={{ paddingRight: '8px' }}></i>Submit</button>
               <button className='button' onClick={handleBack}>
-                <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>Back</button>
+                <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
+                Back</button>
             </div>
           </>
         )}
-      </div>
+    </div>
     </div>
   );
 }

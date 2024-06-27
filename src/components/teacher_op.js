@@ -25,7 +25,7 @@ function Teacher_op({ id, email }) {
             .catch((error) => {
                 alert("Error fetching courses: " + error.message);
             });
-    }, [])
+    }, [selectedCoursePage])
 
     const handleOptions = (event) => {
         const courseCode = event.target.value;

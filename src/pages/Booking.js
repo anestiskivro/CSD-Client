@@ -133,11 +133,13 @@ function Booking() {
   };
 
   const handleHourChangeStud = (start_slot, end_slot) => {
-    if (selectedSlot && selectedSlot.start === start_slot && selectedSlot.end === end_slot) {
-      setSelectedSlot(null);
-    } else {
-      setSelectedSlot({ start: start_slot, end: end_slot });
-    }
+    setSelectedSlot(prevSelectedSlot => {
+      if (prevSelectedSlot && prevSelectedSlot.start === start_slot && prevSelectedSlot.end === end_slot) {
+        return null;
+      } else {
+        return { start: start_slot, end: end_slot };
+      }
+    });
   };
 
   const handleSubmitBook = () => {
@@ -218,8 +220,8 @@ function Booking() {
                       <input
                         type="checkbox"
                         id={`hour-${time.start.hour}-${time.start.minute}`}
-                        checked={selectedHours[new Date(selectedDate).toDateString()]?.some(hour => hour.start.hour === time.start.hour && hour.start.minute === time.start.minute) || false}
-                        onChange={() => handleHourChange(time)}
+                        checked={selectedSlot && selectedSlot.start === time.start && selectedSlot.end === time.end}
+                        onChange={() => handleHourChangeStud(time.start, time.end)}
                       />
                       <label htmlFor={`hour-${time.start.hour}-${time.start.minute}`}>
                         {`${time.start.hour}:${time.start.minute.toString().padStart(2, '0')} - ${time.end.hour}:${time.end.minute.toString().padStart(2, '0')}`}

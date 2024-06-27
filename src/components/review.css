@@ -81,6 +81,7 @@
     }
 
     .table-container {
+        height: 80%;
         overflow-x: auto;
         padding: 10px;
         width: 100%;

@@ -1,13 +1,11 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
 import "../components/teacher_op.css";
 import Info from './info';
 
 function TeachingAssistant() {
-  const isMobile = useMediaQuery({ maxWidth: 428 });
   const navigate = useNavigate();
   const location = useLocation();
   const { email, selectedCourse } = location.state || {};

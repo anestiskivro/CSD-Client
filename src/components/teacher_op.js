@@ -32,7 +32,7 @@ function Teacher_op({ id, email }) {
         navigate('setExams', { state: { email, selectedCourse } });
     }
     const handleReviewComments = async () => {
-        navigate('reviewcomments', { state: {id, email } });
+        navigate('reviewcomments', { state: {id, email, selectedCourse } });
     }
     const handleNotesTA = async () => {
         navigate('getNotes', { state: { email, selectedCourse } })

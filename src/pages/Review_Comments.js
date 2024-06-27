@@ -69,11 +69,11 @@ function Review_comments() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const { email, id } = location.state || {};
+    const { email, id, selectedCourse } = location.state || {};
 
     const handleBack = () => {
         const path = id && id.includes("TA") ? '/tassistant' : '/teacher';
-        navigate(path, { state: { id, email } });
+        navigate(path, { state: { id, email, selectedCourse } });
     };
 
     return (

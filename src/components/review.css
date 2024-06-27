@@ -19,8 +19,7 @@
     flex-direction: column;
     align-items: center;
     overflow: auto;
-    width: 100%;
-    box-sizing: border-box;
+    width: 100%; /* Ensure the .right container does not overflow */
 }
 
 .table-container {
@@ -29,12 +28,13 @@
     max-width: 95%;
     overflow-x: auto;
     margin: 0 auto;
-    box-sizing: border-box;
+    max-height: 300px; /* Ensure the table container does not overflow vertically */
 }
 
 .table-container table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 600px; /* Ensure the table does not collapse to a very small width */
 }
 
 .table-container th,
@@ -44,6 +44,7 @@
     text-align: center;
     word-break: break-word;
     overflow-wrap: break-word;
+    min-width: 100px; /* Ensure columns have a minimum width */
 }
 
 .table-container th {
@@ -57,8 +58,9 @@
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
-    width: 100%;
-    box-sizing: border-box;
+    width: 100%; /* Ensure .btn-group3 does not overflow */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    padding: 0 10px; /* Add padding for better appearance */
 }
 
 .btn-group3 button {
@@ -69,9 +71,9 @@
     padding: 10px 20px;
     font-weight: bold;
     margin: 10px 0;
-    width: 200px;
-    max-width: 100%;
-    box-sizing: border-box;
+    width: 100%; /* Ensure the button does not overflow */
+    max-width: 200px; /* Optional: limit the maximum width of the button */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 @media (max-width: 428px) {
@@ -82,27 +84,29 @@
     .right {
         padding-top: 2vh;
         height: auto;
-        width: 100%;
+        width: 100%; /* Ensure the .right container does not overflow */
     }
 
     .table-container {
         max-height: 300px;
         overflow-x: auto;
         padding: 10px;
-        width: 100%;
+        width: 100%; /* Ensure the .table-container does not overflow */
     }
 
     .table-container table {
-        width: 100%;
+        width: 100%; /* Ensure the table fits within the container */
+        min-width: 600px; /* Ensure the table does not collapse to a very small width */
     }
 
     .btn-group3 {
         margin-top: 20px;
-        align-items: stretch;
+        width: 100%; /* Ensure .btn-group3 does not overflow */
+        padding: 0 10px; /* Add padding for better appearance */
     }
 
     .btn-group3 button {
-        width: 100%;
-        max-width: none;
+        width: 100%; /* Ensure the button does not overflow */
+        max-width: 200px; /* Optional: limit the maximum width of the button */
     }
 }

@@ -71,7 +71,6 @@ function TeachingAssistant() {
     reader.readAsDataURL(fileData);
   };
   return (
-    <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
       <div className="admin1">
         <Info email={email}></Info>
         <div className="right">
@@ -108,7 +107,6 @@ function TeachingAssistant() {
           )}
         </div>
       </div>
-    </div>
   );
 }
 

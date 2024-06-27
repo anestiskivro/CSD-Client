@@ -215,7 +215,7 @@ function Booking() {
                 />
                 <div className='container'>
                   <h4>Select Available Hours:</h4>
-                  {availableHours.map((time, index) => (
+                  {availableHours && availableHours.map((time, index) => (
                     <div key={index}>
                       <input
                         type="checkbox"

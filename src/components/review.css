@@ -81,16 +81,18 @@
     }
 
     .table-container {
-        height: 80%;
         overflow-x: auto;
         padding: 10px;
         width: 100%;
     }
 
     .table-container table {
-        height: 80%;
         width: 100%;
         min-width: 100%;
+    }
+
+    .btn-group3 {
+        margin-top: 2%;
     }
 
     .btn-group3 button {

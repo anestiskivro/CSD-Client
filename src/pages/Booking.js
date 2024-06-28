@@ -126,7 +126,8 @@ function Booking() {
     });
   };
 
-  const handleHourChangeStud = (start_slot, end_slot) => {
+  const handleHourChangeStud = (start_slot, end_slot, date) => {
+    setSelectedDate(date);
     setSelectedSlot(prevSelectedSlot => {
       if (prevSelectedSlot && prevSelectedSlot.start === start_slot && prevSelectedSlot.end === end_slot) {
         return null;
@@ -142,6 +143,7 @@ function Booking() {
     const cid = foundCourse.cid;
     const eid = examSelected.eid;
     const selectDate = selectedDate.toDateString();
+    console.log(selectDate);
     axios.post("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/book", {
       date: selectDate, cid: cid, eid: eid, email: email, FromTime: selectedSlot.start, EndTime: selectedSlot.end, selectedTA: selectedTA
     }).then((response) => {
@@ -268,7 +270,7 @@ function Booking() {
                         type="radio"
                         id={`time-${slot.fromTime}-${slot.EndTime}`}
                         checked={selectedSlot?.start === slot.fromTime && selectedSlot?.end === slot.EndTime}
-                        onChange={() => handleHourChangeStud(slot.fromTime, slot.EndTime)}
+                        onChange={() => handleHourChangeStud(slot.fromTime, slot.EndTime,slot.date)}
                       />
                       <label htmlFor={`hour-${slot.fromTime}-${slot.EndTime}`}>
                         {`${slot.fromTime} - ${slot.EndTime} at ${slot.date}`}

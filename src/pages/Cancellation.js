@@ -20,6 +20,7 @@ function Cancellation() {
     const [students, setStudents] = useState([]);
     const [exams, setExams] = useState([]);
     const [TAs, setTAs] = useState([]);
+    const [comments, setComments] = useState([]);
     useEffect(() => {
         if (id.includes("TA")) {
             axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
@@ -55,6 +56,13 @@ function Cancellation() {
                     }
                 });
         }
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getcomments").then((response) => {
+            if (response.status === 200) {
+                setComments(response.data.comments);
+            } else {
+                alert(response.data.message);
+            }
+        });
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getExams")
             .then((response) => {
                 if (response.status === 200) {
@@ -135,6 +143,7 @@ function Cancellation() {
                                             <th>AM</th>
                                             <th>FromTime</th>
                                             <th>EndTime</th>
+                                            <th>Comment</th>
                                             <th>Status</th>
                                             <th>Select</th>
                                         </tr>
@@ -143,6 +152,7 @@ function Cancellation() {
                                         {selectedSlots.map((val, i) => {
                                             const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
                                             const slotAppointment = appointments.find(appointment => appointment.slotId === val.slotid);
+                                            const matched_comment = comments.find(comment => comment.appoint_id === slotAppointment?.appoint_id);
                                             const student = slotAppointment ? students.find(student => student.id === slotAppointment.studentId) : null;
                                             return (
                                                 <tr key={i}>
@@ -151,6 +161,7 @@ function Cancellation() {
                                                     <td>{student ? student.student_number : ''}</td>
                                                     <td>{val.fromTime}</td>
                                                     <td>{val.EndTime}</td>
+                                                    <td>{matched_comment ? matched_comment.comment : 'N/A'}</td>
                                                     <td>{val.Status}</td>
                                                     <td><input type="checkbox" onChange={handleCheckboxChange(i)} /></td>
                                                 </tr>
@@ -176,6 +187,7 @@ function Cancellation() {
                                             <th>EndTime</th>
                                             <th>Course</th>
                                             <th>Exam</th>
+                                            <th>Comment</th>
                                             <th>Status</th>
                                             <th>Select</th>
                                         </tr>
@@ -184,6 +196,7 @@ function Cancellation() {
                                         {selectedAppointments.map((val, i) => {
                                             const matchedExam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
                                             const matched_TA = TAs.find(ta => ta.taid === val.taid);
+                                            const matched_comment = comments.find(comment => comment.appoint_id === val.appoint_id);
                                             return (
                                                 <tr key={i}>
                                                     <td>{val.date}</td>
@@ -192,6 +205,7 @@ function Cancellation() {
                                                     <td>{val.EndTime}</td>
                                                     <td>{selectedCourses.find(course => course.cid === val.cid)?.code}</td>
                                                     <td>{matchedExam ? matchedExam.name : ''}</td>
+                                                    <td>{matched_comment ? matched_comment.comment : 'N/A'}</td>
                                                     <td>{val.Status}</td>
                                                     <td><input type="checkbox" onChange={handleCheckboxChange(i)} /></td>
                                                 </tr>

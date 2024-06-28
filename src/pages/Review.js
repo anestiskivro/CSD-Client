@@ -18,7 +18,7 @@ function Review() {
     const [exams, setExams] = useState([]);
     const [students, setStudents] = useState([]);
     const [TAs, setTAs] = useState([]);
-
+    const [comments, setComments] = useState([]);
     useEffect(() => {
         if (id.includes("TA")) {
             axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
@@ -54,6 +54,13 @@ function Review() {
                     }
                 });
         }
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getcomments").then((response) => {
+            if (response.status === 200) {
+                setComments(response.data.comments);
+            } else {
+                alert(response.data.message);
+            }
+        });
     }, [email, id]);
 
     useEffect(() => {
@@ -106,6 +113,7 @@ function Review() {
                                         <th>AM</th>
                                         <th>FromTime</th>
                                         <th>EndTime</th>
+                                        <th>Comment</th>
                                         <th>Status</th>
                                         <th>Message</th>
                                     </tr>
@@ -114,6 +122,7 @@ function Review() {
                                     {selectedSlots.map((val, i) => {
                                         const matched_exam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
                                         const slotAppointment = appointments.find(appointment => appointment.slotId === val.slotid);
+                                        const matched_comment = comments.find(comment => comment.appoint_id === slotAppointment?.appoint_id);
                                         const student = slotAppointment ? students.find(student => student.id === slotAppointment.studentId) : null;
                                         return (
                                             <tr key={i}>
@@ -122,6 +131,7 @@ function Review() {
                                                 <td>{student ? student.student_number : ''}</td>
                                                 <td>{val.fromTime}</td>
                                                 <td>{val.EndTime}</td>
+                                                <td>{matched_comment ? matched_comment.comment : 'N/A'}</td>
                                                 <td>{val.Status}</td>
                                                 <td>
                                                     {student ? (
@@ -149,6 +159,7 @@ function Review() {
                                         <th>Date</th>
                                         <th>FromTime</th>
                                         <th>EndTime</th>
+                                        <th>Comment</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -156,6 +167,7 @@ function Review() {
                                         const matchedCourse = selectedCourses.find(course => course.cid === val.cid);
                                         const matchedExam = exams.find(exam => exam.cid === val.cid && exam.eid === val.eid);
                                         const matched_TA = TAs.find(ta => ta.taid === val.taid);
+                                        const matched_comment = comments.find(comment => comment.appoint_id === val.appoint_id);
                                         return (
                                             <tr key={i}>
                                                 <td>{matchedCourse ? matchedCourse.code : 'N/A'}</td>
@@ -164,6 +176,7 @@ function Review() {
                                                 <td>{val.date}</td>
                                                 <td>{val.FromTime}</td>
                                                 <td>{val.EndTime}</td>
+                                                <td>{matched_comment ? matched_comment.comment : 'N/A'}</td>
                                             </tr>
                                         );
                                     })}

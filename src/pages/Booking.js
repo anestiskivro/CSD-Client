@@ -142,7 +142,6 @@ function Booking() {
     const foundCourse = courses.find(course => course.code === selectedCourse);
     const cid = foundCourse.cid;
     const eid = examSelected.eid;
-    console.log(selectedDate);
     axios.post("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/book", {
       date: selectedDate, cid: cid, eid: eid, email: email, FromTime: selectedSlot.start, EndTime: selectedSlot.end, selectedTA: selectedTA
     }).then((response) => {

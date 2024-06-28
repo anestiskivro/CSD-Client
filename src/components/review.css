@@ -55,8 +55,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    
 }
 
 .btn-group3 button {
@@ -68,6 +67,8 @@
     font-weight: bold;
     margin: 10px 0;
     width: 200px;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 @media (max-width: 428px) {

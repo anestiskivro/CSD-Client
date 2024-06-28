@@ -2,10 +2,11 @@
     flex: 1;
     background-color: #ffffff;
     padding-top: 5%;
-    height: 120vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: auto;
 }
 
 .btn-group {

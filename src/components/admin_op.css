@@ -55,14 +55,9 @@
 #import1 {
     margin: 20px 0;
     text-align: center;
-}
-#import1 {
-    margin: 10px 0;
+    gap: 20px;
 }
 
-.button {
-    margin: 5px;
-}
 #file input[type="file"],
 #info button {
     margin: 10px;

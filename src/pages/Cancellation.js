@@ -161,7 +161,7 @@ function Cancellation() {
                                                     <td>{student ? student.student_number : ''}</td>
                                                     <td>{val.fromTime}</td>
                                                     <td>{val.EndTime}</td>
-                                                    <td>{matched_comment ? matched_comment.comment : 'N/A'}</td>
+                                                    <td>{matched_comment ? matched_comment.Comment : 'N/A'}</td>
                                                     <td>{val.Status}</td>
                                                     <td><input type="checkbox" onChange={handleCheckboxChange(i)} /></td>
                                                 </tr>
@@ -205,7 +205,7 @@ function Cancellation() {
                                                     <td>{val.EndTime}</td>
                                                     <td>{selectedCourses.find(course => course.cid === val.cid)?.code}</td>
                                                     <td>{matchedExam ? matchedExam.name : ''}</td>
-                                                    <td>{matched_comment ? matched_comment.comment : 'N/A'}</td>
+                                                    <td>{matched_comment ? matched_comment.Comment : 'N/A'}</td>
                                                     <td>{val.Status}</td>
                                                     <td><input type="checkbox" onChange={handleCheckboxChange(i)} /></td>
                                                 </tr>

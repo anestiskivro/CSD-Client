@@ -131,7 +131,7 @@ function Review() {
                                                 <td>{student ? student.student_number : ''}</td>
                                                 <td>{val.fromTime}</td>
                                                 <td>{val.EndTime}</td>
-                                                <td>{matched_comment ? matched_comment.comment : 'N/A'}</td>
+                                                <td>{matched_comment ? matched_comment.Comment : 'N/A'}</td>
                                                 <td>{val.Status}</td>
                                                 <td>
                                                     {student ? (
@@ -176,7 +176,7 @@ function Review() {
                                                 <td>{val.date}</td>
                                                 <td>{val.FromTime}</td>
                                                 <td>{val.EndTime}</td>
-                                                <td>{matched_comment ? matched_comment.comment : 'N/A'}</td>
+                                                <td>{matched_comment ? matched_comment.Comment : 'N/A'}</td>
                                             </tr>
                                         );
                                     })}

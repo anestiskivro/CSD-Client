@@ -131,7 +131,7 @@ function AdminOp() {
                 <i className="fa fa-external-link-alt" style={{ paddingRight: '8px' }}></i>See your file right here
             </button>
             </div>
-            <div id="info">
+            <div id="btn-group">
                 <button className="button" onClick={handleShowInfo}>
                     <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info
                 </button>

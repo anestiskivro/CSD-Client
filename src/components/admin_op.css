@@ -49,16 +49,21 @@
     text-decoration: none;
 }
 
-#file,
-#import,
-#info,
-#import1 {
+#file, #import, #info, #import1 {
     margin: 20px 0;
     text-align: center;
-    gap: 20%;
 }
 
-#file input[type="file"],
-#info button {
+#import1 {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#import1 .button {
+    margin: 0 10px;
+}
+
+#file input[type="file"], #info button {
     margin: 10px;
 }

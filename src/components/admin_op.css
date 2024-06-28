@@ -2,7 +2,7 @@
     flex: 1;
     background-color: #ffffff;
     padding-top: 5%;
-    min-height: 100vh;
+    height: 120vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,6 +79,5 @@
 
 #file input[type="file"],
 #info button {
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin: 10px;
 }

@@ -135,6 +135,8 @@ function AdminOp() {
                 <button className="button" onClick={handleShowInfo}>
                     <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info
                 </button>
+            </div>
+            <div id="import1">
                 <button className="button" onClick={handleReset}>
                     <i className="fa-solid fa-arrows-rotate" style={{ paddingRight: '8px' }}></i>Reset
                 </button>

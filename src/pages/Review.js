@@ -170,13 +170,13 @@ function Review() {
                                         const matched_comment = comments.find(comment => comment.appoint_id === val.appoint_id);
                                         return (
                                             <tr key={i}>
-                                                <td>{matchedCourse ? matchedCourse.code : 'N/A'}</td>
-                                                <td>{matchedExam ? matchedExam.name : 'N/A'}</td>
-                                                <td>{matched_TA ? matched_TA.lastname : 'N/A'}</td>
+                                                <td>{matchedCourse ? matchedCourse.code : ''}</td>
+                                                <td>{matchedExam ? matchedExam.name : ''}</td>
+                                                <td>{matched_TA ? matched_TA.lastname : ''}</td>
                                                 <td>{val.date}</td>
                                                 <td>{val.FromTime}</td>
                                                 <td>{val.EndTime}</td>
-                                                <td>{matched_comment ? matched_comment.Comment : 'N/A'}</td>
+                                                <td>{matched_comment ? matched_comment.Comment : ''}</td>
                                             </tr>
                                         );
                                     })}

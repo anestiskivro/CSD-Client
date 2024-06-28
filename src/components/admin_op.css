@@ -13,7 +13,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 20%;
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
 
 .btn-group button {
@@ -23,7 +24,7 @@
     border-radius: 5px;
     padding: 10px 20px;
     font-weight: bold;
-    margin: 15%;
+    margin: 20%;
     display: flex;
     text-align: center;
     align-items: center;

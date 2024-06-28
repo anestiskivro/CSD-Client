@@ -9,27 +9,6 @@
     overflow: auto;
 }
 
-.btn-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 10%;
-    margin-bottom: 10%;
-}
-
-.btn-group button {
-    background-color: #C50047;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-weight: bold;
-    margin: 20%;
-    display: flex;
-    text-align: center;
-    align-items: center;
-}
-
 .modal {
     display: flex;
     justify-content: center;

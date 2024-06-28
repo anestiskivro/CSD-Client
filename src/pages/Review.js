@@ -9,8 +9,7 @@ function Review() {
     const isMobile = useMediaQuery({ maxWidth: 428 });
     const navigate = useNavigate();
     const location = useLocation();
-    const { email } = location.state || {};
-    const { id } = location.state || {};
+    const { email, id } = location.state || {};
     const [selectedSlots, setSelectedSlots] = useState([]);
     const [selectedAppointments, setSelectedAppointments] = useState([]);
     const [appointments, setAppointments] = useState([]);
@@ -19,34 +18,36 @@ function Review() {
     const [students, setStudents] = useState([]);
     const [TAs, setTAs] = useState([]);
     const [comments, setComments] = useState([]);
+
     useEffect(() => {
         if (id.includes("TA")) {
             axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
-                .then((response) => {
+                .then(response => {
                     if (response.status === 200) {
                         setSelectedSlots(response.data.slots);
-                        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
-                            if (response.status === 200) {
-                                setStudents(response.data.students);
-                                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getappointments")
-                                    .then((response) => {
-                                        if (response.status === 200) {
-                                            setAppointments(response.data.appointments);
-                                        } else {
-                                            alert("We could not get the appointments. Check your connection");
-                                        }
-                                    });
-                            } else {
-                                alert("We could not get the students. Check your connection");
-                            }
-                        });
+                        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents")
+                            .then(response => {
+                                if (response.status === 200) {
+                                    setStudents(response.data.students);
+                                    axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getappointments")
+                                        .then(response => {
+                                            if (response.status === 200) {
+                                                setAppointments(response.data.appointments);
+                                            } else {
+                                                alert("We could not get the appointments. Check your connection");
+                                            }
+                                        });
+                                } else {
+                                    alert("We could not get the students. Check your connection");
+                                }
+                            });
                     } else {
                         alert("We could not get the slots. Check your connection");
                     }
                 });
         } else {
             axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } })
-                .then((response) => {
+                .then(response => {
                     if (response.status === 200) {
                         setSelectedAppointments(response.data.appointments);
                     } else {
@@ -54,41 +55,42 @@ function Review() {
                     }
                 });
         }
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getcomments").then((response) => {
-            if (response.status === 200) {
-                setComments(response.data.comments);
-            } else {
-                alert(response.data.message);
-            }
-        });
+        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getcomments")
+            .then(response => {
+                if (response.status === 200) {
+                    setComments(response.data.comments);
+                } else {
+                    alert(response.data.message);
+                }
+            });
     }, [email, id]);
 
     useEffect(() => {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses")
-            .then((response) => {
+            .then(response => {
                 setSelectedCourses(response.data.courses);
                 return axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: response.data.courses } });
             })
-            .then((response) => {
+            .then(response => {
                 if (response.status === 200) {
                     setTAs(response.data.TAs);
                 } else {
                     alert(response.data.message);
                 }
             })
-            .catch((error) => {
+            .catch(error => {
                 console.error("There was an error fetching the courses or TAs!", error);
             });
 
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getExams")
-            .then((response) => {
+            .then(response => {
                 if (response.status === 200) {
                     setExams(response.data.exams);
                 } else {
                     alert(response.data.message);
                 }
             })
-            .catch((error) => {
+            .catch(error => {
                 console.error("There was an error fetching the exams!", error);
             });
     }, []);
@@ -104,7 +106,7 @@ function Review() {
             <div className="right">
                 {id.includes("TA") ? (
                     <div className="table-container">
-                        {selectedSlots && selectedSlots.length > 0 ? (
+                        {selectedSlots.length > 0 ? (
                             <table>
                                 <thead>
                                     <tr>
@@ -149,7 +151,7 @@ function Review() {
                     </div>
                 ) : (
                     <div className="table-container">
-                        {selectedAppointments && selectedAppointments.length > 0 ? (
+                        {selectedAppointments.length > 0 ? (
                             <table>
                                 <thead>
                                     <tr>
@@ -187,7 +189,7 @@ function Review() {
                         )}
                     </div>
                 )}
-                <div className='btn-group3'>
+                <div className="btn-group3">
                     <button className="button" onClick={handleBack}>
                         <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
                         Back

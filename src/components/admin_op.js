@@ -10,7 +10,7 @@ function AdminOp() {
         const file = e.target.files[0];
         setFileData(file);
     };
-    const handleReset = async() => {
+    const handleReset = async () => {
         try {
             const response = await axios.delete(
                 'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/admin/reset');
@@ -127,14 +127,16 @@ function AdminOp() {
                 <i className="fa fa-download" style={{ paddingRight: '8px' }}></i>Download Courses File
             </a>
             <div id="import1">
-            <button className="button" onClick={seeFile}>
-                <i className="fa fa-external-link-alt" style={{ paddingRight: '8px' }}></i>See your file right here
-            </button>
+                <button className="button" onClick={seeFile}>
+                    <i className="fa fa-external-link-alt" style={{ paddingRight: '8px' }}></i>See your file right here
+                </button>
             </div>
             <div id="btn-group">
                 <button className="button" onClick={handleShowInfo}>
                     <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info
                 </button>
+            </div>
+            <div id="btn-group">
                 <button className="button" onClick={handleReset}>
                     <i className="fa-solid fa-arrows-rotate" style={{ paddingRight: '8px' }}></i>Reset
                 </button>

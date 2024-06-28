@@ -10,7 +10,19 @@ function AdminOp() {
         const file = e.target.files[0];
         setFileData(file);
     };
-
+    const handleReset = async() => {
+        try {
+            const response = await axios.delete(
+                'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/admin/reset');
+            if (response.status === 200) {
+                alert('Data cleared successfully');
+            } else {
+                alert('Failure of data');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
     const uploadToTeachers = async () => {
         if (!fileData) {
             alert('Please select a file');
@@ -122,6 +134,11 @@ function AdminOp() {
             <div id="info">
                 <button className="button" onClick={handleShowInfo}>
                     <i className="fa fa-info-circle" style={{ paddingRight: '8px' }}></i>Info
+                </button>
+            </div>
+            <div id="info">
+                <button className="button" onClick={handleReset}>
+                    <i className="fa-solid fa-arrows-rotate" style={{ paddingRight: '8px' }}></i>Reset
                 </button>
             </div>
             {showInfo && (

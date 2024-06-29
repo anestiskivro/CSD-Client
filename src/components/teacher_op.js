@@ -12,18 +12,29 @@ function Teacher_op({ id, email }) {
     const { selectedCoursePage } = location.state || {};
 
     useEffect(() => {
-        if (selectedCoursePage) {
-            localStorage.setItem('selectedCourse', selectedCoursePage);
+        const storedCourse = localStorage.getItem('selectedCourse');
+        if (storedCourse) {
+            setSelectedCourse(storedCourse);
+        } else if (selectedCoursePage) {
+            setSelectedCourse(selectedCoursePage);
         }
+
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher")
             .then((response) => {
                 if (response.status === 200) {
                     setCourses(response.data.data);
+                    if (storedCourse && response.data.data.some(course => course.code === storedCourse)) {
+                        setSelectedCourse(storedCourse);
+                    } else {
+                        localStorage.removeItem('selectedCourse');
+                        setSelectedCourse('');
+                    }
                 } else {
                     alert("There is something wrong with the connections. Courses were not retrieved");
                 }
             })
             .catch((error) => {
+                console.error("Error fetching courses:", error);
                 alert("Error fetching courses: " + error.message);
             });
     }, [selectedCoursePage]);

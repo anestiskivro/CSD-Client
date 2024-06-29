@@ -1,4 +1,3 @@
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
 import React, { useState } from 'react';
 import './admin_op.css';
@@ -33,14 +32,11 @@ function AdminOp() {
         try {
             const formData = new FormData();
             formData.append('file', fileData);
-            const response = await axios.post('/admin',
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/admin`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
                 }
-            );
+            });
             if (response.status === 200) {
                 alert('Data imported successfully');
             } else {
@@ -60,7 +56,7 @@ function AdminOp() {
         try {
             const formData = new FormData();
             formData.append('file', fileData);
-            const response = await axios.post('/admin/insertcourses', formData, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/admin/insertcourses`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

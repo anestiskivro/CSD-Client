@@ -6,50 +6,51 @@ import './login.css';
 const Login = () => {
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
-    axios.defaults.withCredentials = true;
+
     useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        axios.get('/', {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        .then(response => {
-            const data = response.data;
-            if (data.loggedIn) {
-                switch (data.id) {
-                    case 'admin':
-                        navigate('/admin');
-                        break;
-                    case 'teacher':
-                        navigate('/teacher');
-                        break;
-                    case 'TA':
-                        navigate('/ta');
-                        break;
-                    case 'student':
-                        navigate('/student');
-                        break;
-                    default:
-                        navigate('/');
+        const token = localStorage.getItem('token');
+        if (token) {
+            axios.get(`${process.env.REACT_APP_API_URL}/`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
-            } else {
+            })
+            .then(response => {
+                const data = response.data;
+                if (data.loggedIn) {
+                    switch (data.id) {
+                        case 'admin':
+                            navigate('/admin');
+                            break;
+                        case 'teacher':
+                            navigate('/teacher');
+                            break;
+                        case 'TA':
+                            navigate('/ta');
+                            break;
+                        case 'student':
+                            navigate('/student');
+                            break;
+                        default:
+                            navigate('/');
+                    }
+                } else {
+                    navigate('/');
+                }
+            })
+            .catch(error => {
+                console.error('Error authenticating user:', error);
                 navigate('/');
-            }
-        })
-        .catch(error => {
-            console.error('Error authenticating user:', error);
+            });
+        } else {
             navigate('/');
-        });
-    } else {
-        navigate('/');
-    }
-}, [navigate]);
+        }
+    }, [navigate]);
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('/', { email }, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}`, { email }, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -95,6 +96,5 @@ const Login = () => {
         </div>
     );
 }
-
 
 export default Login;

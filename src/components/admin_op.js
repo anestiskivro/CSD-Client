@@ -33,8 +33,7 @@ function AdminOp() {
         try {
             const formData = new FormData();
             formData.append('file', fileData);
-            const response = await axios.post(
-                `${process.env.REACT_APP_API_URL}/admin`,
+            const response = await axios.post('/admin',
                 formData,
                 {
                     headers: {
@@ -61,15 +60,11 @@ function AdminOp() {
         try {
             const formData = new FormData();
             formData.append('file', fileData);
-            const response = await axios.post(
-                `${process.env.REACT_APP_API_URL}/admin/insertcourses`,
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
+            const response = await axios.post('/admin/insertcourses', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
                 }
-            );
+            });
             if (response.status === 200) {
                 alert('Data imported successfully');
             } else {

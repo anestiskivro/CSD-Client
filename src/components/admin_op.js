@@ -1,3 +1,4 @@
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
 import React, { useState } from 'react';
 import './admin_op.css';

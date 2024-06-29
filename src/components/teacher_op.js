@@ -13,7 +13,7 @@ function Teacher_op({ id, email }) {
 
     useEffect(() => {
         if (selectedCoursePage) {
-            setSelectedCourse(selectedCoursePage);
+            localStorage.setItem('selectedCourse', selectedCoursePage);
         }
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher")
             .then((response) => {
@@ -31,6 +31,7 @@ function Teacher_op({ id, email }) {
     const handleOptions = (event) => {
         const courseCode = event.target.value;
         setSelectedCourse(courseCode);
+        localStorage.setItem('selectedCourse', courseCode);
     };
 
     const handleInsertStudents = async () => {

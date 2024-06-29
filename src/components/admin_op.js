@@ -10,10 +10,10 @@ function AdminOp() {
         const file = e.target.files[0];
         setFileData(file);
     };
+
     const handleReset = async () => {
         try {
-            const response = await axios.delete(
-                'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/admin/reset');
+            const response = await axios.delete(`${process.env.REACT_APP_API_URL}/admin/reset`);
             if (response.status === 200) {
                 alert('Data cleared successfully');
             } else {
@@ -23,6 +23,7 @@ function AdminOp() {
             console.error('Error:', error);
         }
     };
+
     const uploadToTeachers = async () => {
         if (!fileData) {
             alert('Please select a file');
@@ -32,7 +33,7 @@ function AdminOp() {
             const formData = new FormData();
             formData.append('file', fileData);
             const response = await axios.post(
-                'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/admin',
+                `${process.env.REACT_APP_API_URL}/admin`,
                 formData,
                 {
                     headers: {
@@ -60,7 +61,7 @@ function AdminOp() {
             const formData = new FormData();
             formData.append('file', fileData);
             const response = await axios.post(
-                'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/admin/insertcourses',
+                `${process.env.REACT_APP_API_URL}/admin/insertcourses`,
                 formData,
                 {
                     headers: {

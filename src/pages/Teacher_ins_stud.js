@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Info from '../components/info';
 import "../components/teacher_op.css";
 
-
 function Teacher_ins_stud() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const navigate = useNavigate();
@@ -30,7 +29,7 @@ function Teacher_ins_stud() {
       const formData = new FormData();
       formData.append('file', fileData);
       const response = await axios.post(
-        'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/insertstud',
+        `${process.env.REACT_APP_API_URL}/teacher/insertstud`,
         formData,
         {
           headers: {
@@ -53,6 +52,7 @@ function Teacher_ins_stud() {
   const handleBack = () => {
     navigate('/teacher', { state: { email } });
   };
+
   const handleShowInfo = () => {
     setShowInfo(true);
   };
@@ -60,6 +60,7 @@ function Teacher_ins_stud() {
   const handleCloseInfo = () => {
     setShowInfo(false);
   };
+
   const seeFile = () => {
     if (!fileData) {
       alert('Please select a file');
@@ -116,7 +117,6 @@ function Teacher_ins_stud() {
       </div>
     </div>
   );
-};
-
+}
 
 export default Teacher_ins_stud;

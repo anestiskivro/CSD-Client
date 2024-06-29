@@ -49,7 +49,7 @@ const Login = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('https://rendezvous-csd-106ea9dcba7a.herokuapp.com', { email }, {
+            const response = await axios.post('/', { email }, {
                 headers: {
                     'Content-Type': 'application/json'
                 },

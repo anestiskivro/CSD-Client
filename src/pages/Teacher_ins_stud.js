@@ -10,7 +10,7 @@ function Teacher_ins_stud() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const navigate = useNavigate();
   const location = useLocation();
-  const { email } = location.state || {};
+  const { email, selectedCourse } = location.state || {};
   const [fileData, setFileData] = useState(null);
   const [showInfo, setShowInfo] = useState(false);
 
@@ -50,7 +50,7 @@ function Teacher_ins_stud() {
   };
 
   const handleBack = () => {
-    navigate('/teacher', { state: { email } });
+    navigate('/teacher', { state: { email, selectedCourse } });
   };
 
   const handleShowInfo = () => {

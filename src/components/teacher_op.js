@@ -10,6 +10,7 @@ function Teacher_op({ id, email }) {
     const [courses, setCourses] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState('');
     const { selectedCoursePage } = location.state || {};
+
     useEffect(() => {
         if (selectedCoursePage) {
             setSelectedCourse(selectedCoursePage);
@@ -17,7 +18,7 @@ function Teacher_op({ id, email }) {
         axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher")
             .then((response) => {
                 if (response.status === 200) {
-                    setCourses(response.data.data)
+                    setCourses(response.data.data);
                 } else {
                     alert("There is something wrong with the connections. Courses were not retrieved");
                 }
@@ -25,7 +26,7 @@ function Teacher_op({ id, email }) {
             .catch((error) => {
                 alert("Error fetching courses: " + error.message);
             });
-    }, [selectedCoursePage])
+    }, [selectedCoursePage]);
 
     const handleOptions = (event) => {
         const courseCode = event.target.value;
@@ -49,15 +50,15 @@ function Teacher_op({ id, email }) {
     };
 
     const handleNotesTA = async () => {
-        navigate('getNotes', { state: { email, selectedCourse } })
+        navigate('getNotes', { state: { email, selectedCourse } });
     };
 
     const handleTAslots = async () => {
-        navigate('TAslots', { state: { email, selectedCourse } })
+        navigate('TAslots', { state: { email, selectedCourse } });
     };
 
     const handleStudslots = async () => {
-        navigate('Studslots', { state: { email, selectedCourse } })
+        navigate('Studslots', { state: { email, selectedCourse } });
     };
 
     return (

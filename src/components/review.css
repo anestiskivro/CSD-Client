@@ -33,22 +33,32 @@
     width: 100%;
     min-width: 400px;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .table-container th,
 .table-container td {
     border: 1px solid #ccc;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
     word-break: break-word;
     overflow-wrap: break-word;
+    font-size: 14px;
 }
 
 .table-container th {
     background-color: #c50047;
     color: white;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
+}
+
+.table-container tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-container tr:hover {
+    background-color: #f1f1f1;
 }
 
 .btn-group3 {
@@ -93,11 +103,11 @@
         width: 100%;
         min-width: 100%;
     }
-    .table-container th {
-        background-color: #c50047;
-        color: white;
-        font-size: 10px;
-        font-weight: bold;
+
+    .table-container th,
+    .table-container td {
+        font-size: 12px;
+        padding: 8px;
     }
 
     .btn-group3 button {

@@ -56,7 +56,12 @@ function NotesTA() {
     };
 
     const handleBack = () => {
-        navigate("/teacher", { state: { email } });
+        if(id.includes("TA")){
+            navigate("/tassistant", { state: { id, email } });
+        }else{
+            navigate("/teacher", { state: { id, email } });
+        }
+        
     };
 
     return (

@@ -11,6 +11,7 @@ function NotesTA() {
     const isMobile = useMediaQuery({ maxWidth: 768 });
     const location = useLocation();
     const { email } = location.state || {};
+    const { id } = location.state || {};
     const { selectedCourse } = location.state || {};
     const [TAs, setTAs] = useState([]);
     const [students, setStudents] = useState([]);

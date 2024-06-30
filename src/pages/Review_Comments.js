@@ -1,3 +1,4 @@
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
@@ -5,123 +6,106 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Info from '../components/info';
 import "../components/review.css";
 
-function Review_comments() {
+function NotesTA() {
+    const navigate = useNavigate();
     const isMobile = useMediaQuery({ maxWidth: 768 });
-    const [comments, setComments] = useState([]);
-    const [courses, setCourses] = useState([]);
+    const location = useLocation();
+    const { email } = location.state || {};
+    const { selectedCourse } = location.state || {};
+    const [TAs, setTAs] = useState([]);
     const [students, setStudents] = useState([]);
     const [exams, setExams] = useState([]);
-    const [TAs, setTAs] = useState([]);
+    const [selectedTA, setTA] = useState("");
+    const [Evaluations, setEvaluations] = useState([]);
 
     useEffect(() => {
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getComments")
-            .then((response) => {
-                if (response.status === 200) {
-                    setComments(response.data.comments);
-                    return axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getExams");
-                } else {
-                    throw new Error("Failed to get comments");
-                }
-            })
-            .then((response) => {
-                if (response.status === 200) {
-                    setExams(response.data.exams);
-                } else {
-                    throw new Error("Failed to get exams");
-                }
-            })
-            .catch((error) => {
-                alert(error.message);
-            });
+        axios.get(`${process.env.REACT_APP_API_URL}/teacher/getExams`, { params: { selectedCourse } }).then((response) => {
+            if (response.status === 200) {
+                setExams(response.data.exams);
+                axios.get(`${process.env.REACT_APP_API_URL}/teacher/getStudents`).then((response) => {
+                    if (response.status === 200) {
+                        setStudents(response.data.students);
+                    } else {
+                        alert("We could not get the students. Check your connection");
+                    }
+                });
+            } else {
+                alert(response.data.message);
+            }
+        });
+        axios.get(`${process.env.REACT_APP_API_URL}/teacher/getTAs`, { params: { selectedCourse } }).then((response) => {
+            if (response.status === 200) {
+                setTAs(response.data.TAs);
+            } else {
+                alert(response.data.message);
+            }
+        });
+    }, [selectedCourse]);
 
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant")
+    const handleAssistantChange = (event) => {
+        const selectedTA = event.target.value;
+        setTA(selectedTA);
+        axios.get(`${process.env.REACT_APP_API_URL}/teacher/getNotes`, { params: { teaching_assistant: selectedTA } })
             .then((response) => {
                 if (response.status === 200) {
-                    setCourses(response.data.data);
-                    return axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: response.data.data } });
+                    setEvaluations(response.data.evaluations);
                 } else {
-                    throw new Error("Failed to get courses");
+                    alert(response.data.message);
                 }
-            })
-            .then((response) => {
-                if (response.status === 200) {
-                    setTAs(response.data.TAs);
-                } else {
-                    throw new Error(response.data.message);
-                }
-            })
-            .catch((error) => {
-                alert(error.message);
             });
-
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getStudents")
-            .then((response) => {
-                if (response.status === 200) {
-                    setStudents(response.data.students);
-                } else {
-                    throw new Error("Failed to get students");
-                }
-            })
-            .catch((error) => {
-                alert(error.message);
-            });
-    }, []);
-
-    const navigate = useNavigate();
-    const location = useLocation();
-    const { email, id, selectedCoursePage } = location.state || {};
+    };
 
     const handleBack = () => {
-        const path = id && id.includes("TA") ? '/tassistant' : '/teacher';
-        navigate(path, { state: { id, email, selectedCoursePage } });
+        navigate("/teacher", { state: { email } });
     };
 
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
-            <Info email={email} />
-            <div className='right'>
-                <div className="table-container">
-                    {comments && comments.length > 0 ? (
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Course</th>
-                                    <th>Exam</th>
-                                    <th>TA</th>
-                                    <th>AM</th>
-                                    <th>Date</th>
-                                    <th>FromTime</th>
-                                    <th>EndTime</th>
-                                    <th>Comment</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {comments.map((val, i) => {
-                                    const course = courses.find(course => course.cid === val.cid);
-                                    const exam = exams.find(exam => exam.eid === val.eid);
-                                    const ta = TAs.find(ta => ta.taid === val.taid);
-                                    const student = students.find(student => student.id === val.studentId);
-                                    return (
-                                        <tr key={i}>
-                                            <td>{course ? course.code : 'N/A'}</td>
-                                            <td>{exam ? exam.name : 'N/A'}</td>
-                                            <td>{ta ? ta.lastname : 'N/A'}</td>
-                                            <td>{student ? student.student_number : 'N/A'}</td>
-                                            <td>{val.date}</td>
-                                            <td>{val.FromTime}</td>
-                                            <td>{val.EndTime}</td>
-                                            <td className="comment-cell">{val.Comment}</td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <div>No comments available</div>
-                    )}
-                </div>
-                <div className='btn-group3'>
-                    <button className="button" onClick={handleBack}>
+            <Info email={email}></Info>
+            <div className="right">
+                {selectedCourse && (
+                    <>
+                        <h4>Select TA:</h4>
+                        <select name="TAs" onChange={handleAssistantChange}>
+                            <option value="" selected disabled hidden>Select a TA...</option>
+                            {TAs.length > 0 && TAs.map((opts, i) => <option key={i}>{opts.lastname}</option>)}
+                        </select>
+                    </>
+                )}
+                {selectedCourse && selectedTA && (
+                    <>
+                        <div className="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Course</th>
+                                        <th>Exam</th>
+                                        <th>TAssistant</th>
+                                        <th>Student</th>
+                                        <th>Evaluation</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div className="table-body-container">
+                                <table>
+                                    <tbody>
+                                        {Evaluations.map((val, i) => (
+                                            <tr key={i}>
+                                                <td>{selectedCourse}</td>
+                                                <td>{exams.find(exam => exam.eid === val.eid)?.name}</td>
+                                                <td>{selectedTA}</td>
+                                                <td>{students.find(student => student.id === val.studentId)?.student_number}</td>
+                                                <td>{val.evaluation_info}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </>
+                )}
+                <div className="btn-group3">
+                    <button className='button' onClick={handleBack}>
                         <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
                         Back
                     </button>
@@ -131,4 +115,4 @@ function Review_comments() {
     );
 }
 
-export default Review_comments;
+export default NotesTA;

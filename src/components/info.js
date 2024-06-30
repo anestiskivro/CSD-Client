@@ -11,7 +11,7 @@ const Info = ({ email }) => {
 
   const handleSignOut = async () => {
     try {
-      await axios.post('https://rendezvous-csd-106ea9dcba7a.herokuapp.com/logout');
+      await axios.post(`${process.env.REACT_APP_API_URL}/logout`);
       navigate('/');
     } catch (error) {
       console.error('Error logging out:', error);

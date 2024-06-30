@@ -31,7 +31,7 @@ function Set_Exams() {
     formData.append("Duration", Duration);
 
     const response = await axios.post(
-      'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/setExams',
+      `${process.env.REACT_APP_API_URL}/teacher/setExams`,
       formData,
       {
         headers: {

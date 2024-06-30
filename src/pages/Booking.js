@@ -28,7 +28,7 @@ function Booking() {
   let examDurationInMinutes = 0;
 
   useEffect(() => {
-    axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant").then((response) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/tassistant`).then((response) => {
       if (response.status === 200) {
         setCourses(response.data.data);
       }
@@ -38,7 +38,7 @@ function Booking() {
   const handleOptions = (event) => {
     if (event.target.value !== "Select a course...") {
       setSelectedCourse(event.target.value);
-      axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/book", {
+      axios.get(`${process.env.REACT_APP_API_URL}/tassistant/book`, {
         params: { selectedCourse: event.target.value }
       }).then((response) => {
         if (response.status === 200) {
@@ -54,7 +54,6 @@ function Booking() {
     const foundExam = exams.find(exam => exam.name === selectedExamName);
     setExamSelected(foundExam);
     if (id.includes("TA")) {
-
       const duration = parseInt(foundExam.duration);
       examDurationInMinutes = duration;
       const availableHours = [];
@@ -73,7 +72,7 @@ function Booking() {
       }
       setAvailableHours(availableHours);
     }
-    axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/findTA", {
+    axios.get(`${process.env.REACT_APP_API_URL}/student/findTA`, {
       params: { selectedExam: foundExam }
     }).then((response) => {
       if (response.status === 200) {
@@ -86,7 +85,7 @@ function Booking() {
     const selectedTA = event.target.value;
     setTA(selectedTA);
     if (!email.includes("csdp")) {
-      axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getSlots", { params: { teaching_assistant: selectedTA } })
+      axios.get(`${process.env.REACT_APP_API_URL}/student/getSlots`, { params: { teaching_assistant: selectedTA } })
         .then((response) => {
           if (response.status === 200) {
             setAvailableSlots(response.data.availableSlots);
@@ -142,7 +141,7 @@ function Booking() {
     const foundCourse = courses.find(course => course.code === selectedCourse);
     const cid = foundCourse.cid;
     const eid = examSelected.eid;
-    axios.post("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/book", {
+    axios.post(`${process.env.REACT_APP_API_URL}/student/book`, {
       date: selectedDate, cid: cid, eid: eid, email: email, FromTime: selectedSlot.start, EndTime: selectedSlot.end, selectedTA: selectedTA
     }).then((response) => {
       if (response.status === 200) {
@@ -160,7 +159,7 @@ function Booking() {
     const dates = Object.keys(selectedHours);
     const hours = Object.values(selectedHours);
     console.log(hours)
-    axios.post("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/book", { dates: dates, hours: hours, cid: cid, eid: eid, email: email, duration: examSelected.duration }).then((response) => {
+    axios.post(`${process.env.REACT_APP_API_URL}/tassistant/book`, { dates: dates, hours: hours, cid: cid, eid: eid, email: email, duration: examSelected.duration }).then((response) => {
       if (response.status === 200) {
         alert(response.data.message);
 

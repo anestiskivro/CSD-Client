@@ -21,16 +21,17 @@ function Cancellation() {
     const [exams, setExams] = useState([]);
     const [TAs, setTAs] = useState([]);
     const [comments, setComments] = useState([]);
+
     useEffect(() => {
         if (id.includes("TA")) {
-            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
+            axios.get(`${process.env.REACT_APP_API_URL}/tassistant/getSlots`, { params: { email } })
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedSlots(response.data.slots);
-                        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
+                        axios.get(`${process.env.REACT_APP_API_URL}/teacher/getStudents`).then((response) => {
                             if (response.status === 200) {
                                 setStudents(response.data.students);
-                                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getappointments")
+                                axios.get(`${process.env.REACT_APP_API_URL}/tassistant/getappointments`)
                                     .then((response) => {
                                         if (response.status === 200) {
                                             setAppointments(response.data.appointments);
@@ -47,7 +48,7 @@ function Cancellation() {
                     }
                 });
         } else {
-            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } })
+            axios.get(`${process.env.REACT_APP_API_URL}/student/getappointments`, { params: { email } })
                 .then((response) => {
                     if (response.status === 200) {
                         setSelectedAppointments(response.data.appointments);
@@ -56,14 +57,14 @@ function Cancellation() {
                     }
                 });
         }
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getcomments").then((response) => {
+        axios.get(`${process.env.REACT_APP_API_URL}/tassistant/getcomments`).then((response) => {
             if (response.status === 200) {
                 setComments(response.data.comments);
             } else {
                 alert(response.data.message);
             }
         });
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getExams")
+        axios.get(`${process.env.REACT_APP_API_URL}/student/getExams`)
             .then((response) => {
                 if (response.status === 200) {
                     setExams(response.data.exams);
@@ -76,10 +77,10 @@ function Cancellation() {
     useEffect(() => {
         if (selectedAppointments.length > 0) {
             const cids = selectedAppointments.map(val => val.cid).join(',');
-            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses", { params: { cids } })
+            axios.get(`${process.env.REACT_APP_API_URL}/student/getcourses`, { params: { cids } })
                 .then((response) => {
                     setSelectedCourses(response.data.courses);
-                    return axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: response.data.courses } });
+                    return axios.get(`${process.env.REACT_APP_API_URL}/teacher/getTAs`, { params: { selectedCourse: response.data.courses } });
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -108,7 +109,7 @@ function Cancellation() {
         const endpoint = id.includes("TA") ? "tassistant/cancel" : "student/cancel";
         try {
             if (selectedCheckboxes.length > 0) {
-                const response = await axios.delete(`https://rendezvous-csd-106ea9dcba7a.herokuapp.com/${endpoint}`, { data: { checkboxes: selectedCheckboxes } });
+                const response = await axios.delete(`${process.env.REACT_APP_API_URL}/${endpoint}`, { data: { checkboxes: selectedCheckboxes } });
                 if (response.status === 200) {
                     alert("Successfully removed");
                 }

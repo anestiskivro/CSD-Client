@@ -27,7 +27,7 @@ function TeachingAssistant() {
       formData.append('selectedCourse', selectedCourse);
       console.log(selectedCourse)
       const response = await axios.post(
-        'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/SetTAs',
+        `${process.env.REACT_APP_API_URL}/teacher/SetTAs`,
         formData,
         {
           headers: {

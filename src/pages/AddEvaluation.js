@@ -21,7 +21,7 @@ function AddEvaluation() {
     const [examSelected, setExamSelected] = useState(null);
     const [studentemail, setStudentemail] = useState("");
     useEffect(() => {
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant").then((response) => {
+        axios.get(`${process.env.REACT_APP_API_URL}/tassistant`).then((response) => {
             if (response.status === 200) {
                 setCourses(response.data.data);
             }
@@ -30,13 +30,13 @@ function AddEvaluation() {
     const handleOptions = (event) => {
         if (event.target.value !== "Select a course...") {
             setSelectedCourse(event.target.value);
-            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/book", {
+            axios.get(`${process.env.REACT_APP_API_URL}/tassistant/book`, {
                 params: { selectedCourse: event.target.value }
             }).then((response) => {
                 if (response.status === 200) {
                     setExams(response.data.exams);
                     setExamSelected(null);
-                    axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
+                    axios.get(`${process.env.REACT_APP_API_URL}/teacher/getStudents`).then((response) => {
                         if (response.status === 200) {
                             setStudents(response.data.students);
                         } else {
@@ -66,7 +66,7 @@ function AddEvaluation() {
             formData.append("exam", examSelected.name);
             formData.append("studentemail", studentemail);
             const response = await axios.post(
-                'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/addeval',
+                `${process.env.REACT_APP_API_URL}/tassistant/addeval`,
                 formData,
                 {
                     headers: {

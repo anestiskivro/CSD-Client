@@ -17,49 +17,53 @@ function NotesTA() {
     const [exams, setExams] = useState([]);
     const [selectedTA, setTA] = useState("");
     const [Evaluations, setEvaluations] = useState([]);
+
     useEffect(() => {
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getExams", { params: { selectedCourse: selectedCourse } }).then((response) => {
+        axios.get(`${process.env.REACT_APP_API_URL}/teacher/getExams`, { params: { selectedCourse } }).then((response) => {
             if (response.status === 200) {
                 setExams(response.data.exams);
-                axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents").then((response) => {
+                axios.get(`${process.env.REACT_APP_API_URL}/teacher/getStudents`).then((response) => {
                     if (response.status === 200) {
                         setStudents(response.data.students);
-                    }else{
+                    } else {
                         alert("We could not get the students. Check your connection");
                     }
                 });
             } else {
-                alert(response.data.message)
+                alert(response.data.message);
             }
         });
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: selectedCourse } }).then((response) => {
+        axios.get(`${process.env.REACT_APP_API_URL}/teacher/getTAs`, { params: { selectedCourse } }).then((response) => {
             if (response.status === 200) {
                 setTAs(response.data.TAs);
             } else {
-                alert(response.data.message)
+                alert(response.data.message);
             }
         });
     }, [selectedCourse]);
+
     const handleAssistantChange = (event) => {
         const selectedTA = event.target.value;
         setTA(selectedTA);
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getNotes", { params: { teaching_assistant: selectedTA } })
+        axios.get(`${process.env.REACT_APP_API_URL}/teacher/getNotes`, { params: { teaching_assistant: selectedTA } })
             .then((response) => {
                 if (response.status === 200) {
                     setEvaluations(response.data.evaluations);
                 } else {
-                    alert(response.data.message)
+                    alert(response.data.message);
                 }
             });
     };
+
     const handleBack = () => {
         navigate("/teacher", { state: { email } });
     };
+
     return (
         <div className={`home-container ${isMobile ? 'mobile' : 'desktop'}`}>
             <Info email={email}></Info>
             <div className="right">
-                {(selectedCourse) && (
+                {selectedCourse && (
                     <>
                         <h4>Select TA:</h4>
                         <select name="TAs" onChange={handleAssistantChange}>
@@ -68,7 +72,7 @@ function NotesTA() {
                         </select>
                     </>
                 )}
-                {(selectedCourse && selectedTA) && (
+                {selectedCourse && selectedTA && (
                     <>
                         <div className="table-container">
                             <table>
@@ -100,14 +104,15 @@ function NotesTA() {
                         </div>
                     </>
                 )}
-                <div className="btn-group3" >
+                <div className="btn-group3">
                     <button className='button' onClick={handleBack}>
                         <i className="fa-solid fa-arrow-left" style={{ paddingRight: '8px' }}></i>
-                        Back</button>
+                        Back
+                    </button>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default NotesTA
+export default NotesTA;

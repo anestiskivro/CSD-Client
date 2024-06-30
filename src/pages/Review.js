@@ -21,15 +21,15 @@ function Review() {
 
     useEffect(() => {
         if (id.includes("TA")) {
-            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getSlots", { params: { email } })
+            axios.get(`${process.env.REACT_APP_API_URL}/tassistant/getSlots`, { params: { email } })
                 .then(response => {
                     if (response.status === 200) {
                         setSelectedSlots(response.data.slots);
-                        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getStudents")
+                        axios.get(`${process.env.REACT_APP_API_URL}/teacher/getStudents`)
                             .then(response => {
                                 if (response.status === 200) {
                                     setStudents(response.data.students);
-                                    axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getappointments")
+                                    axios.get(`${process.env.REACT_APP_API_URL}/tassistant/getappointments`)
                                         .then(response => {
                                             if (response.status === 200) {
                                                 setAppointments(response.data.appointments);
@@ -46,7 +46,7 @@ function Review() {
                     }
                 });
         } else {
-            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getappointments", { params: { email } })
+            axios.get(`${process.env.REACT_APP_API_URL}/student/getappointments`, { params: { email } })
                 .then(response => {
                     if (response.status === 200) {
                         setSelectedAppointments(response.data.appointments);
@@ -55,7 +55,7 @@ function Review() {
                     }
                 });
         }
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/getcomments")
+        axios.get(`${process.env.REACT_APP_API_URL}/tassistant/getcomments`)
             .then(response => {
                 if (response.status === 200) {
                     setComments(response.data.comments);
@@ -66,10 +66,10 @@ function Review() {
     }, [email, id]);
 
     useEffect(() => {
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getcourses")
+        axios.get(`${process.env.REACT_APP_API_URL}/student/getcourses`)
             .then(response => {
                 setSelectedCourses(response.data.courses);
-                return axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher/getTAs", { params: { selectedCourse: response.data.courses } });
+                return axios.get(`${process.env.REACT_APP_API_URL}/teacher/getTAs`, { params: { selectedCourse: response.data.courses } });
             })
             .then(response => {
                 if (response.status === 200) {
@@ -82,7 +82,7 @@ function Review() {
                 console.error("There was an error fetching the courses or TAs!", error);
             });
 
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/getExams")
+        axios.get(`${process.env.REACT_APP_API_URL}/student/getExams`)
             .then(response => {
                 if (response.status === 200) {
                     setExams(response.data.exams);

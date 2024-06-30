@@ -19,7 +19,7 @@ function AddComment() {
     const [selectedCourse, setSelectedCourse] = useState('');
     const [examSelected, setExamSelected] = useState(null);
     useEffect(() => {
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant").then((response) => {
+        axios.get(`${process.env.REACT_APP_API_URL}/tassistant`).then((response) => {
             if (response.status === 200) {
                 setCourses(response.data.data);
             }
@@ -29,7 +29,7 @@ function AddComment() {
     const handleOptions = (event) => {
         if (event.target.value !== "Select a course...") {
             setSelectedCourse(event.target.value);
-            axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/tassistant/book", {
+            axios.get(`${process.env.REACT_APP_API_URL}/tassistant/book`, {
                 params: { selectedCourse: event.target.value }
             }).then((response) => {
                 if (response.status === 200) {
@@ -53,7 +53,7 @@ function AddComment() {
             formData.append("code", selectedCourse);
             formData.append("exam", examSelected.name);
             const response = await axios.post(
-                'https://rendezvous-csd-106ea9dcba7a.herokuapp.com/student/addComment',
+                `${process.env.REACT_APP_API_URL}/student/addComment`,
                 formData,
                 {
                     headers: {

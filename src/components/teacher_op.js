@@ -19,7 +19,7 @@ function Teacher_op({ id, email }) {
             setSelectedCourse(selectedCoursePage);
         }
 
-        axios.get("https://rendezvous-csd-106ea9dcba7a.herokuapp.com/teacher")
+        axios.get(`${process.env.REACT_APP_API_URL}/teacher`)
             .then((response) => {
                 if (response.status === 200) {
                     setCourses(response.data.data);

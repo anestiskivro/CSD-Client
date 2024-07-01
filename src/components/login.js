@@ -8,13 +8,9 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            axios.get(`${process.env.REACT_APP_API_URL}/`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
+        axios.get(`${process.env.REACT_APP_API_URL}/`, {
+            withCredentials: true
+        })
             .then(response => {
                 const data = response.data;
                 if (data.loggedIn) {
@@ -42,15 +38,12 @@ const Login = () => {
                 console.error('Error authenticating user:', error);
                 navigate('/');
             });
-        } else {
-            navigate('/');
-        }
     }, [navigate]);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}`, { email }, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/`, { email }, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -59,8 +52,6 @@ const Login = () => {
             if (response.status === 200) {
                 alert('Login successful');
                 const user = response.data.user;
-                const token = response.data.token;
-                localStorage.setItem('token', token);
                 if (user.email.includes("admin")) {
                     navigate("/admin", { state: { id: user.id, email: user.email } });
                 } else if (user.id === "TA") {

@@ -25,12 +25,12 @@ function AddComment() {
             }
         });
         axios.get(`${process.env.REACT_APP_API_URL}/student/getComment`,{
-            params: { email }}).then((response) => {
+            params: { email:email }}).then((response) => {
             if (response.status === 200) {
                 setComment(response.data.comment);
             }
         });
-    }, []);
+    }, [email]);
 
     const handleOptions = (event) => {
         if (event.target.value !== "Select a course...") {

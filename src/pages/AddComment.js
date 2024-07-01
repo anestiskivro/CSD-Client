@@ -24,6 +24,12 @@ function AddComment() {
                 setCourses(response.data.data);
             }
         });
+        axios.get(`${process.env.REACT_APP_API_URL}/student/getComment`,{
+            params: { email }}).then((response) => {
+            if (response.status === 200) {
+                setComment(response.data.comment);
+            }
+        });
     }, []);
 
     const handleOptions = (event) => {

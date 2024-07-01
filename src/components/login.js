@@ -51,6 +51,7 @@ const Login = () => {
             });
             if (response.status === 200) {
                 alert('Login successful');
+                console.log('REACT_APP_API_URL:', process.env.REACT_APP_API_URL);
                 const user = response.data.user;
                 if (user.email.includes("admin")) {
                     navigate("/admin", { state: { id: user.id, email: user.email } });

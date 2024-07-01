@@ -52,33 +52,35 @@ function Booking() {
   const handleExamChange = (event) => {
     const selectedExamName = event.target.value;
     const foundExam = exams.find(exam => exam.name === selectedExamName);
-    setExamSelected(foundExam);
-    if (id.includes("TA")) {
-      const duration = parseInt(foundExam.duration);
-      examDurationInMinutes = duration;
-      const availableHours = [];
-      for (let hour = 9; hour <= 20; hour++) {
-        for (let minute = 0; minute < 60; minute += examDurationInMinutes) {
-          let endHour = hour;
-          let endMinute = minute + examDurationInMinutes;
-          if (endMinute >= 60) {
-            endMinute -= 60;
-            endHour += 1;
-          }
-          if (endHour <= 21) {
-            availableHours.push({ start: { hour, minute }, end: { hour: endHour, minute: endMinute } });
+    if (foundExam) {
+      setExamSelected(foundExam);
+      if (id.includes("TA")) {
+        const duration = parseInt(foundExam.duration);
+        examDurationInMinutes = duration;
+        const availableHours = [];
+        for (let hour = 9; hour <= 20; hour++) {
+          for (let minute = 0; minute < 60; minute += examDurationInMinutes) {
+            let endHour = hour;
+            let endMinute = minute + examDurationInMinutes;
+            if (endMinute >= 60) {
+              endMinute -= 60;
+              endHour += 1;
+            }
+            if (endHour <= 21) {
+              availableHours.push({ start: { hour, minute }, end: { hour: endHour, minute: endMinute } });
+            }
           }
         }
+        setAvailableHours(availableHours);
       }
-      setAvailableHours(availableHours);
+      axios.get(`${process.env.REACT_APP_API_URL}/student/findTA`, {
+        params: { selectedExam: foundExam }
+      }).then((response) => {
+        if (response.status === 200) {
+          setTAS(response.data.teaching_assistants);
+        }
+      });
     }
-    axios.get(`${process.env.REACT_APP_API_URL}/student/findTA`, {
-      params: { selectedExam: foundExam }
-    }).then((response) => {
-      if (response.status === 200) {
-        setTAS(response.data.teaching_assistants);
-      }
-    });
   };
 
   const handleAssistantChange = (event) => {
@@ -188,7 +190,7 @@ function Booking() {
               <option value="" selected disabled hidden>Select a course...</option>
               {courses.length > 0 && courses.map((opts, i) => <option key={i}>{opts.code}</option>)}
             </select>
-            {(selectedCourse) && (
+            {selectedCourse && (
               <>
                 <h4>Select Exam:</h4>
                 <select name="exams" onChange={handleExamChange}>
@@ -197,7 +199,7 @@ function Booking() {
                 </select>
               </>
             )}
-            {(selectedCourse && examSelected) && (
+            {selectedCourse && examSelected && (
               <>
                 <DatePicker
                   selected={selectedDate}
@@ -239,7 +241,7 @@ function Booking() {
               <option value="" selected disabled hidden>Select a course...</option>
               {courses.length > 0 && courses.map((opts, i) => <option key={i}>{opts.code}</option>)}
             </select>
-            {(selectedCourse) && (
+            {selectedCourse && (
               <>
                 <h4>Select Exam:</h4>
                 <select name="exams" onChange={handleExamChange}>
@@ -248,7 +250,7 @@ function Booking() {
                 </select>
               </>
             )}
-            {(selectedCourse && examSelected) && (
+            {selectedCourse && examSelected && (
               <>
                 <h5>Select Teaching Assistant:</h5>
                 <select name="tassistant" onChange={handleAssistantChange}>
@@ -257,7 +259,7 @@ function Booking() {
                 </select>
               </>
             )}
-            {(selectedCourse && examSelected && selectedTA) && (
+            {selectedCourse && examSelected && selectedTA && (
               <>
                 <div className='container'>
                   <h4>Select Available Slots:</h4>
@@ -267,7 +269,7 @@ function Booking() {
                         type="radio"
                         id={`time-${slot.fromTime}-${slot.EndTime}`}
                         checked={selectedSlot?.start === slot.fromTime && selectedSlot?.end === slot.EndTime}
-                        onChange={() => handleHourChangeStud(slot.fromTime, slot.EndTime,slot.date)}
+                        onChange={() => handleHourChangeStud(slot.fromTime, slot.EndTime, slot.date)}
                       />
                       <label htmlFor={`hour-${slot.fromTime}-${slot.EndTime}`}>
                         {`${slot.fromTime} - ${slot.EndTime} at ${slot.date}`}
@@ -289,6 +291,7 @@ function Booking() {
       </div>
     </div>
   );
+
 }
 
 export default Booking;

@@ -15,12 +15,14 @@ function AdminOp() {
         try {
             const response = await axios.delete(`${process.env.REACT_APP_API_URL}/admin/reset`);
             if (response.status === 200) {
+                localStorage.clear();
                 alert('Data cleared successfully');
             } else {
-                alert('Failure of data');
+                alert('Failed to clear data');
             }
         } catch (error) {
             console.error('Error:', error);
+            alert('Failed to clear data');
         }
     };
 

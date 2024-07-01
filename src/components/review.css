@@ -39,11 +39,11 @@
 .table-container th,
 .table-container td {
     border: 1px solid #ccc;
-    padding: 8px;
+    padding: 7px;
     text-align: center;
     word-break: break-word;
     overflow-wrap: break-word;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .table-container th {
